@@ -1,6 +1,20 @@
+import { useState } from "react";
 import DropDown from "../components/DropDown";
+import axios from "axios";
 
 export default function Dashboard() {
+    const headers = ""
+    const [clients,setClients] = useState([])
+    const handleGetClients = ()=>{
+        try {
+            axios.get("https://beta.lvmanager.net/tenants/",{headers}).then(response=>{
+            setClients(response.data)
+            console.log(response.data)
+        })
+        } catch (error) {
+        console.log("error transaction: ",error)
+        }
+    }
   return (
     <div className="rounded-lg mt-16 p-4 bg-white w-fit m-auto">
         <div className="flex mb-4 items-center justify-between">
