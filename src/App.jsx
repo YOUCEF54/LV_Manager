@@ -47,7 +47,7 @@ function App() {
 
   
   return (
-    <div className="App bg-neutral-300 h-screen">
+    <div className="App bg-neutral-300 h-screen overflow-auto">
       <BrowserRouter>
         <Routes>
         
