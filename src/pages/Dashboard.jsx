@@ -18,27 +18,27 @@ export default function Dashboard() {
         }
     }
   return (
-    <div className="flex h-full bottom-0 absolute justify-center inset-0 ">
-    <div className="rounded-lg mx-14 min-w-[5rem] shadow-md overflow-auto  p-4 bg-white w-fit   m-auto">
-        <div className="flex sticky left-0 mb-4 items-center justify-between">
+    <div className="flex h-full bottom-0 absolute  justify-center inset-0 ">
+    <div className="rounded-lg mx-14 max-h-[70vh] min-w-[5rem] shadow-md overflow-auto  bg-white w-fit   m-auto">
+        <div className="flex sticky left-0 top-0  bg-white filter-none backdrop-blur-lg bg-opacity-50  right-0 p-4 items-center justify-between">
             <h1 className="font-semibold text-xl ">Best clients</h1>
             <div className=" right-0"><DropDown/></div>
       
         </div>
-      <table className="w-full min-w-[49rem]  overflow-hidden ">
+      <table className="w-full min-w-[49rem] m-4 mt-0 overflow-hidden ">
         <thead>
-          <tr>
-            <th className="p-3 font-medium bg-slate-200 rounded-l-lg">Full Name</th>
-            <th className="p-3 font-medium bg-slate-200">Telephone</th>
-            <th className="p-3 font-medium bg-slate-200">Identification</th>
-            <th className="p-3 font-medium bg-slate-200">N permis</th>
-            <th className="p-3 font-medium bg-slate-200">Amount</th>
-            <th className="p-3 font-medium bg-slate-200 rounded-r-lg">Status</th>
+          <tr className="bg-slate-200 bg-opacity-70">
+            <th className=" rounded-l-lg">Full Name</th>
+            <th className="p-3 font-medium">Telephone</th>
+            <th className="p-3 font-medium">Identification</th>
+            <th className="p-3 font-medium">N permis</th>
+            <th className="p-3 font-medium">Amount</th>
+            <th className="p-3 font-medium rounded-r-lg">Status</th>
           </tr>
         </thead>
         <tbody className="divide-y-2">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <tr key={index}>
+          {Array.from({ length: 10 }).map((_, index) => (
+            <tr key={index} className="text-neutral-600">
               <td className="p-6 flex gap-2 items-center justify-between">
                 <UserCircleIcon className="size-9 "/>
                 Salama Aazzat
