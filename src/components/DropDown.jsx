@@ -9,10 +9,16 @@ export default function DropDown() {
             DropDownV1
             <ChevronDownIcon className={`size-4 ease-in-out duration-150  ${isdropdown ? "rotate-180":"rotate-0"}`}/>
         </button>
-        <ul className={`flex-col border rounded-md w-full shadow-md bg-white  absolute divide-y-2 mt-2 items-center justify-center m-auto ${isdropdown ?"":"h-0 hidden"} `}>
-            <li className="p-2 ">item1</li>
-            <li className="p-2 ">item2</li>
-            <li className="p-2 ">item3</li>
+        <ul className={`flex-col border rounded-md w-full shadow-md bg-white max-h-36 overflow-y-auto  absolute divide-y-2 mt-2 items-center justify-center m-auto ${isdropdown ?"":"h-0 hidden"} `}>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
+            <li className="p-2 py-1 flex justify-between items-center ">item1 <input type="checkbox"/></li>
         </ul>
     </div>
   )
