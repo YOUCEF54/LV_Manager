@@ -18,7 +18,7 @@ export default function Nav() {
   let url = location.href;
   console.log(url.split("/")[url.split("/").length-1])
   useEffect(()=>{
-    if(url.split("/")[url.split("/").length-1] == "Dashboard"){
+    if(url.split("/")[url.split("/").length-1] == "dashboard"){
       setHidden(true)
     }
   },[url])
