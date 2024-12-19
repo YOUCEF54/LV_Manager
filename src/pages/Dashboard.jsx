@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropDown from "../components/DropDown";
 import axios from "axios";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
-import { UserIcon } from "@heroicons/react/24/solid";
+import { Bars3BottomRightIcon, BellSnoozeIcon, UserIcon } from "@heroicons/react/24/solid";
+import { Bars3BottomLeftIcon, Bars3Icon, BellIcon, ChevronDownIcon, PlusIcon } from "@heroicons/react/16/solid";
+import BestClients from "../components/cards/BestClients";
+import StatCard from "../components/cards/StatCard";
 
 export default function Dashboard() {
     const headers = ""
@@ -17,49 +20,59 @@ export default function Dashboard() {
         console.log("error transaction: ",error)
         }
     }
+
+    const [isToggle,setToggle] = useState(false)
+    const [isHidden,setHidden] = useState(!isToggle)
+
+    useEffect(()=>{
+      setTimeout(()=>{
+        setHidden(isToggle)
+      },150)
+    },[isToggle])
+
   return (
-    <div className="flex h-full bottom-0 absolute  justify-center inset-0 ">
-    <div className="rounded-lg mx-14 max-h-[70vh]  shadow-md overflow-auto  bg-white w-fit   m-auto">
-        <div className="flex sticky left-0 top-0  bg-white filter-none backdrop-blur-lg bg-opacity-50  right-0 p-4 items-center justify-between">
-            <h1 className="font-semibold text-xl ">Best clients</h1>
-            <div className=" right-0"><DropDown/></div>
-      
+    <div className="flex w-full top-0 fixed h-screen">
+      <aside className={`flex max-sm:hidden ease-in-out flex-col ${isHidden && "hidden"} duration-300 ${isToggle ? " w-0" : "w-[15rem] "} bg-white   p-4`}>
+        <div className="text-lg font-bold text-neutral-600">
+          <span className="text-blue-600">Lv</span>Manager
         </div>
-      <table className="min-w-[50rem] m-4 mt-0 overflow-hidden ">
-        <thead>
-          <tr className="bg-slate-200 bg-opacity-70">
-            <th className=" rounded-l-lg">Full Name</th>
-            <th className="p-3 font-medium">Telephone</th>
-            <th className="p-3 font-medium">Identification</th>
-            <th className="p-3 font-medium">N permis</th>
-            <th className="p-3 font-medium">Amount</th>
-            <th className="p-3 font-medium rounded-r-lg">Status</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y-2">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <tr key={index} className="text-neutral-600">
-              <td className="p-6 flex gap-2 items-center justify-between">
-                <UserCircleIcon className="size-9 "/>
-                Salama Aazzat
-                </td>
-              <td className="p-6">+440800000</td>
-              <td className="p-6">SH101010</td>
-              <td className="p-6">423</td>
-              <td className="p-6">1000DH</td>
-              <td className="p-4 ">
-              {
-                (index != 2)?
-                <span className="bg-emerald-500 font-medium text-white py-1 px-6 rounded-full">Active</span>
-                :
-                <span className="bg-red-500 font-medium text-white py-1 px-4  rounded-full">Rejected</span>
-                }
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      </aside>
+
+      <div className="flex flex-col flex-grow w-full">
+        <header className="flex items-center justify-between bg-white border-l pr-6  p-4">
+          <Bars3Icon
+            onClick={() => setToggle(!isToggle)}
+            className="cursor-pointer w-6 h-6"
+          />
+          <div className="flex items-center gap-4">
+            <button className="flex items-center gap-2 bg-blue-600 text-white p-2 py-1 rounded-lg">
+              <PlusIcon className="w-4 h-4 bg-white text-blue-600 rounded-full" />
+              Ajouté
+            </button>
+            <BellIcon className="size-7 cursor-pointer text-neutral-500" />
+            <div className="flex cursor-pointer items-center gap-3">
+              <UserIcon className="size-10 bg-neutral-300 text-white p-1 rounded-full" />
+              <div>
+                <div className="text-sm font-semibold text-neutral-800">Salama</div>
+                <div className="text-xs text-neutral-400">Admin</div>
+              </div>
+              <ChevronDownIcon className="size-5 border rounded-full text-neutral-400 cursor-pointer" />
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-grow p-4 pl-6 bg-gray-100 overflow-x-clip overflow-y-auto">
+        <h1 className="text-2xl font-semibold text-neutral-700">Dashboard</h1>
+        <div className="mt-8 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div key={index} className=" ">
+            <StatCard/>
+          </div>
+        ))}
+        </div>
+
+        </main>
+      </div>
     </div>
   );
 }

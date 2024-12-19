@@ -37,12 +37,14 @@ function App() {
     </div>;  // Step 3: Show loading screen if still loading
   }
 
+  
+
 
   const MainLayout = () => (
-      <Nav>
-      <Outlet /> 
-      </Nav>
-        );
+    <Nav>
+      <Outlet />  {/* This will render the matched child route */}
+    </Nav>
+  );
   
 
   

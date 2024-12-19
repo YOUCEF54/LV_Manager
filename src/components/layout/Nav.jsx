@@ -1,6 +1,6 @@
 import { Bars3BottomRightIcon, ChartBarIcon, HomeIcon, InformationCircleIcon } from '@heroicons/react/16/solid';
 import { Bars2Icon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
 export default function Nav() {
@@ -10,12 +10,34 @@ export default function Nav() {
     { name: "About", url: "/About", icon: InformationCircleIcon},
   ];
   const [isOpen, setOpen] = useState(false)
+  const [isHidden, setHidden] = useState(false)
+
+  
+  const [current,setCurrent] = useState("/")
+
+  let url = location.href;
+  console.log(url.split("/")[url.split("/").length-1])
+  useEffect(()=>{
+    if(url.split("/")[url.split("/").length-1] == "Dashboard"){
+      setHidden(true)
+    }
+  },[url])
+    document.body.addEventListener('click', ()=>{
+      requestAnimationFrame(()=>{
+       
+        if(url!==location.href){
+          console.log('url changed :',location.href, " test : ",url);
+          url = location.href
+          setCurrent(location.href.split("/")[location.href.split("/").length-1])
+        }
+      });
+    }, true);
 
   return (
     <>
-      <header>
+      <header className={`${isHidden?" hidden":""}`}>
         {/* Lower z-index to ensure scrollbar is above */}
-        <nav className="fixed top-0 left-0 w-full z-40 flex items-center px-8 bg-neutral-100 h-14 shadow-md">
+        <nav className={`fixed flex top-0 left-0 w-full z-40  items-center px-8  bg-neutral-100 h-14 shadow-md `}>
           <div className="flex w-full justify-between">
             <div className="text-lg font-semibold">LVM</div>
            
