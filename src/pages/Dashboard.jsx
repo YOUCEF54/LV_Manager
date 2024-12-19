@@ -19,13 +19,13 @@ export default function Dashboard() {
     }
   return (
     <div className="flex h-full bottom-0 absolute  justify-center inset-0 ">
-    <div className="rounded-lg mx-14 max-h-[70vh] min-w-[5rem] shadow-md overflow-auto  bg-white w-fit   m-auto">
+    <div className="rounded-lg mx-14 max-h-[70vh]  shadow-md overflow-auto  bg-white w-fit   m-auto">
         <div className="flex sticky left-0 top-0  bg-white filter-none backdrop-blur-lg bg-opacity-50  right-0 p-4 items-center justify-between">
             <h1 className="font-semibold text-xl ">Best clients</h1>
             <div className=" right-0"><DropDown/></div>
       
         </div>
-      <table className="w-full min-w-[49rem] m-4 mt-0 overflow-hidden ">
+      <table className="min-w-[50rem] m-4 mt-0 overflow-hidden ">
         <thead>
           <tr className="bg-slate-200 bg-opacity-70">
             <th className=" rounded-l-lg">Full Name</th>
