@@ -34,7 +34,7 @@ export default function Nav() {
         <ul className={`flex-col absolute py-4 ${isOpen ? "top-[3.5rem]": "-top-96"}  sm:-top-96 duration-200 ease-in-out shadow space-y-2 bg-white z-30 w-full p-2  `}>
               {menu.map((e, i) => (
                 <li key={i}>
-                  <Link to={e.url} className="hover:text-blue-600 bg-neutral-50 border rounded-lg hover:bg-neutral-100 flex items-center gap-4  p-2">
+                  <Link to={e.url} onClick={()=>setTimeout(()=>setOpen(false),250)} className="hover:text-blue-600 bg-neutral-50 border rounded-lg hover:bg-neutral-100 flex items-center gap-4  p-2">
                     {<e.icon className='size-5'/>}
                     {e.name}
                   </Link>
