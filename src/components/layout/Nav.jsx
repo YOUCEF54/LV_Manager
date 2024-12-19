@@ -6,8 +6,8 @@ import { Outlet, Link } from 'react-router-dom';
 export default function Nav() {
   const menu = [
     { name: "Home", url: "/", icon: HomeIcon },
-    { name: "Dashboard", url: "/Dashboard", icon : ChartBarIcon },
-    { name: "About", url: "/About", icon: InformationCircleIcon},
+    { name: "Dashboard", url: "/dashboard", icon : ChartBarIcon },
+    { name: "About", url: "/about", icon: InformationCircleIcon},
   ];
   const [isOpen, setOpen] = useState(false)
   const [isHidden, setHidden] = useState(false)
