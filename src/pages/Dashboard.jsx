@@ -49,6 +49,21 @@ export default function Dashboard() {
       },100)
     },[isDropProfile])
 
+    const handleOutsideClick = (event) => {
+      const dropdowns = document.querySelectorAll(".dropdown");
+      if (![...dropdowns].some((dropdown) => dropdown.contains(event.target))) {
+        setDropAjout(false);
+        setDropProfile(false);
+      }
+    };
+  
+    useEffect(() => {
+      document.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
+    }, []);
+
   return (
     <div className="flex w-full top-0 fixed h-screen">
       <aside className={`flex max-sm:hidden ease-in-out flex-col ${isHidden && "hidden"} duration-300 ${isToggle ? " w-0" : "w-[15rem] min-w-[12rem] "} bg-white   p-4`}>
@@ -113,7 +128,7 @@ export default function Dashboard() {
             <Reservations />
           </div>
 
-          <BestClients className="rounded-2xl my-4 shadow-md overflow-hidden bg-white w-full" />
+          <BestClients className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
         </main>
 
       </div>
