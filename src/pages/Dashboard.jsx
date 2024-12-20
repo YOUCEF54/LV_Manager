@@ -4,10 +4,12 @@ import axios from "axios";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3BottomRightIcon, BellSnoozeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { ArrowLeftEndOnRectangleIcon, Bars3BottomLeftIcon, Bars3Icon, BellIcon, ChevronDownIcon, PlusIcon } from "@heroicons/react/16/solid";
-import BestClients from "../components/cards/BestClients";
+import BestClients from "../components/cards/BestClientsCard";
 import { Contracts, Reservations, TotalClients, Vehicules } from "../components/cards/Cards";
 import { DocumentTextIcon } from "@heroicons/react/16/solid";
 import CarIcon from "../../public/CarIcon";
+import ContratsActive from "../components/cards/ContratsActiveCard";
+import ReservationsCard from "../components/cards/ReservationsCard";
 
 export default function Dashboard() {
     const headers = ""
@@ -127,7 +129,10 @@ export default function Dashboard() {
             <Vehicules />
             <Reservations />
           </div>
-
+          <div className="grid grid-cols-12 gap-4 max-lg:flex max-lg:flex-col">
+            <ContratsActive className="rounded-2xl col-span-8 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
+            <ReservationsCard className="rounded-2xl col-span-4 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
+          </div>
           <BestClients className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
         </main>
 
