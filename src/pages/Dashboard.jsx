@@ -110,8 +110,8 @@ export default function Dashboard() {
             </button>
             <div className={`absolute  ${timeOutDropProfile&& "hidden"} overflow-clip z-30 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 ${isDropProfile ? 'top-[52px] opacity-100' : '-top-0 opacity-0'} duration-200  shadow rounded-lg bg-white`}>
               <button className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
-                <DocumentTextIcon className="size-5"/>
-                Contracts</button>
+                <UserIcon className="size-5"/>
+                Profile</button>
               <button className="hover:bg-neutral-100 text-nowrap p-2 px-4 flex items-center  gap-3">
               <ArrowLeftEndOnRectangleIcon className="size-5  fill-black " />
                 Se déconneter</button>
@@ -123,15 +123,15 @@ export default function Dashboard() {
 
         <main className="flex-grow p-4 pl-6 pt-5 bg-gray-100 overflow-x-clip overflow-y-auto">
           <h1 className="text-3xl font-semibold text-neutral-700">Dashboard</h1>
-          <div className="mt-7 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
+          <div className="mt-7 mb-3 grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
             <TotalClients />
             <Contracts />
             <Vehicules />
             <Reservations />
           </div>
-          <div className="grid grid-cols-12 gap-4 max-lg:flex max-lg:flex-col">
+          <div className="grid grid-cols-12 lg:gap-8 max-lg:flex max-lg:flex-col">
             <ContratsActive className="rounded-2xl col-span-8 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
-            <ReservationsCard className="rounded-2xl col-span-4 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
+            <ReservationsCard className="rounded-2xl whitespace-nowrap col-span-4 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
           </div>
           <BestClients className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
         </main>

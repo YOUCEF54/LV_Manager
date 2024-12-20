@@ -1,4 +1,4 @@
-import { CalendarDateRangeIcon, CalendarDaysIcon, CalendarIcon } from "@heroicons/react/16/solid";
+import { CalendarDaysIcon } from "@heroicons/react/16/solid";
 
 // eslint-disable-next-line react/prop-types
 export default function ContratsActive({className}) {
@@ -11,7 +11,7 @@ export default function ContratsActive({className}) {
       </div>
     </div>
     <div className="overflow-x-auto ">
-      <table className="w-full min-w-[30rem border-collapse ">
+      <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
         <thead>
           <tr className="bg-slate-200 bg-opacity-70">
             <th className="p-3 rounded-l-lg font-medium">Contrat N°</th>
@@ -20,7 +20,7 @@ export default function ContratsActive({className}) {
             <th className=" rounded-r-lg p-3 font-medium">Return Date</th>
           </tr>
         </thead>
-        <tbody className="divide-y-2">
+        <tbody className="divide-y-2 text-nowrap whitespace-nowrap">
           {Array.from({ length: 3 }).map((_, index) => (
             <tr key={index} className="text-neutral-600">
               <td className="p-6 text-center">4</td>

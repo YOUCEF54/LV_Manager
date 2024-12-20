@@ -1,5 +1,4 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
-import DropDown from '../DropDown'
 
 // eslint-disable-next-line react/prop-types
 export default function BestClients({ className }) {
@@ -8,7 +7,6 @@ export default function BestClients({ className }) {
       <div className="flex sticky left-0 top-0 bg-white filter-none backdrop-blur-lg bg-opacity-50 pb-6  right-0  items-center justify-between">
         <h1 className="font-semibold text-xl">Top clients</h1>
         <div className="right-0">
-          {/* <DropDown /> */}
         </div>
       </div>
       <div className="overflow-x-auto ">
