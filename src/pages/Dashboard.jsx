@@ -5,7 +5,7 @@ import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3BottomRightIcon, BellSnoozeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { Bars3BottomLeftIcon, Bars3Icon, BellIcon, ChevronDownIcon, PlusIcon } from "@heroicons/react/16/solid";
 import BestClients from "../components/cards/BestClients";
-import StatCard from "../components/cards/StatCard";
+import { Contracts, Reservations, TotalClients, Vehicules } from "../components/cards/Cards";
 
 export default function Dashboard() {
     const headers = ""
@@ -32,13 +32,13 @@ export default function Dashboard() {
 
   return (
     <div className="flex w-full top-0 fixed h-screen">
-      <aside className={`flex max-sm:hidden ease-in-out flex-col ${isHidden && "hidden"} duration-300 ${isToggle ? " w-0" : "w-[15rem] "} bg-white   p-4`}>
+      <aside className={`flex max-sm:hidden ease-in-out flex-col ${isHidden && "hidden"} duration-300 ${isToggle ? " w-0" : "w-[15rem] min-w-[12rem] "} bg-white   p-4`}>
         <div className="text-lg font-bold text-neutral-600">
           <span className="text-blue-600">Lv</span>Manager
         </div>
       </aside>
 
-      <div className="flex flex-col flex-grow w-full">
+      <div className="flex flex-col overflow-auto flex-grow w-full">
         <header className="flex items-center justify-between bg-white border-l pr-6  p-4">
           <Bars3Icon
             onClick={() => setToggle(!isToggle)}
@@ -61,17 +61,18 @@ export default function Dashboard() {
           </div>
         </header>
 
-        <main className="flex-grow p-4 pl-6 bg-gray-100 overflow-x-clip overflow-y-auto">
-        <h1 className="text-2xl font-semibold text-neutral-700">Dashboard</h1>
-        <div className="mt-8 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div key={index} className=" ">
-            <StatCard/>
+        <main className="flex-grow p-4 pl-6 pt-5 bg-gray-100 overflow-x-clip overflow-y-auto">
+          <h1 className="text-3xl font-semibold text-neutral-700">Dashboard</h1>
+          <div className="mt-7 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
+            <TotalClients />
+            <Contracts />
+            <Vehicules />
+            <Reservations />
           </div>
-        ))}
-        </div>
 
+          <BestClients className="rounded-2xl my-4 shadow-md overflow-hidden bg-white w-full" />
         </main>
+
       </div>
     </div>
   );
