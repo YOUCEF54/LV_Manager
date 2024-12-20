@@ -3,9 +3,11 @@ import DropDown from "../components/DropDown";
 import axios from "axios";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { Bars3BottomRightIcon, BellSnoozeIcon, UserIcon } from "@heroicons/react/24/solid";
-import { Bars3BottomLeftIcon, Bars3Icon, BellIcon, ChevronDownIcon, PlusIcon } from "@heroicons/react/16/solid";
+import { ArrowLeftEndOnRectangleIcon, Bars3BottomLeftIcon, Bars3Icon, BellIcon, ChevronDownIcon, PlusIcon } from "@heroicons/react/16/solid";
 import BestClients from "../components/cards/BestClients";
 import { Contracts, Reservations, TotalClients, Vehicules } from "../components/cards/Cards";
+import { DocumentTextIcon } from "@heroicons/react/16/solid";
+import CarIcon from "../../public/CarIcon";
 
 export default function Dashboard() {
     const headers = ""
@@ -22,13 +24,30 @@ export default function Dashboard() {
     }
 
     const [isToggle,setToggle] = useState(false)
+    const [dropAjout,setDropAjout] = useState(false)
+    const [isDropProfile,setDropProfile] = useState(false)
+    const [timeOutDropAjout,setTimeOutDropAjout] = useState(false)
+    const [timeOutDropProfile,setTimeOutDropProfile] = useState(false)
     const [isHidden,setHidden] = useState(!isToggle)
+
 
     useEffect(()=>{
       setTimeout(()=>{
         setHidden(isToggle)
       },150)
     },[isToggle])
+
+    useEffect(()=>{
+      setTimeout(()=>{
+        setTimeOutDropAjout(!dropAjout)
+      },100)
+    },[dropAjout])
+
+    useEffect(()=>{
+      setTimeout(()=>{
+        setTimeOutDropProfile(!isDropProfile)
+      },100)
+    },[isDropProfile])
 
   return (
     <div className="flex w-full top-0 fixed h-screen">
@@ -45,18 +64,42 @@ export default function Dashboard() {
             className="cursor-pointer w-6 h-6"
           />
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-2 bg-blue-600 text-white p-2 py-1 rounded-lg">
+            <div className="relative flex flex-col items-center">
+            <button onClick={()=>{setDropAjout(!dropAjout);setDropProfile(false)}} className="flex z-40 items-center gap-2 bg-blue-600 text-white p-2 py-1 rounded-lg">
               <PlusIcon className="w-4 h-4 bg-white text-blue-600 rounded-full" />
               Ajouté
             </button>
+            <div className={`absolute ${timeOutDropAjout&& "hidden"} overflow-clip ease-out z-30 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 ${dropAjout ? 'top-12 opacity-100' : '-top-0 opacity-0'} duration-200  shadow rounded-lg bg-white`}>
+              <button className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
+                <DocumentTextIcon className="size-5"/>
+                Contracts</button>
+              <button className="hover:bg-neutral-100  p-2 px-4 flex items-center  gap-3">
+              <CarIcon className="size-4  fill-black mt-2" />
+                Véhicule</button>
+              <button className="hover:bg-neutral-100 p-2 px-4 flex items-center  gap-3">
+                <UserIcon className="size-5"/>
+                Client</button>
+            </div>
+            </div>
             <BellIcon className="size-7 cursor-pointer text-neutral-500" />
-            <div className="flex cursor-pointer items-center gap-3">
+            <div className="flex relative flex-col items-center">
+            <button  onClick={()=>{setDropProfile(!isDropProfile);setDropAjout(false)}} className="flex z-40 cursor-pointer items-center gap-3">
               <UserIcon className="size-10 bg-neutral-300 text-white p-1 rounded-full" />
               <div>
                 <div className="text-sm font-semibold text-neutral-800">Salama</div>
                 <div className="text-xs text-neutral-400">Admin</div>
               </div>
               <ChevronDownIcon className="size-5 border rounded-full text-neutral-400 cursor-pointer" />
+            </button>
+            <div className={`absolute  ${timeOutDropProfile&& "hidden"} overflow-clip z-30 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 ${isDropProfile ? 'top-[52px] opacity-100' : '-top-0 opacity-0'} duration-200  shadow rounded-lg bg-white`}>
+              <button className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
+                <DocumentTextIcon className="size-5"/>
+                Contracts</button>
+              <button className="hover:bg-neutral-100 text-nowrap p-2 px-4 flex items-center  gap-3">
+              <ArrowLeftEndOnRectangleIcon className="size-5  fill-black " />
+                Se déconneter</button>
+            </div>
+            
             </div>
           </div>
         </header>
