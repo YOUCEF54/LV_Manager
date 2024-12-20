@@ -10,6 +10,7 @@ import { DocumentTextIcon } from "@heroicons/react/16/solid";
 import CarIcon from "../../public/CarIcon";
 import ContratsActive from "../components/cards/ContratsActiveCard";
 import ReservationsCard from "../components/cards/ReservationsCard";
+import RevenueChart from "../components/charts/RevenueChart";
 
 export default function Dashboard() {
     const headers = ""
@@ -75,7 +76,7 @@ export default function Dashboard() {
       </aside>
 
       <div className="flex flex-col overflow-auto flex-grow w-full">
-        <header className="flex items-center justify-between bg-white border-l pr-6  p-4">
+        <header className="flex items-center justify-between bg-white pr-6  p-4">
           <Bars3Icon
             onClick={() => setToggle(!isToggle)}
             className="cursor-pointer w-6 h-6"
@@ -133,6 +134,7 @@ export default function Dashboard() {
             <ContratsActive className="rounded-2xl col-span-8 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
             <ReservationsCard className="rounded-2xl whitespace-nowrap col-span-4 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
           </div>
+          <RevenueChart />
           <BestClients className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
         </main>
 
