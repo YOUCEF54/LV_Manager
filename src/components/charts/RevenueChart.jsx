@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -14,7 +14,8 @@ import {
 // Register necessary Chart.js components
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, Filler);
 
-const RevenueChart = () => {
+// eslint-disable-next-line react/prop-types
+const RevenueChart = ({className}) => {
   const chartRef = useRef(null);
 
   const data = {
@@ -87,7 +88,7 @@ const RevenueChart = () => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
+    <div className={className}>
       <h2 className="text-lg font-medium mb-4">Revenue</h2>
       <Line className="max-h-[50vh]" ref={chartRef} data={data} options={options} />
     </div>
