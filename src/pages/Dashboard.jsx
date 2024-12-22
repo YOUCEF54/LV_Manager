@@ -9,6 +9,7 @@ import ContratsActive from "../components/cards/ContratsActiveCard";
 import ReservationsCard from "../components/cards/ReservationsCard";
 import RevenueChart from "../components/charts/RevenueChart";
 import ContratsActiveMV from "../components/mobile respnsive tables/ContratsActiveMV";
+import ReservationsMobile from "../components/cards/ReservationsMobile";
 
 export default function Dashboard() {
 
@@ -149,7 +150,8 @@ export default function Dashboard() {
           <div className="grid grid-cols-12 lg:gap-8 max-lg:flex max-lg:flex-col">
             <ContratsActive className="rounded-2xl max-sm:hidden col-span-8 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
             <ContratsActiveMV className="rounded-2xl sm:hidden col-span-8 my-4 shadow-md overflow-hidden bg-white w-full"/>
-            <ReservationsCard className="rounded-2xl whitespace-nowrap col-span-4 my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full"/>
+            <ReservationsCard className="rounded-2xl whitespace-nowrap col-span-4 my-4 max-h-[30rem]  overflow-hidden  w-full"/>
+            
           </div>
           <RevenueChart className="bg-white shadow-md rounded-2xl p-4 mb-8 mt-4" />
           <BestClients className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />

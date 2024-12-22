@@ -1,4 +1,6 @@
 import MobileTableCard from "../cards/MobileTableCard";
+import { Button } from "flowbite-react";
+
 
 // eslint-disable-next-line react/prop-types
 export default function ContratsActiveMV({className}) {
