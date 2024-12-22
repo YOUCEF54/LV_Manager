@@ -2,8 +2,8 @@ import { CalendarDaysIcon, PhoneIcon } from "@heroicons/react/24/solid";
 
 export default function ReservationsMobile() {
   return (
-    <div className="flex flex-col rounded-xl  overflow-clip ">
-         <div>
+    <div className="flex flex-col rounded-xl w-full  overflow-clip ">
+        <div>
           <img className="rounded-2xl border-2 border-black" src="autom.jpeg"/>
         </div>
         <div className="felx flex-col w-full mt-4 ">
@@ -18,7 +18,7 @@ export default function ReservationsMobile() {
                 <CalendarDaysIcon className="size-5 fill-emerald-600"/>
                 10 Dec, 2024</div>
         </div> 
-      
+
         
     </div>
   )
