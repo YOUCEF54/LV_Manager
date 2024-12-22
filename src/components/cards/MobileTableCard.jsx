@@ -2,7 +2,7 @@ import { CalendarDaysIcon } from "@heroicons/react/24/solid";
 
 export default function MobileTableCard() {
   return (
-    <div className="flex border-2 rounded-xl  overflow-clip ">
+    <div className="flex border-2 rounded-xl  overflow-clip bg-white  ">
         <div className="felx flex-col w-fit  divide-y-2 bg-neutral-50">
             <div className="p-4 ">Contrat N°</div>
             <div className="p-4 ">Cient</div>

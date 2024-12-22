@@ -1,5 +1,5 @@
 import { UserIcon } from "@heroicons/react/16/solid";
-import ReservationsMobile from "./ReservationsMobile";
+import ReservationsMobile from "../mobile respnsive tables/ReservationsMobile";
 
 // eslint-disable-next-line react/prop-types
 export default function ReservationsCard({className}) {
