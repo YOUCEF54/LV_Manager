@@ -8,8 +8,9 @@ const RevenueChart = ({ className }) => {
     const options = {
       chart: {
         type: 'line',
+        height: 400, // Set the max height for the chart
         toolbar: {
-          show: false, // Hide the toolbar
+          show: false,
         },
       },
       series: [
@@ -26,35 +27,36 @@ const RevenueChart = ({ className }) => {
         ],
         labels: {
           style: {
-            colors: '#888', // Customize x-axis label color
+            colors: '#888',
           },
         },
       },
       yaxis: {
         labels: {
-          formatter: (value) => `${value / 1000}k`, // Show 'k' format for y-axis
+          formatter: (value) => `${value / 1000}k`,
           style: {
-            colors: '#888', // Customize y-axis label color
+            colors: '#888',
           },
         },
       },
-      colors: ['#2563eb'], // Tailwind blue-600
+      colors: ['#2563eb'],
       dataLabels: {
-        enabled: false, // Disable data labels on points
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth', // Add curve to the line
+        curve: 'smooth',
       },
       grid: {
-        borderColor: '#f1f5f9', // Light gray grid lines
+        borderColor: '#f1f5f9',
         strokeDashArray: 4,
       },
       tooltip: {
         y: {
-          formatter: (value) => `${value.toLocaleString()} €`, // Format tooltip with currency
+          formatter: (value) => `${value.toLocaleString()} €`,
         },
       },
     };
+    
 
     const chart = new ApexCharts(chartRef.current, options);
     chart.render();
@@ -65,9 +67,10 @@ const RevenueChart = ({ className }) => {
   }, []);
 
   return (
-    <div className={`flex relative flex-col  ${className}`}>
+    <div  className={`flex relative flex-col  ${className}`}>
       <h1 className="font-semibold p-2 text-xl">Revenue</h1>
-      <div style={{ height: '40vh' }} id="chart" ref={chartRef} />
+      <div id="chart" ref={chartRef} className="chart-container" />
+
     </div>
   );
 };
