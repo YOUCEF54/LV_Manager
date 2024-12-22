@@ -64,9 +64,9 @@ export default function GanttChart() {
     const dates = getDatesForDuration(duration);
 
     return (
-      <tr key={details.matricule} className="hover:bg-gray-50">
-        <td className="px-3 py-2">
-          <div className="flex flex-row gap-2 items-center">
+      <tr key={details.matricule} className="hover:bg-gray-50 whitespace-nowrap">
+        <td className="px-3 py-2 min-w-[10rem]">
+          <div className="flex flex-row gap-2 w-full items-center">
             <img
               className="w-10 h-10 rounded-full"
               src={
@@ -140,10 +140,10 @@ export default function GanttChart() {
   }, []);
 
   return (
-    <div className="mt-2 w-full rounded-lg shadow bg-white p-4 md:p-6">
+    <div className="mt-2 w-full  overflow-x-auto rounded-lg shadow bg-white p-4 md:p-6">
       <div className="flex flex-row justify-between items-center py-3">
         <h3 className="text-2xl font-bold">Utilisation du Flott</h3>
-        <div ref={dropdownRef} className="relative">
+        <div ref={dropdownRef} className="relative whitespace-nowrap">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex justify-center items-center gap-1 text-neutral-400 border p-2 py-1 rounded-lg border-neutral-300 bg-neutral-50"
@@ -180,7 +180,7 @@ export default function GanttChart() {
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-gray-100 p-4 rounded-lg shadow-md">
+      <div className="w-full whitespace-nowrap overflow-x-auto bg-gray-100 p-4 rounded-lg shadow-md">
         <table className="w-full text-sm text-left text-gray-600">
           <thead className="bg-gray-200">
             <tr>
