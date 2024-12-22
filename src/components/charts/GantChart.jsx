@@ -65,7 +65,7 @@ export default function GanttChart() {
 
     return (
       <tr key={details.matricule} className="hover:bg-gray-50 whitespace-nowrap">
-        <td className="px-3 py-2 min-w-[10rem]">
+        <td className="px-3 py-2 min-w-[10rem] sticky left-0 bg-white">
           <div className="flex flex-row gap-2 w-full items-center">
             <img
               className="w-10 h-10 rounded-full"
@@ -180,11 +180,11 @@ export default function GanttChart() {
         </div>
       </div>
 
-      <div className="w-full whitespace-nowrap overflow-x-auto bg-gray-100 p-4 rounded-lg shadow-md">
-        <table className="w-full text-sm text-left text-gray-600">
-          <thead className="bg-gray-200">
+      <div className="w-full whitespace-nowrap  overflow-x-auto bg-gray-100 rounded-lg shadow-md">
+        <table className="w-full text-sm text-left text-gray-600 ">
+          <thead className="bg-gray-200 ">
             <tr>
-              <th className="px-2 py-1 text-gray-700">Véhicule/Jour</th>
+              <th className="px-2 py-1 sticky left-0 text-gray-700 bg-gray-200">Véhicule/Jour</th>
               {getDatesForDuration(duration).map((date) => {
                 const dateObj = new Date(date);
                 const dayName = dateObj.toLocaleDateString("fr-FR", {
