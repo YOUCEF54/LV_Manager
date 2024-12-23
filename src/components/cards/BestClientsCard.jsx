@@ -1,4 +1,4 @@
-import { UserCircleIcon } from '@heroicons/react/24/solid'
+import { UserCircleIcon } from "@heroicons/react/16/solid";
 
 // eslint-disable-next-line react/prop-types
 export default function BestClients({ className }) {

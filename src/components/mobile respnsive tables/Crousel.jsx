@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid"
+import { ArrowLeft01Icon } from "hugeicons-react"
 import { useState, useEffect } from "react"
 
 export default function Carousel({
@@ -36,13 +36,13 @@ export default function Carousel({
           onClick={prev}
           className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white"
         >
-          <ChevronLeftIcon className="size-5" />
+          {/* <ArrowLeft01Icon className="size-5" /> */}
         </button>
         <button
           onClick={next}
           className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white"
         >
-        <ChevronRightIcon className="size-5"/>
+        {/* <ar className="size-5"/> */}
         </button>
       </div>
 

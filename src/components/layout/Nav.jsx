@@ -1,5 +1,4 @@
-import { Bars3BottomRightIcon, ChartBarIcon, HomeIcon, InformationCircleIcon } from '@heroicons/react/16/solid';
-import { Bars2Icon } from '@heroicons/react/24/solid';
+import { Bars3Icon, ChartBarIcon, HomeIcon, InformationCircleIcon } from '@heroicons/react/16/solid';
 import { useEffect, useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
@@ -51,7 +50,7 @@ export default function Nav() {
               ))}
             </ul>
           </div>
-            <Bars3BottomRightIcon onClick={()=>setOpen(!isOpen)} className='size-5 sm:hidden cursor-pointer'/>
+            <Bars3Icon onClick={()=>setOpen(!isOpen)} className='size-5 sm:hidden cursor-pointer'/>
         </nav>
         <ul className={`flex-col absolute py-4 ${isOpen ? "top-[3.5rem]": "-top-96"}  sm:-top-96 duration-200 ease-in-out shadow space-y-2 bg-white z-30 w-full p-2  `}>
               {menu.map((e, i) => (

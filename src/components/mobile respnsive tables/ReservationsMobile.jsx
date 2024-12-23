@@ -1,4 +1,4 @@
-import { CalendarDaysIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import { PhoneIcon } from "@heroicons/react/16/solid";
 
 export default function ReservationsMobile() {
   return (
@@ -15,7 +15,7 @@ export default function ReservationsMobile() {
               <img src="hugeicons_id.svg" className="size-5 "/>
               ww1234</div>
             <div className="px-4 py-2 text-center flex items-center  gap-1">
-                <CalendarDaysIcon className="size-5 fill-emerald-600"/>
+                <PhoneIcon className="size-5 fill-emerald-600"/>
                 10 Dec, 2024</div>
         </div> 
 

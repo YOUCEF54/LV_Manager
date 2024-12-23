@@ -1,4 +1,4 @@
-import { CalendarDaysIcon } from "@heroicons/react/24/solid";
+import { Calendar01Icon } from "hugeicons-react";
 
 export default function MobileTableCardCA() {
   return (
@@ -14,7 +14,7 @@ export default function MobileTableCardCA() {
             <div className="p-4 ">Mohamed</div>
             <div className="p-4 ">Clio 4</div>
             <div className="p-4 text-center flex items-center  gap-1">
-                <CalendarDaysIcon className="size-5 fill-emerald-600"/>
+                <Calendar01Icon className="size-5 fill-emerald-600"/>
                 10 Dec, 2024</div>
         </div>
     </div>

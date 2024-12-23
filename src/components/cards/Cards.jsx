@@ -1,7 +1,5 @@
-import { DocumentCurrencyDollarIcon, DocumentDuplicateIcon, DocumentMinusIcon, DocumentTextIcon } from "@heroicons/react/16/solid";
-import { DocumentChartBarIcon, UsersIcon } from "@heroicons/react/16/solid";
+import { CalendarDateRangeIcon, DocumentTextIcon, UsersIcon } from "@heroicons/react/16/solid";
 import CarIcon from "../../../public/CarIcon";
-import { CalendarDateRangeIcon } from "@heroicons/react/16/solid";
 
 export function TotalClients() {
   return (

@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react";
-import {UserIcon } from "@heroicons/react/24/solid";
-import { ArrowLeftEndOnRectangleIcon, Bars3Icon, BellIcon, ChevronDownIcon, PlusIcon } from "@heroicons/react/16/solid";
 import BestClients from "../components/cards/BestClientsCard";
 import { Contracts, Reservations, TotalClients, Vehicules } from "../components/cards/Cards";
-import { DocumentTextIcon } from "@heroicons/react/16/solid";
+import { Bars3BottomLeftIcon, BellIcon, ChevronDownIcon, ChevronLeftIcon, DocumentTextIcon, PlusIcon, UserIcon } from "@heroicons/react/16/solid";
 import CarIcon from "../../public/CarIcon";
 import ContratsActive from "../components/cards/ContratsActiveCard";
 import ReservationsCard from "../components/cards/ReservationsCard";
 import RevenueChart from "../components/charts/RevenueChart";
-import ContratsActiveMV from "../components/mobile respnsive tables/ContratsActiveMV";
-import ReservationsMobile from "../components/mobile respnsive tables/ReservationsMobile";
 import GantChart from "../components/charts/GantChart";
 import TopVehicules from "../components/cards/TopVehiculesCard";
+import Sidebar from "../components/layout/Sidebar";
 
 export default function Dashboard() {
 
     const [isToggle,setToggle] = useState(false)
     const [dropAjout,setDropAjout] = useState(false)
     const [isDropProfile,setDropProfile] = useState(false)
-    const [timeOutDropAjout,setTimeOutDropAjout] = useState(false)
-    const [timeOutDropProfile,setTimeOutDropProfile] = useState(false)
     const [isHidden,setHidden] = useState(!isToggle)
 
 
@@ -60,6 +55,10 @@ export default function Dashboard() {
           <div className="text-lg font-bold text-neutral-600">
             <span className="text-blue-600">Lv</span>Manager
           </div>
+
+          <div>
+            <Sidebar/>
+          </div>
         </aside>
   
         <div
@@ -67,7 +66,7 @@ export default function Dashboard() {
           className="flex flex-col overflow-auto flex-grow w-full"
         >
           <header className="flex items-center justify-between bg-white pr-6  p-4">
-            <Bars3Icon
+            <Bars3BottomLeftIcon
               onClick={() => setToggle(!isToggle)}
               className="cursor-pointer w-6 h-6"
             />
@@ -132,7 +131,7 @@ export default function Dashboard() {
                       Profile
                     </button>
                     <button className="hover:bg-neutral-100 text-nowrap p-2 px-4 flex items-center  gap-3">
-                      <ArrowLeftEndOnRectangleIcon className="size-5  fill-black " />
+                      <ChevronLeftIcon className="size-5  fill-black " />
                       Se déconneter
                     </button>
                   </div>

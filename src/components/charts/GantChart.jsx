@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import  { useState, useEffect, useRef } from "react";
 
 export default function GanttChart() {
   const [duration, setDuration] = useState("thisWeek");
