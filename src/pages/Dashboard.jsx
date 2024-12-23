@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BestClients from "../components/cards/BestClientsCard";
 import { Contracts, Reservations, TotalClients, Vehicules } from "../components/cards/Cards";
-import { Bars3BottomLeftIcon, BellIcon, ChevronDownIcon, ChevronLeftIcon, DocumentTextIcon, PlusIcon, UserIcon } from "@heroicons/react/16/solid";
+import { Bars3BottomLeftIcon, BellIcon, ChevronDownIcon, ChevronLeftIcon, DocumentTextIcon, LockClosedIcon, PlusIcon, UserIcon } from "@heroicons/react/16/solid";
 import CarIcon from "../../public/CarIcon";
 import ContratsActive from "../components/cards/ContratsActiveCard";
 import ReservationsCard from "../components/cards/ReservationsCard";
@@ -9,6 +9,7 @@ import RevenueChart from "../components/charts/RevenueChart";
 import GantChart from "../components/charts/GantChart";
 import TopVehicules from "../components/cards/TopVehiculesCard";
 import Sidebar from "../components/layout/Sidebar";
+import { Tooltip } from "flowbite-react";
 
 export default function Dashboard() {
 
@@ -21,7 +22,7 @@ export default function Dashboard() {
     useEffect(()=>{
       setTimeout(()=>{
         setHidden(isToggle)
-      },150)
+      },0)
     },[isToggle])
 
     useEffect(() => {
@@ -46,14 +47,15 @@ export default function Dashboard() {
     return (
       <div className="flex w-full top-0 fixed h-screen">
         <aside
-          className={`flex max-sm:hidden ease-in-out flex-col ${
+          className={`flex ease-in-out flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
             isHidden && "hidden"
           } duration-300 ${
             isToggle ? "w-0" : "w-[15rem] min-w-[12rem]"
           } bg-white p-4`}
         >
-          <div className="text-lg font-bold text-neutral-600">
-            <span className="text-blue-600">Lv</span>Manager
+          <div className="text-lg font-bold text-neutral-600 max-sm:flex items-center justify-between">
+            <div><span className="text-blue-600">Lv</span>Manager</div>
+            <button onClick={()=>setToggle(!isToggle)} className="sm:hidden" ><PlusIcon className="size-8 rotate-45 mx-2 bg-neutral-50  rounded-full p-1 "/></button>
           </div>
 
           <div>
