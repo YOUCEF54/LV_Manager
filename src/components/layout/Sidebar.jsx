@@ -5,8 +5,8 @@ export default function Sidebar() {
     <div className="mt-10">
         <ul className="flex flex-col gap-2">
             <li className="relative">
-              <button className="bg-blue-600 before:absolute before:w-3.5 before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md  whitespace-nowrap p-3 rounded-md w-full text-white flex items-center gap-2">
-              <ChartBarIcon className="size-6"/>
+              <button className="bg-blue-600 before:absolute before:w-3.5 before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md  whitespace-nowrap p-2 px-3 rounded-md w-full text-white flex items-center gap-2">
+              <ChartBarIcon className="size-4"/>
               Tableau de bord</button>
             </li>
             <li className=""><button className="p-2  gap-2 hover:bg-neutral-100 w-full  flex items-center rounded-lg">
