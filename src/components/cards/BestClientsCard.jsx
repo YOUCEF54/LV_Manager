@@ -65,7 +65,7 @@ export default function BestClients({className}) {
                 <td className="p-6 text-center">{e.tel}</td>
                 <td className="p-6 text-center">{e.cin}</td>
                 <td className="p-6 text-center">{e.permis}</td>
-                <td className="p-6 text-center">{e.totalAmountSpent}</td>
+                <td className="p-6 text-center">{e.totalAmountSpent}DH</td>
                 <td className="p-4 text-center">
                   {e.statutCl == "Active" ? (
                     <span className="bg-emerald-500 font-medium text-white py-1 px-6 rounded-full">Active</span>
