@@ -9,11 +9,12 @@ import RevenueChart from "../components/charts/RevenueChart";
 import GantChart from "../components/charts/GantChart";
 import TopVehicules from "../components/cards/TopVehiculesCard";
 import Sidebar from "../components/layout/Sidebar";
-import { Tooltip } from "flowbite-react";
+import Chat from "../components/Chat";
+import axios from "axios";
 
 export default function Dashboard() {
 
-    const [isToggle,setToggle] = useState(false)
+    const [isToggle,setToggle] = useState(true)
     const [dropAjout,setDropAjout] = useState(false)
     const [isDropProfile,setDropProfile] = useState(false)
     const [isHidden,setHidden] = useState(!isToggle)
@@ -38,6 +39,7 @@ export default function Dashboard() {
     };
   
     useEffect(() => {
+
       document.addEventListener("mousedown", handleOutsideClick);
       return () => {
         document.removeEventListener("mousedown", handleOutsideClick);
@@ -46,6 +48,7 @@ export default function Dashboard() {
   
     return (
       <div className="flex w-full top-0 fixed h-screen">
+        <Chat/>
         <aside
           className={`flex ease-in-out flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
             isHidden && "hidden"
@@ -158,7 +161,7 @@ export default function Dashboard() {
           </div>
           <RevenueChart className="bg-white  shadow-md rounded-2xl p-4 pb-0 mb-8 mt-4" />
           <GantChart/>
-          <BestClients className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
+          <BestClients className=" whitespace-nowrap rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
           <TopVehicules className="rounded-2xl my-4 max-h-[30rem] shadow-md overflow-hidden bg-white w-full" />
         </main>
 

@@ -56,7 +56,7 @@ export default function GanttChart() {
     return dates;
   };
 
-  const renderGanttChartRow = (vehicle) => {
+  const renderGanttChartRow = (vehicle, index) => {
     const { details, rentals, reservations } = vehicle || {};
     if (!details) return null;
 
@@ -64,7 +64,7 @@ export default function GanttChart() {
     const dates = getDatesForDuration(duration);
 
     return (
-      <tr key={details.matricule} className="hover:bg-gray-50 whitespace-nowrap">
+      <tr key={index} className="hover:bg-gray-50 whitespace-nowrap">
         <td className="px-3 py-2 min-w-[10rem] sticky left-0 bg-white">
           <div className="flex flex-row gap-2 w-full items-center">
             <img
@@ -201,8 +201,8 @@ export default function GanttChart() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {Object.keys(fleetData).map((matricule) =>
-              renderGanttChartRow(fleetData[matricule])
+            {Object.keys(fleetData).map((matricule,index) =>
+              renderGanttChartRow(fleetData[matricule],index)
             )}
           </tbody>
         </table>

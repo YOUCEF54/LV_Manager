@@ -1,8 +1,42 @@
+import  { useEffect, useRef, useState } from "react";
+import useInView from "../../hooks/useInView";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export default function TopVehicules({ className }) {
+export default function TopVehicules({className}) {
+  const ref = useRef();
+  const isInView = useInView(ref);
+  const [topVehicules, setTopVehicules] = useState([]);
+  const [hasFetched, setHasFetched] = useState(false);
+
+  useEffect(() => {
+    async function fetchTopClients() {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
+      };
+      
+        try {
+          const response = await axios.get(
+            `https://beta.lvmanager.net/tenants/analytics/topClients_vehicles`,
+            { headers }
+          );
+          setTopVehicules(Array(response.data.topVehicules)[0]);
+          setHasFetched(true)
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+    if (isInView && !hasFetched) {
+      fetchTopClients();
+      console.log("top vehicules is in View!")
+    }
+  }, [isInView, hasFetched]);
+
   return (
-    <div className={`flex flex-col p-6 min-h-60 ${className}`}>
+    <div ref={ref} className={`flex flex-col p-6 min-h-60 ${className}`}>
       <div className="flex sticky left-0 top-0 bg-white filter-none backdrop-blur-lg bg-opacity-50 pb-6  right-0  items-center justify-between">
         <h1 className="font-semibold text-xl">Meilleurs véhicules</h1>
         <div className="right-0">
@@ -20,17 +54,17 @@ export default function TopVehicules({ className }) {
             </tr>
           </thead>
           <tbody className="divide-y-2">
-            {Array.from({ length: 3 }).map((_, index) => (
+            {topVehicules?.map((e, index) => (
               <tr key={index} className="text-neutral-600">
-                <td className="p-6 text-center">Clio 4</td>
-                <td className="p-6 text-center">8</td>
-                <td className="p-6 text-center">7</td>
-                <td className="p-6 text-center">500DH</td>
+                <td className="p-6 text-center">{e.libelle}</td>
+                <td className="p-6 text-center">{e.nbrContrats}</td>
+                <td className="p-6 text-center">{e.daysRented}</td>
+                <td className="p-6 text-center">{e.totalRevenues}DH</td>
                 <td className="p-4 text-center">
-                  {index !== 2 ? (
-                    <span className="bg-emerald-500 font-medium text-white py-1 px-6 rounded-full">Active</span>
+                  {e.status == "Disponible" ? (
+                    <span className="bg-emerald-500 font-medium text-white py-1 px-6 rounded-full">{e.status}</span>
                   ) : (
-                    <span className="bg-red-500 font-medium text-white py-1 px-4 rounded-full">Rejected</span>
+                    <span className="bg-red-500 font-medium text-white py-1 px-4 rounded-full">{e.status}</span>
                   )}
                 </td>
               </tr>
