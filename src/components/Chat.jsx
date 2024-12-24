@@ -2,11 +2,13 @@ import { ChatBubbleLeftRightIcon,CogIcon, MinusIcon, PaperClipIcon, PlusIcon, Us
 import { useState } from "react";
 
 export default function Chat() {
+
     const [isOpen,setisOpen]=  useState(false);
+    const [isClose,setIsClose]=  useState(false);
 
   return (
    <div>
-    <div onClick={()=>{setisOpen(!isOpen)}} className={`${isOpen ? "flex flex-col max-w-[90vw] w-[25rem] mi-h-[20rem]  bg-white rounded-lg shadow-md border" : "size-16 bg-orange-20 p-3 bg-opacity-75 backdrop-blur-lg  hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400  rounded-full"} z-50 duration-200 ease-in-out  absolute right-4 bottom-4 overflow-y-hidden`}>
+    <div onClick={()=>{setisOpen(!isOpen)}} className={`${isOpen ? "flex flex-col max-w-[90vw] w-[25rem] mi-h-[20rem]  bg-white rounded-lg shadow-md border" : "size-16 bg-orange-20 p-3 bg-opacity-75 backdrop-blur-lg  hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400  rounded-full"} ${isClose && "hidden"} z-50 duration-200 ease-in-out  absolute right-4 bottom-4 overflow-y-hidden`}>
         <ChatBubbleLeftRightIcon className={`${isOpen?"hidden":" hover:scale-105  fill-orange-400"}   duration-100 `}/>
         {isOpen ?
         <div onClick={(e)=>{e.stopPropagation()}}>
@@ -15,10 +17,10 @@ export default function Chat() {
                     <UserCircleIcon className="size-8"/>
                     <div>Youcef El Omari</div>
                 </div>
-                <div onClick={()=>{setisOpen(false)}} className="flex cursor-pointer items-center gap-2">
+                <div  className="flex cursor-pointer items-center gap-2">
                     <CogIcon className="size-6 bg-neutral-100 border border-neutral-300 rounded-full p-[2px] "/>
-                    <MinusIcon className="size-6"/>
-                    <PlusIcon className=" rotate-45 size-6"/>
+                    <MinusIcon onClick={()=>{setisOpen(false)}} className="size-6"/>
+                    <PlusIcon onClick={()=>{setIsClose(true)}} className=" rotate-45 size-6"/>
                 </div>
 
 
