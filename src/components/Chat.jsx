@@ -6,8 +6,8 @@ export default function Chat() {
 
   return (
    <div>
-    <div onClick={()=>{setisOpen(!isOpen)}} className={`${isOpen ? "flex flex-col max-w-[90vw] w-[25rem] mi-h-[20rem]  bg-white rounded-lg shadow-md border" : "size-16 bg-orange-200 p-3 bg-opacity-75 backdrop-blur-lg hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400  rounded-full"} z-50 duration-200 ease-in-out  absolute right-4 bottom-4 overflow-y-hidden`}>
-        <ChatBubbleLeftRightIcon className={`${isOpen?"hidden":" hover:scale-105 fill-orange-400"}  duration-100 `}/>
+    <div onClick={()=>{setisOpen(!isOpen)}} className={`${isOpen ? "flex flex-col max-w-[90vw] w-[25rem] mi-h-[20rem]  bg-white rounded-lg shadow-md border" : "size-16 bg-orange-20 p-3 bg-opacity-75 backdrop-blur-lg  hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400  rounded-full"} z-50 duration-200 ease-in-out  absolute right-4 bottom-4 overflow-y-hidden`}>
+        <ChatBubbleLeftRightIcon className={`${isOpen?"hidden":" hover:scale-105  fill-orange-400"}   duration-100 `}/>
         {isOpen ?
         <div onClick={(e)=>{e.stopPropagation()}}>
             <div className="flex items-center justify-between gap-2 p-2 py-4 border-b" >
