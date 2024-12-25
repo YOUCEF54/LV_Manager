@@ -51,7 +51,7 @@ const DropDown = ({libelle, dataset}) =>{
 
 export default function Contrats() {
   return (
-    <div>
+    <div className="pr-2">
         <h1 className="text-3xl font-semibold text-neutral-700">Contrats</h1>
             <div className="flex gap-6 mb-4 justify-between sticky inset-0 mt-10">
                 Filtré par
