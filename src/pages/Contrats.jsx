@@ -1,4 +1,4 @@
-import { CalendarDaysIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
+import { CalendarDaysIcon, ChevronDownIcon, PencilIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -60,25 +60,42 @@ export default function Contrats() {
                     <DropDown libelle="Véhicules" dataset = {["client01","client02"]}/>
                 </div>
             </div>
-        <div className="overflow-x-auto overflow-y-clip  bg-white p-4 rounded-xl">
+        <div className="overflow-x-auto overflow-y-clip  bg-white shadow-md p-4 rounded-xl">
         <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
         <thead>
-          <tr className="bg-slate-200 bg-opacity-70">
-            <th className="p-3 rounded-l-lg font-medium">Contrat N°</th>
-            <th className="p-3 font-medium">Cient</th>
+          <tr className="bg-neutral-200 text-neutral-800 bg-opacity-70">
+            <th className="p-3 rounded-l-lg font-medium">Ref</th>
             <th className="p-3 font-medium">Véhicule</th>
-            <th className=" rounded-r-lg p-3 font-medium">Return Date</th>
+            <th className="p-3 font-medium">Date de départ</th>
+            <th className="p-3 font-medium">Date de retour</th>
+            <th className="p-3 font-medium">Client</th>
+            <th className="p-3 font-medium">Paiements</th>
+            <th className="p-3 font-medium">Status</th>
+            <th className=" rounded-r-lg p-3 font-medium">Action</th>
           </tr>
         </thead>
         <tbody className="divide-y-2 text-nowrap whitespace-nowrap">
           {Array.from({ length: 3 }).map((_, index) => (
             <tr key={index} className="text-neutral-600">
               <td className="p-6 text-center">4</td>
-              <td className="p-6 text-center">Mohamed</td>
               <td className="p-6 text-center">Clio 4</td>
-              <td className="p-6 text-center flex items-center justify-center gap-1">
-                <CalendarDaysIcon className="size-5 fill-emerald-600"/>
-                10 Dec, 2024
+              <td className="p-6 text-center justify-center flex items-center gap-2">
+              {/* <CalendarDaysIcon className="size-5 fill-emerald-600"/> */}
+                21-12-2024<br/>100:30:00</td>
+              <td className="p-6 text-center">21-12-2024<br/> 100:30:00</td>
+              <td className="p-6 text-center">Mohamed</td>
+              <td className="px-2 text-center w-full flex flex-col flex-grow m-auto  items-center gap-1">
+              <span className="bg-emerald-500 rounded-xl min-w-24  px-4  text-white h-full ">600DH</span>
+              <span className="bg-red-500 rounded-xl px-4 min-w-24  flex-grow text-white h-full ">0DH</span>
+              </td>
+              <td className="px-2 text-center  ">
+                  <div className=" bg-yellow-500 w-fit m-auto  text-white px-4 rounded-xl ">Active</div>
+              </td>
+              <td className="p-6 text-center ">
+                  <div className="w-full  px-4 rounded-xl flex items-center gap-2 ">
+                  <PencilSquareIcon className="size-8 p-1 hover:bg-neutral-100 rounded-md  cursor-pointer"/>
+                  <TrashIcon className="size-8 p-1 hover:bg-neutral-100 rounded-md  cursor-pointer "/>
+                  </div>
               </td>
             </tr>
           ))}

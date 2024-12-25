@@ -9,6 +9,7 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contrats from './pages/Contrats.jsx';
 import Sidebar from './components/layout/Sidebar.jsx';
+import Login from './routes/Login.jsx';
 
 // Define a simple NotFound component
 const NotFound = () => (
@@ -49,11 +50,17 @@ function App() {
     </Sidebar>
   );
 
+  const NoSidebarLayout = ({ children }) => (
+    <>{children}</>
+  );
+
   return (
     <div className="App bg-neutral-300 h-screen overflow-auto">
       <BrowserRouter>
         <Routes>
-          <Route element={<MainLayout />}>
+            <Route path="login" element={<NoSidebarLayout><Login /></NoSidebarLayout>} />
+            <Route element={<MainLayout />}>
+
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
