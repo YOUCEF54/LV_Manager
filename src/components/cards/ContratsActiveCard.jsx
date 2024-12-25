@@ -5,7 +5,7 @@ export default function ContratsActive({className}) {
   return (
     <div className={`flex flex-col p-6 min-h-60 ${className}`}>
     <div className="flex sticky left-0 top-0 bg-white filter-none backdrop-blur-lg bg-opacity-50 pb-6  right-0  items-center justify-between">
-      <h1 className="font-semibold text-xl">Contarats Active</h1>
+      <h1 className="font-semibold text-xl">Contrats Active</h1>
       <div className="right-0">
         {/* <DropDown /> */}
       </div>
