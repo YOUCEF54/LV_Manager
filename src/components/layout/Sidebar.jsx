@@ -4,8 +4,8 @@ import { Bars3BottomLeftIcon, BellIcon, ChevronDownIcon, ChevronLeftIcon, PlusIc
 
 import CarIcon from "../../../public/CarIcon";
 
-import Chat from "../Chat";
 import { Link } from "react-router-dom";
+import Chat from "../Chat";
 // eslint-disable-next-line react/prop-types
 export default function Sidebar({children}) {
 const [isToggle,setToggle] = useState(true)
