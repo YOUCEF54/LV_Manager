@@ -55,7 +55,7 @@ export default function Contrats() {
     <div className="pr-2">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold text-neutral-700">Contrats</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 whitespace-nowrap">
           <button className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">Factures</button>
           <button className="flex items-center pl-1 bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
             <PlusIcon className="size-5"/>
