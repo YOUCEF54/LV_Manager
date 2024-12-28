@@ -9,19 +9,24 @@ import {
     UserCircleIcon,
 } from "@heroicons/react/16/solid";
 
+import LoadingIcon from "../../public/Loading"
+
 import SendIcon from "../../public/SendIcon"
 import { useState, useEffect } from "react";
 import echo from "../utils/echo";
 import axios from "axios";
 
-
+import { useRef } from "react";
 
 export default function Chat() {
-    console.log("tests are here")
     const [isOpen, setIsOpen] = useState(false);
     const [isClose, setIsClose] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState([]);
+
     const [messageInput, setMessageInput] = useState("");
+
+    const messagesEndRef = useRef(null); // Ref for the messages container
 
     const headers = {
         Accept: "application/json",
@@ -29,49 +34,63 @@ export default function Chat() {
         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
     };
 
-    // console.log("here I am : ",import.meta.env.VITE_API_TOKEN)
     useEffect(() => {
-        getMessages()
-        const channel = echo.channel("tenant-chat." + 4);
-    
+        getMessages();
+        const channel = echo.channel("tenant-chat.4");
+
         channel.listen("MessageSent", (data) => {
             console.log("Message received in real time:", data.message);
             setMessages((prevMessages) => [...prevMessages, data.message]);
         });
+
         return () => {
             channel.unsubscribe();
         };
     }, []);
 
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
-
+    const handleChatToggle = () => {
+        setIsOpen((prev) => !prev);
+        if (!isOpen) {
+            // Scroll to bottom when the chat box is opened
+            setTimeout(scrollToBottom, 0); // Ensure the DOM is updated
+        }
+    };
 
     const sendMessage = async () => {
         if (!messageInput.trim()) return;
 
-        const responce = await axios.post("https://beta.lvmanager.net/central-db/chat/tenant/add",
-        JSON.stringify({ message: messageInput,sender:"location"}),
-        {headers});
-        
-        // console.log("Send Message: ",responce)
+        const response = await axios.post(
+            "https://beta.lvmanager.net/central-db/chat/tenant/add",
+            JSON.stringify({ message: messageInput, sender: "location" }),
+            { headers }
+        );
+
+        getMessages();
         setMessageInput("");
     };
+
     const getMessages = async () => {
+        setIsLoading(true)
+        setMessages([]);
+        const response = await axios.get(
+            "https://beta.lvmanager.net/central-db/chats/tenantMessages",
+            { headers }
+        );
+        setIsLoading(false)
 
-        setMessages([])
-        const responce = await axios.get("https://beta.lvmanager.net/central-db/chats/tenantMessages",
-        {headers});
-        
-        console.log("get Message: ",responce)
-        setMessages(responce.data)
+        console.log("get Message: ", response);
+        setMessages(response.data);
+        setTimeout(scrollToBottom, 0);
     };
-
-
 
     return (
         <div>
             <div
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={handleChatToggle} // Use the new toggle handler
                 className={`${
                     isOpen
                         ? "flex flex-col max-w-[90vw] w-[25rem] min-h-[20rem] bg-white rounded-lg shadow-md border"
@@ -95,29 +114,38 @@ export default function Chat() {
                                     onClick={() => setIsOpen(false)}
                                     className="size-7 bg-neutral-50 rounded-full hover:bg-neutral-100 cursor-pointer hover:scale-105 duration-100 ease-in-out p-1"
                                 />
-                                
                             </div>
                         </div>
-                        <div className="flex max-h-[25rem]  flex-col flex-grow h-full gap-2 min-h-[20rem] overflow-y-auto">
-                            {messages.map((msg, index) => (
-                                <div
-                                    key={index}
-                                    className={`flex items-center p-2 px-3 gap-2 ${
-                                        msg.sender == "tenant" ? "justify-end" : ""
-                                    }`}
-                                >
-                                    {msg.sender == "admin" && <UserCircleIcon className="size-6" />}
+                        <div
+                            className="flex max-h-[25rem] relative flex-col flex-grow h-full gap-2 min-h-[20rem] overflow-y-auto"
+                        >
+                            <div className="">
+                                {isLoading?
+                                <div className="w-full h-full absolute m-auto flex items-center justify-center ">
+                                    <LoadingIcon className=" size-8 animate-spin"/>
+                                </div>:
+                                messages.map((msg, index) => (
                                     <div
-                                        className={`p-2 ${
-                                            msg.sender == "admin"
-                                                ? "bg-neutral-100"
-                                                : "bg-orange-100"
-                                        } rounded-lg px- relative`}
+                                        key={index}
+                                        className={`flex items-center p-2 px-3 gap-2 ${
+                                            msg.sender == "tenant" ? "justify-end" : ""
+                                        }`}
                                     >
-                                        {msg?.message || "Message content unavailable"}
+                                        {msg.sender == "admin" && <UserCircleIcon className="size-6" />}
+                                        <div
+                                            className={`p-2 ${
+                                                msg.sender == "admin"
+                                                    ? "bg-neutral-100"
+                                                    : "bg-orange-100"
+                                            } rounded-lg px- relative`}
+                                        >
+                                            {msg?.message || "Message content unavailable"}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+                            {/* Ref Element to Scroll To */}
+                            <div ref={messagesEndRef} />
                         </div>
                         <div className="w-full h-[4rem] relative flex items-center">
                             <input
