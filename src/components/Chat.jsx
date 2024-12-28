@@ -1,13 +1,20 @@
+/* eslint-disable no-unused-vars */
 import {
     ChatBubbleLeftRightIcon,
     CogIcon,
     MinusIcon,
+    PaperAirplaneIcon,
     PaperClipIcon,
     PlusIcon,
     UserCircleIcon,
 } from "@heroicons/react/16/solid";
+
+import SendIcon from "../../public/SendIcon"
 import { useState, useEffect } from "react";
 import echo from "../utils/echo";
+import axios from "axios";
+
+
 
 export default function Chat() {
     console.log("tests are here")
@@ -23,30 +30,43 @@ export default function Chat() {
     };
 
     // console.log("here I am : ",import.meta.env.VITE_API_TOKEN)
-
     useEffect(() => {
-        const channel = echo.channel("chat");
+        getMessages()
+        const channel = echo.channel("tenant-chat." + 4);
+    
         channel.listen("MessageSent", (data) => {
+            console.log("Message received in real time:", data.message);
             setMessages((prevMessages) => [...prevMessages, data.message]);
-            console.log("here are some chat messages: ",data)
         });
-
+    
         return () => {
             channel.unsubscribe();
         };
     }, []);
 
+
+
+
     const sendMessage = async () => {
         if (!messageInput.trim()) return;
 
-        await fetch("https://beta.lvmanager.net/central-db/chat/tenant/add", {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify({ message: messageInput,sender:"location"}),
-        });
-
+        const responce = await axios.post("https://beta.lvmanager.net/central-db/chat/tenant/add",
+        JSON.stringify({ message: messageInput,sender:"location"}),
+        {headers});
+        
+        // console.log("Send Message: ",responce)
         setMessageInput("");
     };
+    const getMessages = async () => {
+
+        setMessages([])
+        const responce = await axios.get("https://beta.lvmanager.net/central-db/chats/tenantMessages",
+        {headers});
+        
+        console.log("get Message: ",responce)
+        setMessages(responce.data)
+    };
+
 
 
     return (
@@ -71,35 +91,31 @@ export default function Chat() {
                                 <UserCircleIcon className="size-8" />
                                 <div>Youcef El Omari</div>
                             </div>
-                            <div className="flex cursor-pointer items-center gap-2">
-                                <CogIcon className="size-6 bg-neutral-100 border border-neutral-300 rounded-full p-[2px]" />
+                            <div className="mx-4">
                                 <MinusIcon
                                     onClick={() => setIsOpen(false)}
-                                    className="size-6"
+                                    className="size-7 bg-neutral-50 rounded-full hover:bg-neutral-100 cursor-pointer hover:scale-105 duration-100 ease-in-out p-1"
                                 />
-                                <PlusIcon
-                                    onClick={() => setIsClose(true)}
-                                    className="rotate-45 size-6"
-                                />
+                                
                             </div>
                         </div>
-                        <div className="flex flex-col flex-grow h-full gap-2 min-h-[20rem] overflow-y-auto">
+                        <div className="flex max-h-[25rem]  flex-col flex-grow h-full gap-2 min-h-[20rem] overflow-y-auto">
                             {messages.map((msg, index) => (
                                 <div
                                     key={index}
                                     className={`flex items-center p-2 px-3 gap-2 ${
-                                        msg.isOwn ? "justify-end" : ""
+                                        msg.sender == "tenant" ? "justify-end" : ""
                                     }`}
                                 >
-                                    {!msg.isOwn && <UserCircleIcon className="size-6" />}
+                                    {msg.sender == "admin" && <UserCircleIcon className="size-6" />}
                                     <div
                                         className={`p-2 ${
-                                            msg.isOwn
+                                            msg.sender == "admin"
                                                 ? "bg-neutral-100"
                                                 : "bg-orange-100"
                                         } rounded-lg px- relative`}
                                     >
-                                        {msg.text || "Message content unavailable"}
+                                        {msg?.message || "Message content unavailable"}
                                     </div>
                                 </div>
                             ))}
@@ -114,7 +130,7 @@ export default function Chat() {
                                     if (e.key === "Enter") sendMessage();
                                 }}
                             />
-                            <PaperClipIcon
+                            <SendIcon
                                 className="absolute size-9 text-neutral-800 cursor-pointer hover:bg-neutral-100 rounded-md right-4 p-1.5"
                                 onClick={sendMessage}
                             />

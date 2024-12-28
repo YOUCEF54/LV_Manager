@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
 export default function DropDown({ dataset }) {
   const [isDropdown, setIsDropdown] = useState(false);
   const [selectedOption, setSelectedOption] = useState(1);
