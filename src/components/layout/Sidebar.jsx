@@ -1,4 +1,4 @@
-import { ArchiveBoxIcon, BanknotesIcon, CalendarDateRangeIcon, ChartBarIcon, Cog6ToothIcon, DocumentTextIcon, GlobeAltIcon, UsersIcon } from "@heroicons/react/16/solid";
+import { ArchiveBoxIcon, BanknotesIcon, CalendarDateRangeIcon, ChartBarIcon, Cog6ToothIcon, DocumentIcon, DocumentTextIcon, GlobeAltIcon, PaperClipIcon, PencilSquareIcon, UsersIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState } from "react";
 import { Bars3BottomLeftIcon, BellIcon, ChevronDownIcon, ChevronLeftIcon, PlusIcon, UserIcon } from "@heroicons/react/16/solid";
 
@@ -11,6 +11,7 @@ export default function Sidebar({children}) {
 const [isToggle,setToggle] = useState(true)
 const [dropAjout,setDropAjout] = useState(false)
 const [isDropProfile,setDropProfile] = useState(false)
+const [isDown,setisDown] = useState(false)
 const [isHidden,setHidden] = useState(!isToggle)
   // Notification code [END]
   const [current,setCurrent] = useState(location.href.split("/")[location.href.split("/").length-1])
@@ -47,7 +48,10 @@ const menu = [
   {name: "Site web", icon: GlobeAltIcon , link: "/siteWeb", isCurrent :  current == "siteWeb"},
 
 ]
-
+useEffect(()=>{
+  isDown &&
+  setCurrent("siteWeb")
+},[isDown])
 useEffect(()=>{
   setTimeout(()=>{
     setHidden(isToggle)
@@ -77,7 +81,7 @@ useEffect(() => {
     <div className="flex w-full top-0 fixed h-screen">
     <Chat/>
     <aside
-      className={`flex ease-in-out  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
+      className={`flex ease-in-out overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
         !isHidden && "hidden"
       } duration-300 ${
         !isToggle ? "w-0" : "w-[20rem] min-w-[15rem]"
@@ -88,10 +92,39 @@ useEffect(() => {
         <button onClick={()=>setToggle(!isToggle)} className="sm:hidden" ><PlusIcon className="size-8 rotate-45 mx-2 bg-neutral-50  rounded-full p-1 "/></button>
       </div>
 
-      <div className="mt-10 ">
+      <div className="mt-10  ">
 
     <ul className="flex flex-col gap-2 whitespace-nowrap">
       {menu?.map((e,index)=>(
+        e.link == "/siteWeb" ?
+          <div key={index} className={`${isDown ?"bg-neutral-50 p-2 border rounded-lg":""} duration-100`}>
+            <button onClick={()=>setisDown(!isDown)} className={`${isDown ? "bg-blue-600 mb-2 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center justify-between`}>
+              <div className="flex items-center gap-2"><GlobeAltIcon className="size-4"/>Site web</div>
+              <ChevronDownIcon className={`size-5 duration-200 ease-in-out ${isDown?"rotate-180":"rotate-0"}`}/>
+              </button>
+            <ul className={`${isDown?"h-full":"h-[0]"} flex flex-col gap-1  rounded-lg  overflow-hidden duration-100 ease-in-out`}>
+              <li key={index} className="relative">
+                <Link to={e?.link} className={`  whitespace-nowrap p-2 hover:bg-neutral-100 px-3 rounded-md w-full flex items-center gap-2`}>
+                <PencilSquareIcon className="size-4"/>
+                Editeur de style
+                </Link>
+              </li>
+              <li key={index} className="relative">
+                <Link to={e?.link} className={`  whitespace-nowrap p-2 px-3 hover:bg-neutral-100 rounded-md w-full flex items-center gap-2`}>
+                <ChartBarIcon className="size-4"/>
+                Statistiques
+                </Link>
+              </li>
+              <li key={index} className="relative">
+                <Link to={e?.link} 
+                className={` whitespace-nowrap p-2 px-3 rounded-md w-full hover:bg-neutral-100 flex items-center gap-2`}>
+                <DocumentIcon className="size-4"/>
+                Pages
+                </Link>
+              </li>
+            </ul>
+          </div>
+        :
 
           <li key={index} className="relative">
            <Link to={e?.link} className={`${e.isCurrent ? "bg-blue-600 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center gap-2`}>
