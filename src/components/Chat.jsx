@@ -38,7 +38,6 @@ export default function Chat() {
             console.log("Message received in real time:", data.message);
             setMessages((prevMessages) => [...prevMessages, data.message]);
         });
-    
         return () => {
             channel.unsubscribe();
         };
