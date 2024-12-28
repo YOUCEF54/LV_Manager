@@ -1,4 +1,5 @@
-import { CalendarDaysIcon, ChevronDownIcon, PencilIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/16/solid";
+/* eslint-disable react/prop-types */
+import { ChevronDownIcon, PencilSquareIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -23,7 +24,7 @@ const DropDown = ({libelle, dataset}) =>{
         <div ref={dropdownRef} className="relative w-fit whitespace-nowrap">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex justify-center items-center gap-1 text-sm text-neutral-500 border p-2 py-1 rounded-lg border-neutral-300 bg-neutral-50"
+            className="flex justify-center items-center gap-1 text-sm text-neutral-500 border p-2 py-1 rounded-[5px] border-neutral-300 bg-neutral-50"
           >
             <div className="">
               {libelle}
@@ -52,9 +53,17 @@ const DropDown = ({libelle, dataset}) =>{
 export default function Contrats() {
   return (
     <div className="pr-2">
+      <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold text-neutral-700">Contrats</h1>
+        <div className="flex items-center gap-2">
+          <button className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">Factures</button>
+          <button className="flex items-center pl-1 bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
+            <PlusIcon className="size-5"/>
+            Nouveau contrat</button>
+        </div>
+      </div>
             <div className="flex gap-6 mb-4 justify-between sticky inset-0 mt-10">
-                Filtré par
+                <span className="font-semibold">Filtré par</span>
                 <div className="flex items-center gap-2">
                     <DropDown libelle="Véhicules" dataset = {["Clio 4","Toyota"]}/>
                     <DropDown libelle="Véhicules" dataset = {["client01","client02"]}/>
