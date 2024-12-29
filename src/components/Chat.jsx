@@ -82,8 +82,8 @@ export default function Chat() {
         );
         setIsLoading(false)
 
-        console.log("get Message: ", response);
-        setMessages(response.data);
+        console.log("get Messages: ", response);
+        setMessages(response?.data);
         setTimeout(scrollToBottom, 0);
     };
 
@@ -124,7 +124,7 @@ export default function Chat() {
                                 <div className="w-full h-full absolute m-auto flex items-center justify-center ">
                                     <LoadingIcon className=" size-8 animate-spin"/>
                                 </div>:
-                                messages.map((msg, index) => (
+                                messages?.map((msg, index) => (
                                     <div
                                         key={index}
                                         className={`flex items-center p-2 px-3 gap-2 ${
