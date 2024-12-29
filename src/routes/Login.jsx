@@ -16,10 +16,10 @@ export default function Login() {
         <div className={`sm:w-1/2 max-sm:pb-2 w-full h-full duration-100 ease-in-out  shadow-xl relative  bg-white ${isUp ? "rounded-t-0" : "max-sm:rounded-t-3xl"}    m-auto flex justify-center text-neutral-500`}>
           <div className="flex   flex-col gap-2 justify-center">
         <ChevronUpIcon onClick={()=>setIsUp(!isUp)} className={`size-8 sm:hidden bg-neutral-100 rounded-full mx-auto absolute top-4 hover:scale-105 duration-75 cursor-pointer left-0 right-0 ${isUp ? " rotate-180" : "rotate-0"} duration-150 ease-in-out text-neutral-500`} />
-          <h1 className="text-center mb-8 text-xl font-semibold text-neutral-700">Bienvenue!</h1>
+          <h1 className="text-center mb-8 text-xl font-semibold text-neutral-700">S'authentifié</h1>
             <div className="relative flex items-center">
               <EnvelopeIcon className={`size-5 cursor-pointer absolute left-3 fill-neutral-300`}/>
-              <input type="email" placeholder="username" className="p-2 px-4 pl-10 w-full border border-neutral-300  rounded-full outline-none "/>
+              <input type="email" placeholder="email" className="p-2 px-4 pl-10 w-full border border-neutral-300  rounded-full outline-none "/>
             </div>
             <div className="relative flex  items-center">
               <LockClosedIcon className={`size-5 cursor-pointer absolute left-3  fill-neutral-300`}/>
