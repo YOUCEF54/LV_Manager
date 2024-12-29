@@ -11,7 +11,7 @@ export default function Login() {
           <div className="flex flex-col gap-4 justify-center">
             <h1 className="text-4xl font-bold">LVManager</h1>
             <p className=" text-lg font-light">Maîtrisez chaque trajet, optimisez chaque gestion...</p>
-          </div>
+        </div>
         </div>
         <div className={`sm:w-1/2 w-full h-full duration-100 ease-in-out  shadow-xl relative  bg-white ${isUp ? "rounded-t-0" : "rounded-t-3xl"}   m-auto flex justify-center text-neutral-500`}>
           <div className="flex   flex-col gap-2 justify-center">

@@ -183,6 +183,7 @@ useEffect(() => {
           </div>
 
           <BellIcon className="size-7 cursor-pointer text-neutral-500" />
+          <BellIcon className="size-7 cursor-pointer text-neutral-500" />
           <div className="flex relative flex-col items-center dropdown">
             <button
               onClick={(e) => {
@@ -205,10 +206,10 @@ useEffect(() => {
               <div
                 className={`absolute z-30 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 top-[52px] opacity-100 duration-200 shadow rounded-lg bg-white`}
               >
-                <button className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
+                <Link to="login" className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
                   <UserIcon className="size-5" />
                   Profile
-                </button>
+                </Link>
                 <button className="hover:bg-neutral-100 text-nowrap p-2 px-4 flex items-center  gap-3">
                   <ChevronLeftIcon className="size-5  fill-black " />
                   Se déconneter
