@@ -9,7 +9,7 @@ export default function Login() {
           
           <div className="flex flex-col gap-4 justify-center">
             <h1 className="text-4xl font-bold">LVManager</h1>
-            <p>Maîtrisez chaque trajet, optimisez chaque gestion...</p>
+            <p className=" text-lg font-light">Maîtrisez chaque trajet, optimisez chaque gestion...</p>
           </div>
         </div>
         <div className="w-1/2 m-auto flex justify-center text-neutral-500">
