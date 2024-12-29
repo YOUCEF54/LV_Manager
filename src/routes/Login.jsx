@@ -13,9 +13,9 @@ export default function Login() {
             <p className=" text-lg font-light">Maîtrisez chaque trajet, optimisez chaque gestion...</p>
           </div>
         </div>
-        <div className={`sm:w-1/2 w-full h-full duration-100 ease-in-out  shadow-xl relative  duration-100 ease-in-out bg-white ${isUp ? "rounded-t-0" : "rounded-t-3xl"}   m-auto flex justify-center text-neutral-500`}>
+        <div className={`sm:w-1/2 w-full h-full duration-100 ease-in-out  shadow-xl relative  bg-white ${isUp ? "rounded-t-0" : "rounded-t-3xl"}   m-auto flex justify-center text-neutral-500`}>
           <div className="flex   flex-col gap-2 justify-center">
-        <ChevronUpIcon onClick={()=>setIsUp(!isUp)} className={`size-8 bg-neutral-100 rounded-full mx-auto absolute top-4 hover:scale-105 duration-75 cursor-pointer left-0 right-0 ${isUp ? " rotate-180" : "rotate-0"} duration-150 ease-in-out text-neutral-500`} />
+        <ChevronUpIcon onClick={()=>setIsUp(!isUp)} className={`size-8 sm:hidden bg-neutral-100 rounded-full mx-auto absolute top-4 hover:scale-105 duration-75 cursor-pointer left-0 right-0 ${isUp ? " rotate-180" : "rotate-0"} duration-150 ease-in-out text-neutral-500`} />
           <h1 className="text-center mb-8 text-xl font-semibold text-neutral-700">Bienvenue!</h1>
             <div className="relative flex items-center">
               <EnvelopeIcon className={`size-5 cursor-pointer absolute left-3 fill-neutral-300`}/>
