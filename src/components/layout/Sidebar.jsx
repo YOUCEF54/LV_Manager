@@ -183,7 +183,6 @@ useEffect(() => {
           </div>
 
           <BellIcon className="size-7 cursor-pointer text-neutral-500" />
-          <BellIcon className="size-7 cursor-pointer text-neutral-500" />
           <div className="flex relative flex-col items-center dropdown">
             <button
               onClick={(e) => {
