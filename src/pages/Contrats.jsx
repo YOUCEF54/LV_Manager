@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { ChevronDownIcon, PencilSquareIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 
 const DropDown = ({libelle, dataset}) =>{
       const [isOpen, setIsOpen] = useState(false);
       const dropdownRef = useRef(null);
+    
 
       const handleOutsideClick = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -51,6 +53,32 @@ const DropDown = ({libelle, dataset}) =>{
 }
 
 export default function Contrats() {
+  const [hasFetched, setHasFetched] = useState(false);
+  const [contrats, setContrats] = useState([]);
+
+  useEffect(()=>{
+    async function fetchContrats() {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
+      };
+      // if (!hasFetched){
+      try {
+        const response = await axios.get(
+          `https://beta.lvmanager.net/tenants/contrats`,
+          { headers }
+        );
+        setContrats(response.data);
+        console.log("Contrats ",response.data);
+        setHasFetched(true)
+      } catch (error) {
+        console.error(error);
+      }
+    // }
+  }
+    fetchContrats()
+  },[])
   return (
     <div className="pr-2">
       <div className="flex items-center max-sm:items-start justify-between">
@@ -84,21 +112,21 @@ export default function Contrats() {
           </tr>
         </thead>
         <tbody className="divide-y-2 text-nowrap whitespace-nowrap">
-          {Array.from({ length: 3 }).map((_, index) => (
+          {contrats.map((e, index) => (
             <tr key={index} className="text-neutral-600">
-              <td className="p-6 text-center">4</td>
-              <td className="p-6 text-center">Clio 4</td>
+              <td className="p-6 text-center">{e?.matricule}</td>
+              <td className="p-6 text-center">{e?.libelle}</td>
               <td className="p-6 text-center justify-center flex items-center gap-2">
               {/* <CalendarDaysIcon className="size-5 fill-emerald-600"/> */}
-                21-12-2024<br/>100:30:00</td>
-              <td className="p-6 text-center">21-12-2024<br/> 100:30:00</td>
-              <td className="p-6 text-center">Mohamed</td>
+               {e?.dateDep.split(" ")[0]}<br/>{e.dateDep.split(" ")[1]}</td>
+              <td className="p-6 text-center">{e?.dateArriv.split(" ")[0]}<br/>{e?.dateArriv.split(" ")[1]}</td>
+              <td className="p-6 text-center">{e?.nomClient}</td>
               <td className="px-2 text-center w-full flex flex-col flex-grow m-auto  items-center gap-1">
-              <span className="bg-emerald-500 rounded-xl min-w-24  px-4  text-white h-full ">600DH</span>
-              <span className="bg-red-500 rounded-xl px-4 min-w-24  flex-grow text-white h-full ">0DH</span>
+              <span className="bg-emerald-500 rounded-xl min-w-24  px-4  text-white h-full ">{e?.avance}DH</span>
+              <span className="bg-red-500 rounded-xl px-4 min-w-24  flex-grow text-white h-full ">{e?.montantAPayer - e?.avance}DH</span>
               </td>
               <td className="px-2 text-center  ">
-                  <div className=" bg-yellow-500 w-fit m-auto  text-white px-4 rounded-xl ">Active</div>
+                  <div className=" bg-yellow-500 w-fit m-auto  text-white px-4 rounded-xl ">{e?.statut}</div>
               </td>
               <td className="p-6 text-center ">
                   <div className="w-full  px-4 rounded-xl flex items-center gap-2 ">

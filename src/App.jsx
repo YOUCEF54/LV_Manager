@@ -62,9 +62,9 @@ function App() {
             <Route element={<MainLayout />}>
 
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contrats" element={<Contrats />} />
+            <Route path="/admin/contrats" element={<Contrats />} />
             <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
           </Route>
         </Routes>

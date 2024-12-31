@@ -34,18 +34,18 @@ const [isHidden,setHidden] = useState(!isToggle)
     console.log("current: ",current)
   },[current])
 const menu = [
-  {name: "Dashboard", icon: ChartBarIcon , link: "/dashboard", isCurrent :  current == "dashboard"},
-  {name: "Contrats", icon: DocumentTextIcon , link: "/contrats", isCurrent :  current == "contrats"},
-  {name: "Reservations", icon: CalendarDateRangeIcon , link: "/reservations", isCurrent :  current == "reservations"},
-  {name: "Véhicules", icon: DocumentTextIcon , link: "/vehicules", isCurrent :  current == "vehicules"},
-  {name: "Clients", icon: UsersIcon , link: "/clients", isCurrent :  current == "clients"},
-  {name: "Paiement", icon: DocumentTextIcon , link: "/paiement", isCurrent :  current == "paiement"},
-  {name: "Charge", icon: BanknotesIcon , link: "/charge", isCurrent :  current == "charge"},
-  {name: "Caisse", icon: ArchiveBoxIcon , link: "/caisse", isCurrent :  current == "caisse"},
-  {name: "Contacts", icon: DocumentTextIcon , link: "/contacts", isCurrent :  current == "contacts"},
-  {name: "Utilisateurs", icon: UsersIcon , link: "/utilisateurs", isCurrent :  current == "utilisateurs"},
-  {name: "Paramètres", icon: Cog6ToothIcon , link: "/parametre", isCurrent :  current == "parametre"},
-  {name: "Site web", icon: GlobeAltIcon , link: "/siteWeb", isCurrent :  current == "siteWeb"},
+  {name: "Dashboard", icon: ChartBarIcon , link: "/admin/dashboard", isCurrent :  current == "dashboard"},
+  {name: "Contrats", icon: DocumentTextIcon , link: "/admin/contrats", isCurrent :  current == "contrats"},
+  {name: "Reservations", icon: CalendarDateRangeIcon , link: "/admin/reservations", isCurrent :  current == "reservations"},
+  {name: "Véhicules", icon: DocumentTextIcon , link: "/admin/vehicules", isCurrent :  current == "vehicules"},
+  {name: "Clients", icon: UsersIcon , link: "/admin/clients", isCurrent :  current == "clients"},
+  {name: "Paiement", icon: DocumentTextIcon , link: "/admin/paiement", isCurrent :  current == "paiement"},
+  {name: "Charge", icon: BanknotesIcon , link: "/admin/charge", isCurrent :  current == "charge"},
+  {name: "Caisse", icon: ArchiveBoxIcon , link: "/admin/caisse", isCurrent :  current == "caisse"},
+  {name: "Contacts", icon: DocumentTextIcon , link: "/admin/contacts", isCurrent :  current == "contacts"},
+  {name: "Utilisateurs", icon: UsersIcon , link: "/admin/utilisateurs", isCurrent :  current == "utilisateurs"},
+  {name: "Paramètres", icon: Cog6ToothIcon , link: "/admin/parametre", isCurrent :  current == "parametre"},
+  {name: "Site web", icon: GlobeAltIcon , link: "/admin/siteWeb", isCurrent :  current == "siteWeb"},
 
 ]
 useEffect(()=>{
