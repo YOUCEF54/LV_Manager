@@ -2,12 +2,14 @@ import  { useEffect, useRef, useState } from "react";
 import useInView from "../../hooks/useInView";
 import axios from "axios";
 
+import LoadingIcon from "../../../public/Loading";
 // eslint-disable-next-line react/prop-types
 export default function TopVehicules({className}) {
   const ref = useRef();
   const isInView = useInView(ref);
   const [topVehicules, setTopVehicules] = useState([]);
   const [hasFetched, setHasFetched] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchTopClients() {
@@ -18,10 +20,12 @@ export default function TopVehicules({className}) {
       };
       
         try {
+          setIsLoading(true);
           const response = await axios.get(
             `https://beta.lvmanager.net/tenants/analytics/topClients_vehicles`,
             { headers }
           );
+          setIsLoading(false)
           setTopVehicules(Array(response.data.topVehicules)[0]);
           setHasFetched(true)
         } catch (error) {
@@ -42,7 +46,7 @@ export default function TopVehicules({className}) {
         <div className="right-0">
         </div>
       </div>
-      <div className="overflow-x-auto overflow-y-clip ">
+      <div className="overflow-x-auto overflow-y-clip  relative">
         <table className="w-full  min-w-[50rem] border-collapse ">
           <thead>
             <tr className="bg-slate-200 bg-opacity-70">
@@ -54,7 +58,12 @@ export default function TopVehicules({className}) {
             </tr>
           </thead>
           <tbody className="divide-y-2">
-            {topVehicules?.map((e, index) => (
+          {isLoading ?
+            <tr className="h-[2.2rem]  flex justify-center ">
+              <td  className=" right-0 cursor-wait left-0 absolute overflow-clip ">
+                <LoadingIcon className=" my-2  animate-spin   m-auto "/>
+              </td>
+            </tr>:topVehicules?.map((e, index) => (
               <tr key={index} className="text-neutral-600">
                 <td className="p-6 text-center">{e.libelle}</td>
                 <td className="p-6 text-center">{e.nbrContrats}</td>
