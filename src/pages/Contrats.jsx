@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { ChevronDownIcon, PencilSquareIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 import axios from "axios";
+import Loading from "../../public/Loading";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -54,7 +55,10 @@ const DropDown = ({libelle, dataset}) =>{
 
 export default function Contrats() {
   const [hasFetched, setHasFetched] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [contrats, setContrats] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(null);
 
   useEffect(()=>{
     async function fetchContrats() {
@@ -65,10 +69,12 @@ export default function Contrats() {
       };
       // if (!hasFetched){
       try {
+        setIsLoading(true)
         const response = await axios.get(
           `https://beta.lvmanager.net/tenants/contrats`,
           { headers }
         );
+        setIsLoading(false)
         setContrats(response.data);
         console.log("Contrats ",response.data);
         setHasFetched(true)
@@ -80,14 +86,31 @@ export default function Contrats() {
     fetchContrats()
   },[])
   return (
-    <div className="pr-2">
-      <div className="flex items-center max-sm:items-start justify-between">
+    <div className="pr-2 ">
+      <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-50 bg-opacity-50 ${!isOpen &&" hidden"}`}>
+
+        <div className="flex flex-col bg-white m-auto w-[30vw] p-2 rounded-lg">
+          <button onClick={()=>{setSearchQuery("Ref")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Ref</button>
+          <button onClick={()=>{setSearchQuery("Véhicule")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Véhicule</button>
+          <button onClick={()=>{setSearchQuery("Client")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Client</button>
+          <button onClick={()=>{setSearchQuery("Status")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Status</button>
+        </div>
+      </div>
+      <div className="max-sm:flex grid grid-cols-2   max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Contrats</h1>
-        <div className="flex max-sm:flex-col max-sm:items-end items-center gap-2 whitespace-nowrap">
-          <button className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">Factures</button>
-          <button className="flex items-center whitespace-nowrap pl-1 bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
+        <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
+          <button className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
+          <button className="flex items-center max-sm:gap-2 max-sm:justify-center whitespace-nowrap max-sm:p-2 pl-1 max-sm:w-full bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
             <PlusIcon className="size-5"/>
             Nouveau contrat</button>
+        </div>
+        <div className="w-full col-span-2 flex whitespace-nowrap gap-2">
+          <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}
+            <ChevronDownIcon className="size-5"/>
+          </button>
+          <input 
+            className="outline-none focus:bg-opacity-90 bg-opacity-40 duration-100 ease-in-out focus:shadow-md bg-white p-2 w-full px-3 rounded-lg border border-neutral-300 focus:border-blue-600 "
+            type="text" placeholder="Search ..."/>
         </div>
       </div>
             <div className="flex gap-6 mb-4 justify-between sticky inset-0 mt-10">
@@ -97,7 +120,7 @@ export default function Contrats() {
                     <DropDown libelle="Véhicules" dataset = {["client01","client02"]}/>
                 </div>
             </div>
-        <div className="overflow-x-auto overflow-y-clip  bg-white shadow-md p-4 rounded-xl">
+        <div className="overflow-x-auto overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
         <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
         <thead>
           <tr className="bg-neutral-200 text-neutral-800 bg-opacity-70">
@@ -112,7 +135,12 @@ export default function Contrats() {
           </tr>
         </thead>
         <tbody className="divide-y-2 text-nowrap whitespace-nowrap">
-          {contrats.map((e, index) => (
+        {isLoading ?
+            <tr className="h-[2.2rem]  flex justify-center ">
+              <td  className=" right-0 cursor-wait left-0 absolute overflow-clip ">
+                <Loading className=" my-2  animate-spin   m-auto "/>
+              </td>
+            </tr>:contrats.map((e, index) => (
             <tr key={index} className="text-neutral-600">
               <td className="p-6 text-center">{e?.matricule}</td>
               <td className="p-6 text-center">{e?.libelle}</td>
