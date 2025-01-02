@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import img from "../../public/carsRental1.jpg"
+import img2 from "../../public/autom.jpeg"
 
 export default function Home() {
   return (
@@ -73,7 +74,7 @@ export default function Home() {
           <div className="absolute bg-orange-500 px-2 rounded-lg text-white border bg-opacity-65 backdrop-blur-lg border-white top-3 right-3">Louée</div>
           <img 
             className="rounded-lg "
-            src="../../public/autom.jpeg"/>
+            src={img2}/>
             <div>
               <div className="font-semibold text-lg">Clio 4</div>
               <div className="font-meduim text-lg">Economique</div>      
