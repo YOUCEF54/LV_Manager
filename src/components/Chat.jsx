@@ -149,6 +149,7 @@ export default function Chat() {
                         </div>
                         <div className="w-full h-[4rem] relative flex items-center">
                             <input
+                            type="text"
                                 placeholder="What can we help you with?"
                                 className="outline-none relative w-full px-4 pr-16 p-2 bg-neutral-50 h-full bottom-0"
                                 value={messageInput}
