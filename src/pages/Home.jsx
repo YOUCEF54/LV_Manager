@@ -10,9 +10,9 @@ export default function Home() {
    <div>
     <div className=" fixed z-50 w-full  mix-blend-difference   backdrop-blur-lg">
      <div className="flex justify-between p-4 px-12 max-w-[70rem] m-auto text-white">
-        <div className="font-semibold text-xl">
+        <Link to="admin/dashboard" className="font-semibold text-xl">
           LV Manager
-        </div>
+        </Link>
         <ul className="flex gap-4 max-sm:hidden">
           <Link className=" flex justify-center before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Acceuil</li></Link>
           <Link className=" flex justify-center before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Véhicules</li></Link>
