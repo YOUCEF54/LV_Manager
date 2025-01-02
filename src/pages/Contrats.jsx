@@ -87,7 +87,7 @@ export default function Contrats() {
   },[])
   return (
     <div className="pr-2 ">
-      <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-40 bg-opacity-50 ${!isOpen &&" hidden"}`}>
+      <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}>
 
         {/* <div className="flex flex-col bg-white m-auto w-[30vw] p-2 rounded-lg">
           <button onClick={()=>{setSearchQuery("Ref")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Ref</button>
@@ -106,25 +106,25 @@ export default function Contrats() {
         </div>
        
       </div>
-            <div className="flex gap-6 mb-4 justify-between sticky inset-0 mt-10">
+            <div className="flex gap-6 mb-4 justify-between sticky z-50 inset-0 mt-10">
                 <span className="font-semibold">Filtré par</span>
-                <div className="flex  items-center gap-2">
+                <div className="flex  items-center gap-2 ">
                     <DropDown libelle="Véhicules" dataset = {["Clio 4","Toyota"]}/>
                     <DropDown libelle="Véhicules" dataset = {["client01","client02"]}/>
                 </div>
             </div>
-            <div className=" my-2 flex justify-end">
+            <div className=" mb-2 flex justify-end">
               <div className="flex whitespace-nowrap gap-2 w-1/3">
                 {/* <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}
                   <ChevronDownIcon className="size-5"/>
                 </button> */}
                 <input 
                 onFocus={()=>setIsOpen(true)}
-                  className="outline-none focus:bg-opacity-90 z-50 bg-opacity-40 duration-100 ease-in-out focus:shadow-md bg-white p-2 w-full px-3 rounded-lg border border-neutral-300 focus:border-blue-600 "
+                  className="outline-none focus:bg-opacity-90 z-500 bg-opacity-40 duration-100 ease-in-out focus:shadow-md bg-white p-1 w-full px-3 rounded-md border border-neutral-300 focus:border-blue-600 "
                   type="text" placeholder="Search ..."/>
                 </div>
           </div>
-        <div className="overflow-x-auto z-50  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+        <div className="overflow-x-auto   overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
           
         <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
         <thead>

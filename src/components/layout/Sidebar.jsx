@@ -81,7 +81,7 @@ useEffect(() => {
     <div  className="flex w-full  top-0 fixed h-screen ">
     <Chat/>
     <aside
-      className={`flex ease-in-out max-sm:${isHidden && "hidden"} overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 sm:${
+      className={`flex ease-in-out overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
         !isHidden && "hidden"
       } duration-300 ${
         !isToggle ? "w-0" : "w-[20rem] min-w-[15rem]"
@@ -127,7 +127,7 @@ useEffect(() => {
         :
 
           <li key={index} className="relative">
-           <Link onClick={()=>setToggle(!isToggle)} to={e?.link} className={`${e.isCurrent ? "bg-blue-600 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center gap-2`}>
+           <Link to={e?.link} onClick={()=>setToggle(false)} className={`${e.isCurrent ? "bg-blue-600 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center gap-2`}>
            <e.icon className="size-4"/>
            {e.name}
            </Link>
@@ -164,7 +164,7 @@ useEffect(() => {
             </button>
             {dropAjout && (
               <div
-                className={`absolute z-30 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 top-12 opacity-100 duration-200 shadow rounded-lg bg-white`}
+                className={`absolute z-50 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 top-12 opacity-100 duration-200 shadow rounded-lg bg-white`}
               >
                 <button className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
                   <DocumentTextIcon className="size-5" />
@@ -190,7 +190,7 @@ useEffect(() => {
                 setDropProfile(!isDropProfile);
                 setDropAjout(false)
               }}
-              className="flex z-40 cursor-pointer items-center gap-3"
+              className="flex z-40  cursor-pointer items-center gap-3"
             >
               <UserIcon className="size-10 bg-neutral-300 text-white p-1 rounded-full" />
               <div>
@@ -203,7 +203,7 @@ useEffect(() => {
             </button>
             {isDropProfile && (
               <div
-                className={`absolute z-30 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 top-[52px] opacity-100 duration-200 shadow rounded-lg bg-white`}
+                className={`absolute overflow-clip z-50 bg-opacity-75 backdrop-blur-lg flex flex-col m-2 top-[52px] opacity-100 duration-200 shadow rounded-lg bg-white`}
               >
                 <Link to="login" className="hover:bg-neutral-100 p-2 px-4 flex items-center gap-3">
                   <UserIcon className="size-5" />
