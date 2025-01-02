@@ -9,7 +9,7 @@ export default function Home() {
   return (
    <div>
     <div className=" fixed z-50 w-full  mix-blend-difference   backdrop-blur-lg">
-     <div className="flex justify-between p-4 px-12 max-w-[70rem] m-auto text-white">
+     <div className="flex justify-between p-4 sm:px-12 max-sm:px-4 max-w-[70rem] m-auto text-white">
         <Link to="admin/dashboard" className="font-semibold text-xl">
           LV Manager
         </Link>
@@ -86,7 +86,7 @@ export default function Home() {
         <div className="border text-center relative gap-2 border-neutral-400 p-2 bg-white rounded-lg shadow-md flex flex-col">
           <div className="absolute bg-orange-500 px-2 rounded-lg text-white border bg-opacity-65 backdrop-blur-lg border-white top-3 right-3">Louée</div>
           <img 
-            className="rounded-lg "
+            className="rounded-lg"
             src={img2}/>
             <div>
               <div className="font-semibold text-lg">Clio 4</div>
