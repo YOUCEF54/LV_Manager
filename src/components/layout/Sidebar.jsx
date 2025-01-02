@@ -79,14 +79,13 @@ useEffect(() => {
 }, []);
   return (
     <div  className="flex w-full  top-0 fixed h-screen ">
-    <Chat/>
     <aside
       className={`flex ease-in-out overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
         !isHidden && "hidden"
       } duration-300 ${
         !isToggle ? "w-0" : "w-[20rem] min-w-[15rem]"
       } bg-white p-4`}
-    >
+      >
       <div className="text-lg font-bold text-neutral-600 max-sm:flex items-center justify-between">
         <div><span className="text-blue-600">Lv</span>Manager</div>
         <button onClick={()=>setToggle(!isToggle)} className="sm:hidden" ><PlusIcon className="size-8 rotate-45 mx-2 bg-neutral-50  rounded-full p-1 "/></button>
@@ -97,7 +96,7 @@ useEffect(() => {
     <ul className="flex flex-col gap-2 whitespace-nowrap">
       {menu?.map((e,index)=>(
         e.link == "/siteWeb" ?
-          <div key={index} className={`${isDown ?"bg-red-50 p-2 border rounded-lg":""} duration-100`}>
+        <div key={index} className={`${isDown ?"bg-red-50 p-2 border rounded-lg":""} duration-100`}>
             <button onClick={()=>setisDown(!isDown)} className={`${isDown ? "bg-blue-600 mb-2 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center justify-between`}>
               <div className="flex items-center gap-2"><GlobeAltIcon className="size-4"/>Site web</div>
               <ChevronDownIcon className={`size-5 duration-200 ease-in-out ${isDown?"rotate-180":"rotate-0"}`}/>
@@ -143,12 +142,13 @@ useEffect(() => {
     <div
       onClick={(e) => e.stopPropagation()}
       className="flex flex-col overflow-auto flex-grow w-full"
-    >
+      >
       <header className="flex items-center justify-between bg-white pr-6  p-4">
         <Bars3BottomLeftIcon
           onClick={() => setToggle(!isToggle)}
           className="cursor-pointer w-6 h-6"
-        />
+          />
+          <Chat/>
         <div className="flex items-center gap-4">
           <div className="relative flex flex-col items-center dropdown">
             <button
