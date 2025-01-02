@@ -102,7 +102,7 @@ export default function Chat() {
                         isOpen ? "hidden" : "hover:scale-105 fill-orange-400"
                     } duration-100 size-7`}
                 />
-                {isOpen ? (
+                {isOpen && (
                     <div onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center justify-between gap-2 p-2 py-4 border-b">
                             <div className="flex cursor-pointer items-center gap-2">
@@ -149,7 +149,7 @@ export default function Chat() {
                         </div>
                         <div className="w-full h-[4rem] relative flex items-center">
                             <input
-                            type="text"
+                                type="text"
                                 placeholder="What can we help you with?"
                                 className="outline-none relative w-full px-4 pr-16 p-2 bg-neutral-50 h-full bottom-0"
                                 value={messageInput}
@@ -164,7 +164,7 @@ export default function Chat() {
                             />
                         </div>
                     </div>
-                ) : null}
+                )}
             </div>
         </div>
     );
