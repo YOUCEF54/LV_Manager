@@ -1,23 +1,36 @@
 import { Link } from "react-router-dom";
 import img from "../../public/carsRental1.jpg"
 import img2 from "../../public/autom.jpeg"
+import { Bars3BottomRightIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
 
 export default function Home() {
+  const [isOpen,setIsOpen] = useState(false)
   return (
    <div>
     <div className=" fixed z-50 w-full  mix-blend-difference   backdrop-blur-lg">
-     <div className="flex justify-between p-4 px-6 max-w-[80rem] m-auto text-white">
+     <div className="flex justify-between p-4 px-12 max-w-[70rem] m-auto text-white">
         <div className="font-semibold text-xl">
           LV Manager
         </div>
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 max-sm:hidden">
           <Link className=" flex justify-center before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Acceuil</li></Link>
           <Link className=" flex justify-center before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Véhicules</li></Link>
           <Link className=" flex justify-center before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Avis Clients</li></Link>
           <Link className=" flex justify-center before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Nous Contacter</li></Link>
         </ul>
+        <div className="sm:hidden">
+          <Bars3BottomRightIcon onClick={()=>{setIsOpen(!isOpen)}} className="size-6 cursor-pointer"/>
+        </div>
     </div>
     </div>
+          <ul className={`absolute flex flex-col gap-4  w-full duration-300 ease-in-out text-white  z-40 bg-opacity-35  backdrop-blur-md bg-black p-4
+          ${isOpen ? "-top-[100px] opacity-0 " : "top-[55px] opacity-100"} `}>
+          <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Acceuil</li></Link>
+          <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Véhicules</li></Link>
+          <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Avis Clients</li></Link>
+          <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Nous Contacter</li></Link>
+          </ul>
     <div className="w-full relative  flex items-center justify-center ">
       <div className="w-full h-full bg-black absolute bg-opacity-70"/>
       <img className=" object-cover w-full max-h-[70vh] " src={img}/>
@@ -32,7 +45,7 @@ export default function Home() {
       <div className="max-w-[70rem] m-auto relative  flex flex-col gap-4 items-center justify-center ">
 
       <div className="font-semibold  m-auto text-xl border-l-[3px]  bg-blue-95 via-transparent bg-opacity-5  px-3 mb-4 border-black">Nos services</div>
-      <div className="grid grid-cols-3 gap-2 mx-2 ">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 max-sm:grid-cols-1 gap-2 mx-2 ">
         <div className="border text-center gap-6 py-6 border-neutral-400 p-4 bg-white rounded-lg shadow-md flex flex-col">
 {/*           
           <div className="absolute z-10 inset-0 h-full w-full 
@@ -67,7 +80,7 @@ export default function Home() {
       <div className="max-w-[70rem] m-auto relative  flex flex-col gap-4 items-center justify-center ">
 
       <div className="font-semibold  m-auto text-xl border-l-[3px]  bg-blue-95 via-transparent bg-opacity-5  px-3 mb-4 border-black">Nos véhicules</div>
-      <div className="grid grid-cols-3 gap-2 mx-2 ">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 max-sm:grid-cols-1 gap-2 mx-2 ">
 
 
         <div className="border text-center relative gap-2 border-neutral-400 p-2 bg-white rounded-lg shadow-md flex flex-col">
