@@ -33,7 +33,7 @@ export default function Home() {
           </ul>
     <div className="w-full relative  flex items-center justify-center ">
       <div className="w-full h-full bg-black absolute bg-opacity-70"/>
-      <img className=" object-cover w-full max-h-[70vh] " src={img}/>
+      <img className=" object-cover w-full max-sm:min-h-[80vh] sm:max-h-[70vh] " src={img}/>
       <div className="text-white absolute w-full text-center max-w-[70rem] px-6  m-auto">
         <h1 className="text-5xl font-semibold">Location de Voitures</h1>
         <p className="text-lg mt-2 max-w-[45rem] m-auto">La meilleur location de voiture au maroc, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem velit suscipit, temporibus similique dolorem saepe veritatis, numquam autem vel ut quis?</p>
@@ -42,7 +42,7 @@ export default function Home() {
     </div>
 
     <div className="w-full  py-6 bg-white flex flex-col gap-12 ">
-      <div className="max-w-[70rem] m-auto relative  flex flex-col gap-4 items-center justify-center ">
+      <div className="max-w-[70rem] m-auto relative   flex flex-col gap-4 items-center justify-center ">
 
       <div className="font-semibold  m-auto text-xl border-l-[3px]  bg-blue-95 via-transparent bg-opacity-5  px-3 mb-4 border-black">Nos services</div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 max-sm:grid-cols-1 gap-2 mx-2 ">
