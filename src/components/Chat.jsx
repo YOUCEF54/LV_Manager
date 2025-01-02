@@ -95,7 +95,7 @@ export default function Chat() {
                     isOpen
                         ? "flex flex-col max-w-[90vw] w-[25rem] max-sm:w-[20rem] sm:min-h-[20rem]   bg-white rounded-lg shadow-md border"
                         : " shadow-lg bg-orange-20 p-3 bg-opacity-75 backdrop-blur-lg hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400 rounded-full"
-                } ${isClose && "hidden"} z-50 absolute right-4 bottom-4 overflow-y-hidden`}
+                } ${isClose && "hidden"} z-50 overflow-y-hidden`}
             >
                 <ChatBubbleLeftRightIcon
                     className={`${

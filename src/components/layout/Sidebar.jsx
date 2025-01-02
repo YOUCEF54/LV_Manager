@@ -79,6 +79,9 @@ useEffect(() => {
 }, []);
   return (
     <div  className="flex w-full  top-0 fixed h-screen ">
+      <div className="absolute bottom-6 z-50  right-4">
+          <Chat/>
+      </div>
     <aside
       className={`flex ease-in-out overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
         !isHidden && "hidden"
@@ -137,8 +140,8 @@ useEffect(() => {
  </ul>
 
  </div>
-    </aside>
 
+    </aside>
     <div
       onClick={(e) => e.stopPropagation()}
       className="flex flex-col overflow-auto flex-grow w-full"
@@ -148,7 +151,6 @@ useEffect(() => {
           onClick={() => setToggle(!isToggle)}
           className="cursor-pointer w-6 h-6"
           />
-          <Chat/>
         <div className="flex items-center gap-4">
           <div className="relative flex flex-col items-center dropdown">
             <button
