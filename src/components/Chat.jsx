@@ -93,14 +93,14 @@ export default function Chat() {
                 onClick={handleChatToggle} // Use the new toggle handler
                 className={`${
                     isOpen
-                        ? "flex flex-col max-w-[90vw] w-[25rem] min-h-[20rem] bg-white rounded-lg shadow-md border"
-                        : "size-14 shadow-lg bg-orange-20 p-3 bg-opacity-75 backdrop-blur-lg hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400 rounded-full"
-                } ${isClose && "hidden"} z-50 duration-200 ease-in-out absolute right-4 bottom-4 overflow-y-hidden`}
+                        ? "flex flex-col max-w-[90vw] w-[25rem] max-sm:w-[20rem] sm:min-h-[20rem]   bg-white rounded-lg shadow-md border"
+                        : " shadow-lg bg-orange-20 p-3 bg-opacity-75 backdrop-blur-lg hover:bg-orange-100 duration-75 cursor-pointer border border-orange-400 rounded-full"
+                } ${isClose && "hidden"} z-50 absolute right-4 bottom-4 overflow-y-hidden`}
             >
                 <ChatBubbleLeftRightIcon
                     className={`${
                         isOpen ? "hidden" : "hover:scale-105 fill-orange-400"
-                    } duration-100`}
+                    } duration-100 size-7`}
                 />
                 {isOpen ? (
                     <div onClick={(e) => e.stopPropagation()}>
@@ -117,7 +117,7 @@ export default function Chat() {
                             </div>
                         </div>
                         <div
-                            className="flex max-h-[25rem] relative flex-col flex-grow h-full gap-2 min-h-[20rem] overflow-y-auto"
+                            className="flex sm:max-h-[25rem] max-sm:max-h-[15rem] relative flex-col flex-grow h-full gap-2 sm:min-h-[20rem] max-sm:min-h-[15rem] overflow-y-auto"
                         >
                             <div className="">
                                 {isLoading?
