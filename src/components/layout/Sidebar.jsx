@@ -127,7 +127,7 @@ useEffect(() => {
         :
 
           <li key={index} className="relative">
-           <Link to={e?.link} className={`${e.isCurrent ? "bg-blue-600 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center gap-2`}>
+           <Link onClick={()=>setToggle(!isToggle)} to={e?.link} className={`${e.isCurrent ? "bg-blue-600 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center gap-2`}>
            <e.icon className="size-4"/>
            {e.name}
            </Link>
