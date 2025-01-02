@@ -59,9 +59,8 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="login" element={<NoSidebarLayout><Login /></NoSidebarLayout>} />
+            <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />
             <Route element={<MainLayout />}>
-
-            <Route path="/" element={<Home />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
             <Route path="/admin/contrats" element={<Contrats />} />

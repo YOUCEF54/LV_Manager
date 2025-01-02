@@ -78,10 +78,10 @@ useEffect(() => {
   };
 }, []);
   return (
-    <div className="flex w-full top-0 fixed h-screen">
+    <div  className="flex w-full  top-0 fixed h-screen ">
     <Chat/>
     <aside
-      className={`flex ease-in-out overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
+      className={`flex ease-in-out max-sm:${isHidden && "hidden"} overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 sm:${
         !isHidden && "hidden"
       } duration-300 ${
         !isToggle ? "w-0" : "w-[20rem] min-w-[15rem]"
@@ -97,7 +97,7 @@ useEffect(() => {
     <ul className="flex flex-col gap-2 whitespace-nowrap">
       {menu?.map((e,index)=>(
         e.link == "/siteWeb" ?
-          <div key={index} className={`${isDown ?"bg-neutral-50 p-2 border rounded-lg":""} duration-100`}>
+          <div key={index} className={`${isDown ?"bg-red-50 p-2 border rounded-lg":""} duration-100`}>
             <button onClick={()=>setisDown(!isDown)} className={`${isDown ? "bg-blue-600 mb-2 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center justify-between`}>
               <div className="flex items-center gap-2"><GlobeAltIcon className="size-4"/>Site web</div>
               <ChevronDownIcon className={`size-5 duration-200 ease-in-out ${isDown?"rotate-180":"rotate-0"}`}/>
@@ -219,7 +219,7 @@ useEffect(() => {
         </div>
       </header>
 
-    <main className="flex-grow p-4 pl-6 pt-5 bg-gray-100 overflow-x-clip  overflow-y-auto">
+    <main style={{zIndex:48}} className="flex-grow p-4 pl-6 pt-5 bg-gray-100 overflow-x-clip  overflow-y-auto">
      {children}
     </main>
 
