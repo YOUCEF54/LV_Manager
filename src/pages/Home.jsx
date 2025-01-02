@@ -25,7 +25,7 @@ export default function Home() {
     </div>
     </div>
           <ul className={`absolute flex flex-col gap-4  w-full duration-300 ease-in-out text-white  z-40 bg-opacity-35  backdrop-blur-md bg-black p-4
-          ${isOpen ? "-top-[100px] opacity-0 " : "top-[55px] opacity-100"} `}>
+          ${!isOpen ? "-top-[100px] opacity-0 " : "top-[55px] opacity-100"} `}>
           <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Acceuil</li></Link>
           <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Véhicules</li></Link>
           <Link className=" flex  w-fit before:ease-in-out relative before:duration-200 before:rounded-full before:h-[2px] before:hover:w-full before:w-0 before:active:w-full before:active:bg-blue-900 before:bg-white before:absolute before:bottom-0 "><li>Avis Clients</li></Link>
