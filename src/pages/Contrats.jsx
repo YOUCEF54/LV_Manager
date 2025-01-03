@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { ChevronDownIcon, PencilSquareIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { ArrowUturnLeftIcon, CalendarDateRangeIcon, CalendarIcon, ChevronDownIcon, CurrencyDollarIcon, EllipsisVerticalIcon, EyeDropperIcon, EyeIcon, PencilSquareIcon, PlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import axios from "axios";
 import Loading from "../../public/Loading";
 import { useEffect, useRef, useState } from "react";
-
+import whatsappIcon from "../../public/whatsapp.svg"
 
 const DropDown = ({libelle, dataset}) =>{
       const [isOpen, setIsOpen] = useState(false);
@@ -85,9 +85,32 @@ export default function Contrats() {
   }
     fetchContrats()
   },[])
+
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [openActions, setOpenActions] = useState({contrat : null,state : false})
+
+  const Prolonger = ()=>{
+    return(
+    <div style={{zIndex : 80}} onClick={()=>setIsPopUpOpen(false)} className={`absolute ${isPopUpOpen ? "flex" : "hidden"} bg-opacity-55 backdrop-blur-sm inset-0  items-center justify-center bg-black`}>
+      <div onClick={(e)=>e.stopPropagation()} className="bg-white min-w-[25rem] p-4 rounded-xl shadow-md">
+
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold">Aout de Prolongation</h2>
+          <XMarkIcon onClick={()=>setIsPopUpOpen(false)} className="size-5 cursor-pointer"/>
+        </div>
+        <div>
+          <h3>Contrat : 5</h3>
+          <p>Le contrat est prolongé pour 1 an</p>
+        </div>
+
+
+      </div>
+    </div>)
+  }
   return (
     <div className="pr-2 ">
-      <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}>
+      <Prolonger/>
+      {/* <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}> */}
 
         {/* <div className="flex flex-col bg-white m-auto w-[30vw] p-2 rounded-lg">
           <button onClick={()=>{setSearchQuery("Ref")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Ref</button>
@@ -95,7 +118,7 @@ export default function Contrats() {
           <button onClick={()=>{setSearchQuery("Client")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Client</button>
           <button onClick={()=>{setSearchQuery("Status")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Status</button>
         </div> */}
-      </div>
+      {/* </div> */}
       <div className="max-sm:flex grid grid-cols-2   max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Contrats</h1>
         <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
@@ -124,7 +147,7 @@ export default function Contrats() {
                   type="text" placeholder="Search ..."/>
                 </div>
           </div>
-        <div className="overflow-x-auto   overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+        <div className="overflow-x-auto  min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
           
         <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
         <thead>
@@ -136,7 +159,7 @@ export default function Contrats() {
             <th className="p-3 font-medium">Client</th>
             <th className="p-3 font-medium">Paiements</th>
             <th className="p-3 font-medium">Status</th>
-            <th className=" rounded-r-lg p-3 font-medium">Action</th>
+            <th className=" rounded-r-lg p-3 font-medium sticky backdrop-blur-lg -right-4 bg-inherit ">Action</th>
           </tr>
         </thead>
         <tbody className="divide-y-2 text-nowrap whitespace-nowrap">
@@ -161,10 +184,30 @@ export default function Contrats() {
               <td className="px-2 text-center  ">
                   <div className=" bg-yellow-500 w-fit m-auto  text-white px-4 rounded-xl ">{e?.statut}</div>
               </td>
-              <td className="p-6 text-center ">
-                  <div className="w-full  px-4 rounded-xl flex items-center gap-2 ">
-                  <PencilSquareIcon className="size-8 p-1 hover:bg-neutral-100 rounded-md  cursor-pointer"/>
-                  <TrashIcon className="size-8 p-1 hover:bg-neutral-100 rounded-md  cursor-pointer "/>
+              <td className="p-6 text-center sticky -right-4  bg-opacity-70 backdrop-blur-lg bg-white  ">
+                  <div className="w-full px-4 rounded-xl flex justify-center items-center gap-2 ">
+                  <EyeIcon className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
+                  <a className="size-8 min-w-8 p-[6px] hover:bg-neutral-100 rounded-full  cursor-pointer" aria-label="Chat on WhatsApp" href="https://wa.me/1XXXXXXXXXX"> <img alt="Chat on WhatsApp" src={whatsappIcon} /></a>
+                  <EllipsisVerticalIcon onClick={()=>setOpenActions({contrat:1,state:!openActions.state})}  className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
+                  <div className={`min-w-16 border rounded-lg shadow-lg border-neutral-300  bg-white h-auto absolute right-4 top-[70px] ${openActions.state && openActions.contrat == 1 ? "" : "hidden"} `}>
+                    <div onClick={()=>setIsPopUpOpen(true)} className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
+                      <CalendarDateRangeIcon   id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
+                      <div>Prolonger </div>
+                    </div>
+                    <div className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
+                      <ArrowUturnLeftIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
+                      <div>Retourner</div>
+                    </div>
+                    <div className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
+                      <CurrencyDollarIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
+                      <div>Paiement</div>
+                    </div>
+                 
+                    <div className="flex gap-2 items-center p-1 m-1 cursor-pointer pr-2 hover:bg-red-600 bg-red-600 text-white  rounded-md">
+                      <TrashIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1 cursor-pointer  rounded-md  "/>
+                      <div>Supprimer</div>
+                    </div>
+                  </div>
                   </div>
               </td>
             </tr>

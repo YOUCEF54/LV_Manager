@@ -79,7 +79,7 @@ useEffect(() => {
 }, []);
   return (
     <div  className="flex w-full  top-0 fixed h-screen ">
-      <div className="absolute bottom-16 z-50  right-4">
+      <div style={{zIndex:50}} className="absolute bottom-16  right-4">
           <Chat/>
       </div>
     <aside
