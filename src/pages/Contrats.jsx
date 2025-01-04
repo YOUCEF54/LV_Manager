@@ -57,58 +57,97 @@ export default function Contrats() {
   const [hasFetched, setHasFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [contrats, setContrats] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(()=>{
-    async function fetchContrats() {
-      const headers = {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
-      };
-      // if (!hasFetched){
-      try {
-        setIsLoading(true)
-        const response = await axios.get(
-          `https://beta.lvmanager.net/tenants/contrats`,
-          { headers }
+  const [allContrats, setAllContrats] = useState([]); // Store all data
+  const [contrats, setContrats] = useState([]); // Filtered data
+  const [searchQuery, setSearchQuery] = useState({ from: null, value: "" });
+  
+  async function fetchContrats() {
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
+    };
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        `https://beta.lvmanager.net/tenants/contrats`,
+        { headers }
+      );
+      setIsLoading(false);
+      setAllContrats(response.data); // Store fetched data
+      setContrats(response.data); // Initially display all data
+      setHasFetched(true);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  useEffect(() => {
+    fetchContrats();
+  }, []);
+  
+  useEffect(() => {
+    if (!searchQuery.from) {
+      setContrats(allContrats); // Reset to all data if no filter applied
+      return;
+    }
+  
+    let filteredContrats = allContrats;
+  
+    switch (searchQuery.from) {
+      case "V": // Filter by vehicle
+        filteredContrats = allContrats.filter((e) =>
+          e?.libelle?.toLowerCase().includes(searchQuery.value.toLowerCase())
         );
-        setIsLoading(false)
-        setContrats(response.data);
-        console.log("Contrats ",response.data);
-        setHasFetched(true)
-      } catch (error) {
-        console.error(error);
-      }
-    // }
+        break;
+      case "C": // Filter by client
+        filteredContrats = allContrats.filter((e) =>
+          e?.nomClient?.toLowerCase().includes(searchQuery.value.toLowerCase())
+        );
+        break;
+      case "G": // General search (both vehicle and client)
+        filteredContrats = allContrats.filter(
+          (e) =>
+            e?.libelle?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+            e?.nomClient?.toLowerCase().includes(searchQuery.value.toLowerCase())
+        );
+        break;
+      default:
+        break;
+    }
+  
+    setContrats(filteredContrats);
+  }, [searchQuery, allContrats]);
+  
+  // Update searchQuery on filter change
+  function handleSearch(from, value) {
+    setSearchQuery({ from, value });
   }
-    fetchContrats()
-  },[])
-
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
-  const [openActions, setOpenActions] = useState({contrat : null,state : false})
-
-  const Prolonger = ()=>{
-    return(
-    <div style={{zIndex : 80}} onClick={()=>setIsPopUpOpen(false)} className={`absolute ${isPopUpOpen ? "flex" : "hidden"} bg-opacity-55 backdrop-blur-sm inset-0  items-center justify-center bg-black`}>
-      <div onClick={(e)=>e.stopPropagation()} className="bg-white min-w-[25rem] p-4 rounded-xl shadow-md">
-
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Aout de Prolongation</h2>
-          <XMarkIcon onClick={()=>setIsPopUpOpen(false)} className="size-5 cursor-pointer"/>
-        </div>
-        <div>
-          <h3>Contrat : 5</h3>
-          <p>Le contrat est prolongé pour 1 an</p>
-        </div>
-
-
-      </div>
-    </div>)
-  }
-  return (
-    <div className="pr-2 ">
+  
+          
+            const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+            const [openActions, setOpenActions] = useState({contrat : null,state : false})
+          
+          const Prolonger = ()=>{
+            return(
+            <div style={{zIndex : 80}} onClick={()=>setIsPopUpOpen(false)} className={`absolute ${isPopUpOpen ? "flex" : "hidden"} bg-opacity-55 backdrop-blur-sm inset-0  items-center justify-center bg-black`}>
+              <div onClick={(e)=>e.stopPropagation()} className="bg-white min-w-[25rem] p-4 rounded-xl shadow-md">
+        
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-semibold">Aout de Prolongation</h2>
+                  <XMarkIcon onClick={()=>setIsPopUpOpen(false)} className="size-5 cursor-pointer"/>
+                </div>
+                <div>
+                  <h3>Contrat : 5</h3>
+                  <p>Le contrat est prolongé pour 1 an</p>
+                </div>
+        
+        
+              </div>
+            </div>)
+          }
+          return (
+            <div className="pr-2 ">
       <Prolonger/>
       {/* <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}> */}
 
@@ -133,10 +172,17 @@ export default function Contrats() {
               <div className="flex gap-6 w-full justify-between">
                 <span className="font-semibold">Filtré par</span>
                 <div className="flex  items-center gap-2 ">
-                    <DropDown libelle="Par véhicules" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"Toyota"]}/>
-                    <DropDown libelle="Par clients" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"client02"]}/>
-                    <DropDown libelle="Par paiement" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"Toyota"]}/>
-                    <DropDown libelle="Par statut" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"client02"]}/>
+                    <DropDown libelle="Par véhicules" dataset = {[
+                      <input onChange={(e)=>{handleSearch("V", e.target.value)}} type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,
+                      <label className="flex items-center gap-2" htmlFor="v" key={2}><input className="size-3" id="v" type="checkbox"/>Toyota</label>]}/>
+                    <DropDown libelle="Par clients" dataset = {[
+                      <input onChange={(e)=>{handleSearch("C",e.target.value)}} type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,
+                      <label className="flex items-center gap-2" htmlFor="c" key={2}><input className="size-3" id="c" type="checkbox"/>Toyota</label>]}/>
+                    <DropDown libelle="Par paiement" dataset = {[
+                      <label className="flex items-center gap-2" htmlFor="p" key={2}><input className="size-3" id="p" type="checkbox"/>Toyota</label>]}/>
+                    <DropDown libelle="Par statut" dataset = {[
+                      <label className="flex items-center gap-2" htmlFor="s" key={2}><input className="size-3" id="s" type="checkbox"/>Toyota</label>]}/>
+                    
                 </div>
               </div>
             <div className=" mb-2 flex justify-end ">
@@ -145,7 +191,7 @@ export default function Contrats() {
                   <ChevronDownIcon className="size-5"/>
                 </button> */}
                 <input 
-                  onChange={(e)=>{setSearchQuery(e.target.value)}}                
+                  onChange={(e)=>{handleSearch("G",e.target.value)}}              
                   className="outline-none focus:bg-opacity-90 z-500 bg-opacity-40 duration-100 ease-in-out focus:shadow-md bg-white p-1 w-full px-3 rounded-md border border-neutral-300 focus:border-blue-600 "
                   type="text" placeholder="Search ..."/>
                 </div>
@@ -176,15 +222,17 @@ export default function Contrats() {
                 <Loading className=" my-2  animate-spin   m-auto "/>
               </td>
             </tr>:
-            contrats.filter((e)=>e.libelle.includes(searchQuery)).length != 0 ?(contrats.filter((e)=>e.libelle.includes(searchQuery))).map((e, index) => (
+            // Contrats mapping
+            contrats?.length != 0 ?
+              contrats?.map((e, index) => (
             <tr key={index} className="text-neutral-600">
               <td className="p-6 text-center">{e?.contratId}</td>
               <td className="p-6 text-center">{e?.libelle}</td>
               <td className="p-6 text-center">{e?.matricule}</td>
               <td className="p-6 text-center justify-center flex items-center gap-2">
               {/* <CalendarDaysIcon className="size-5 fill-emerald-600"/> */}
-               {e?.dateDep.split(" ")[0]}<br/>{e.dateDep.split(" ")[1]}</td>
-              <td className="p-6 text-center">{e?.dateArriv.split(" ")[0]}<br/>{e?.dateArriv.split(" ")[1]}</td>
+               {e?.dateDep?.split(" ")[0]}<br/>{e?.dateDep?.split(" ")[1]}</td>
+              <td className="p-6 text-center">{e?.dateArriv?.split(" ")[0]}<br/>{e?.dateArriv?.split(" ")[1]}</td>
               <td className="p-6 text-center">{e?.nomClient}</td>
               <td className="p-6 text-center">{e?.tel}</td>
               <td className="px-6 text-center w-full flex whitespace-normal  flex-grow m-auto  items-center gap-1">
