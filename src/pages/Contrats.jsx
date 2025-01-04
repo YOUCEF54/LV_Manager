@@ -58,7 +58,7 @@ export default function Contrats() {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [contrats, setContrats] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(()=>{
     async function fetchContrats() {
@@ -142,7 +142,7 @@ export default function Contrats() {
                   <ChevronDownIcon className="size-5"/>
                 </button> */}
                 <input 
-                onFocus={()=>setIsOpen(true)}
+                  onChange={(e)=>{setSearchQuery(e.target.value)}}                
                   className="outline-none focus:bg-opacity-90 z-500 bg-opacity-40 duration-100 ease-in-out focus:shadow-md bg-white p-1 w-full px-3 rounded-md border border-neutral-300 focus:border-blue-600 "
                   type="text" placeholder="Search ..."/>
                 </div>
@@ -168,7 +168,8 @@ export default function Contrats() {
               <td  className=" right-0 cursor-wait left-0 absolute overflow-clip ">
                 <Loading className=" my-2  animate-spin   m-auto "/>
               </td>
-            </tr>:contrats.map((e, index) => (
+            </tr>:
+            contrats.filter((e)=>e.libelle.includes(searchQuery)).length != 0 ?(contrats.filter((e)=>e.libelle.includes(searchQuery))).map((e, index) => (
             <tr key={index} className="text-neutral-600">
               <td className="p-6 text-center">{e?.matricule}</td>
               <td className="p-6 text-center">{e?.libelle}</td>
@@ -211,7 +212,7 @@ export default function Contrats() {
                   </div>
               </td>
             </tr>
-          ))}
+          )) : <div className="text-center flex items-center justify-center w-full absolute my-2 p-6 rounded-md bg-red-300">Nothing to show</div>}
         </tbody>
       </table>
       </div>
