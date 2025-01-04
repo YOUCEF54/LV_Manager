@@ -119,7 +119,7 @@ export default function Contrats() {
           <button onClick={()=>{setSearchQuery("Status")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Status</button>
         </div> */}
       {/* </div> */}
-      <div className="max-sm:flex grid grid-cols-2   max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
+      <div className="max-sm:flex grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Contrats</h1>
         <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
           <button className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
@@ -129,15 +129,18 @@ export default function Contrats() {
         </div>
        
       </div>
-            <div className="flex gap-6 mb-4 justify-between sticky z-50 inset-0 mt-10">
+            <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-0 sticky z-50 inset-0 mt-0">
+              <div className="flex gap-6 w-full justify-between">
                 <span className="font-semibold">Filtré par</span>
                 <div className="flex  items-center gap-2 ">
-                    <DropDown libelle="Véhicules" dataset = {["Clio 4","Toyota"]}/>
-                    <DropDown libelle="Véhicules" dataset = {["client01","client02"]}/>
+                    <DropDown libelle="Par véhicules" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"Toyota"]}/>
+                    <DropDown libelle="Par clients" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"client02"]}/>
+                    <DropDown libelle="Par paiement" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"Toyota"]}/>
+                    <DropDown libelle="Par statut" dataset = {[<input type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,"client02"]}/>
                 </div>
-            </div>
-            <div className=" mb-2 flex justify-end">
-              <div className="flex whitespace-nowrap gap-2 w-1/3">
+              </div>
+            <div className=" mb-2 flex justify-end ">
+              <div className="flex whitespace-nowrap gap-2 mb-2 mt-4 w-1/3">
                 {/* <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}
                   <ChevronDownIcon className="size-5"/>
                 </button> */}
@@ -147,17 +150,21 @@ export default function Contrats() {
                   type="text" placeholder="Search ..."/>
                 </div>
           </div>
+            </div>
         <div className="overflow-x-auto  min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
           
         <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
         <thead>
           <tr className="bg-neutral-200 text-neutral-800 bg-opacity-70">
-            <th className="p-3 rounded-l-lg font-medium">Ref</th>
+            <th className="p-3 rounded-l-lg font-medium">Réf</th>
             <th className="p-3 font-medium">Véhicule</th>
+            <th className="p-3 font-medium">Nº matricule</th>
             <th className="p-3 font-medium">Date de départ</th>
             <th className="p-3 font-medium">Date de retour</th>
             <th className="p-3 font-medium">Client</th>
+            <th className="p-3 font-medium">Téléphone</th>
             <th className="p-3 font-medium">Paiements</th>
+            <th className="p-3 font-medium">Suivie</th>
             <th className="p-3 font-medium">Status</th>
             <th className=" rounded-r-lg p-3 font-medium sticky backdrop-blur-lg -right-4 bg-inherit ">Action</th>
           </tr>
@@ -171,19 +178,27 @@ export default function Contrats() {
             </tr>:
             contrats.filter((e)=>e.libelle.includes(searchQuery)).length != 0 ?(contrats.filter((e)=>e.libelle.includes(searchQuery))).map((e, index) => (
             <tr key={index} className="text-neutral-600">
-              <td className="p-6 text-center">{e?.matricule}</td>
+              <td className="p-6 text-center">{e?.contratId}</td>
               <td className="p-6 text-center">{e?.libelle}</td>
+              <td className="p-6 text-center">{e?.matricule}</td>
               <td className="p-6 text-center justify-center flex items-center gap-2">
               {/* <CalendarDaysIcon className="size-5 fill-emerald-600"/> */}
                {e?.dateDep.split(" ")[0]}<br/>{e.dateDep.split(" ")[1]}</td>
               <td className="p-6 text-center">{e?.dateArriv.split(" ")[0]}<br/>{e?.dateArriv.split(" ")[1]}</td>
               <td className="p-6 text-center">{e?.nomClient}</td>
-              <td className="px-2 text-center w-full flex flex-col flex-grow m-auto  items-center gap-1">
-              <span className="bg-emerald-500 rounded-xl min-w-24  px-4  text-white h-full ">{e?.avance}DH</span>
-              <span className="bg-red-500 rounded-xl px-4 min-w-24  flex-grow text-white h-full ">{e?.montantAPayer - e?.avance}DH</span>
+              <td className="p-6 text-center">{e?.tel}</td>
+              <td className="px-6 text-center w-full flex whitespace-normal  flex-grow m-auto  items-center gap-1">
+                <div className="flex flex-col justify-between gap-1">
+                  <span className="bg-emerald-500 rounded-xl min-w-24  px-4  text-white h-full ">{e?.avance}DH</span>
+                  <span className="bg-red-500 rounded-xl px-4 min-w-24  flex-grow text-white h-full ">{e?.montantAPayer - e?.avance}DH</span>
+                </div>
+                <span className=" text-left">{e?.statut}</span>
+              </td>
+              <td className="px-2 text-center">
+                  <div className={`${e?.suivi == "Facturé" ? "bg-green-500" :"bg-red-500"} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.suivi}</div>
               </td>
               <td className="px-2 text-center  ">
-                  <div className=" bg-yellow-500 w-fit m-auto  text-white px-4 rounded-xl ">{e?.statut}</div>
+                  <div className={` ${e?.vehicleReturned != 1 ? "bg-yellow-500 " :"bg-green-500 "} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.vehicleReturned == 1 ? "Terminé" :"Active"}</div>
               </td>
               <td className="p-6 text-center sticky -right-4  bg-opacity-70 backdrop-blur-lg bg-white  ">
                   <div className="w-full px-4 rounded-xl flex justify-center items-center gap-2 ">
@@ -191,7 +206,7 @@ export default function Contrats() {
                   <a className="size-8 min-w-8 p-[6px] hover:bg-neutral-100 rounded-full  cursor-pointer" aria-label="Chat on WhatsApp" href="https://wa.me/1XXXXXXXXXX"> <img alt="Chat on WhatsApp" src={whatsappIcon} /></a>
                   <EllipsisVerticalIcon onClick={()=>setOpenActions({contrat:1,state:!openActions.state})}  className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
                   <div className={`min-w-16 border rounded-lg shadow-lg border-neutral-300  bg-white h-auto absolute right-4 top-[70px] ${openActions.state && openActions.contrat == 1 ? "" : "hidden"} `}>
-                    <div onClick={()=>setIsPopUpOpen(true)} className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
+                    <div onClick={()=>setIsPopUpOpen(true)} className={`flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer ${e.statut == "Terminé" && "hidden"} `}>
                       <CalendarDateRangeIcon   id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
                       <div>Prolonger </div>
                     </div>
@@ -203,7 +218,6 @@ export default function Contrats() {
                       <CurrencyDollarIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
                       <div>Paiement</div>
                     </div>
-                 
                     <div className="flex gap-2 items-center p-1 m-1 cursor-pointer pr-2 hover:bg-red-600 bg-red-600 text-white  rounded-md">
                       <TrashIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1 cursor-pointer  rounded-md  "/>
                       <div>Supprimer</div>
