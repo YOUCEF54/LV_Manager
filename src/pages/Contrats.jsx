@@ -60,6 +60,7 @@ export default function Contrats() {
   const [allContrats, setAllContrats] = useState([]); // Store all data
   const [contrats, setContrats] = useState([]); // Filtered data
   const [vehicles, setVehicles] = useState([]); 
+  const [clients, setClients] = useState([]); 
   const [searchQuery, setSearchQuery] = useState({ from: null, value: "" });
   
   const headers = {
@@ -77,6 +78,7 @@ export default function Contrats() {
       setIsLoading(false);
       setAllContrats(response.data); // Store fetched data
       setContrats(response.data); // Initially display all data
+      console.log("Contrats: ",response.data); 
       setHasFetched(true);
     } catch (error) {
       console.error(error);
@@ -88,7 +90,8 @@ export default function Contrats() {
         `https://beta.lvmanager.net/tenants/vehicles`,
         { headers }
       );
-      setVehicles(response.data); 
+      setVehicles(response.data.map(e=>e.libelle)); 
+      console.log(response.data); 
     } catch (error) {
       console.error(error);
     }
@@ -99,7 +102,8 @@ export default function Contrats() {
         `https://beta.lvmanager.net/tenants/clients`,
         { headers }
       );
-      setVehicles(response.data); 
+      setClients(response.data.map(e=>e.nomClient)); 
+      console.log(response.data); 
     } catch (error) {
       console.error(error);
     }
@@ -107,6 +111,8 @@ export default function Contrats() {
   
   useEffect(() => {
     fetchContrats();
+    fetchVehicles();
+    fetchClients();
   }, []);
   
   useEffect(() => {
@@ -197,15 +203,18 @@ export default function Contrats() {
                 <div className="flex  items-center gap-2 ">
                     <DropDown libelle="Par véhicules" dataset = {[
                       <input onChange={(e)=>{handleSearch("V", e.target.value)}} type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,
-                      <label className="flex items-center gap-2" htmlFor="v" key={2}><input className="size-3" id="v" type="checkbox"/>Toyota</label>]}/>
+                      vehicles]}/>
                     <DropDown libelle="Par clients" dataset = {[
                       <input onChange={(e)=>{handleSearch("C",e.target.value)}} type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,
-                      <label className="flex items-center gap-2" htmlFor="c" key={2}><input className="size-3" id="c" type="checkbox"/>Toyota</label>]}/>
+                      clients]}/>
                     <DropDown libelle="Par paiement" dataset = {[
-                      <label className="flex items-center gap-2" htmlFor="p" key={2}><input className="size-3" id="p" type="checkbox"/>Toyota</label>]}/>
+                      <label className="flex items-center gap-2" htmlFor="paye" key={2}><input className="size-3" id="paye" type="checkbox"/>Payé</label>,
+                      <label className="flex items-center gap-2" htmlFor="encours" key={2}><input className="size-3" id="encours" type="checkbox"/>En cours</label>,
+
+                      ]}/>
                     <DropDown libelle="Par statut" dataset = {[
-                      <label className="flex items-center gap-2" htmlFor="s" key={2}><input className="size-3" id="s" type="checkbox"/>Toyota</label>]}/>
-                    
+                      <label className="flex items-center gap-2" htmlFor="active" key={2}><input className="size-3" id="active" type="checkbox"/>Active</label>,
+                      <label className="flex items-center gap-2" htmlFor="termine" key={2}><input className="size-3" id="termine" type="checkbox"/>Terminé</label>,]}/>                    
                 </div>
               </div>
             <div className=" mb-2 flex justify-end ">
