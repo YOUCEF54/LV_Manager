@@ -59,14 +59,15 @@ export default function Contrats() {
   const [isOpen, setIsOpen] = useState(false);
   const [allContrats, setAllContrats] = useState([]); // Store all data
   const [contrats, setContrats] = useState([]); // Filtered data
+  const [vehicles, setVehicles] = useState([]); 
   const [searchQuery, setSearchQuery] = useState({ from: null, value: "" });
   
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
+  };
   async function fetchContrats() {
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
-    };
     try {
       setIsLoading(true);
       const response = await axios.get(
@@ -77,6 +78,28 @@ export default function Contrats() {
       setAllContrats(response.data); // Store fetched data
       setContrats(response.data); // Initially display all data
       setHasFetched(true);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function fetchVehicles() {
+    try {
+      const response = await axios.get(
+        `https://beta.lvmanager.net/tenants/vehicles`,
+        { headers }
+      );
+      setVehicles(response.data); 
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function fetchClients() {
+    try {
+      const response = await axios.get(
+        `https://beta.lvmanager.net/tenants/clients`,
+        { headers }
+      );
+      setVehicles(response.data); 
     } catch (error) {
       console.error(error);
     }
