@@ -4,6 +4,9 @@ import axios from "axios";
 import Loading from "../../public/Loading";
 import { useEffect, useRef, useState } from "react";
 import whatsappIcon from "../../public/whatsapp.svg"
+import NewContract from "../components/NewContract";
+import { useSelector,useDispatch } from 'react-redux';
+import { setIsOpenNewContrat } from "../redux/newContratSlice";
 
 const DropDown = ({libelle, dataset}) =>{
       const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +66,10 @@ export default function Contrats() {
   const [clients, setClients] = useState([]); 
   const [searchQuery, setSearchQuery] = useState({ from: null, value: "" });
   
+  // const isNewContratOpen = useSelector(state => state?.newContrat?.value?.isOpen)
+  const dispatch = useDispatch()
+
+
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -134,11 +141,11 @@ export default function Contrats() {
           e?.nomClient?.toLowerCase().includes(searchQuery.value.toLowerCase())
         );
         break;
-      case "G": // General search (both vehicle and client)
-        filteredContrats = allContrats.filter(
-          (e) =>
-            e?.libelle?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-            e?.nomClient?.toLowerCase().includes(searchQuery.value.toLowerCase())
+      case "G": // General search (all attributes)
+        filteredContrats = allContrats.filter((e) =>
+            Object.values(e).some(value =>
+                String(value)?.toLowerCase().includes(searchQuery.value.toLowerCase())
+            )
         );
         break;
       default:
@@ -152,7 +159,37 @@ export default function Contrats() {
   function handleSearch(from, value) {
     setSearchQuery({ from, value });
   }
-  
+
+  function sendWatshappRappelMessage(e) {
+    const contrat = contrats.find(contract => contract.contratId === e.contratId);
+
+    if (!contrat) {
+        console.error("Contract not found!");
+        console.error(contrat);
+        return;
+    }
+
+    let Reste = contrat.montantAPayer - contrat.avance;
+    const websiteLink = window.location.protocol + '//' + window.location.hostname;
+    let whatsappMessage =
+        `Bonjour ${contrat.nomClient}, Ceci est un rappel pour payer le montant dû (${Reste} DH)
+          Détails du contrat:
+          Date de début: ${contrat.dateDep}.
+          Date de retour: ${contrat.dateArriv}.
+          Total à payer: ${contrat.montantAPayer} DH.
+          Montant fourni: ${contrat.avance} DH.
+          Reste: ${Reste} DH.
+
+          Pour plus de détails, veuillez visiter ce lien et saisir votre CIN:
+          ${websiteLink}/admin/clientPrintContrat.html?contratId=${contrat.contratsId}
+          Nous vous remercions de votre coopération et nous restons à votre disposition pour toute assistance supplémentaire. N'hésitez pas à nous contacter en cas de questions ou de préoccupations.
+
+          Cordialement`;
+
+          const whatsappUrl = `https://wa.me/${contrat.tel.replace(/^\d/, '+212')}?text=${encodeURIComponent(whatsappMessage)}`;
+          window.open(whatsappUrl, '_blank');
+      }
+
           
             const [isPopUpOpen, setIsPopUpOpen] = useState(false)
             const [openActions, setOpenActions] = useState({contrat : null,state : false})
@@ -187,18 +224,19 @@ export default function Contrats() {
           <button onClick={()=>{setSearchQuery("Status")}} className="p-2 border border-neutral-300 hover:bg-neutral-100 bg-neutral-50 m-1 rounded-lg hover:scale-105 duration-100 ease-in-out">Status</button>
         </div> */}
       {/* </div> */}
-      <div className="max-sm:flex grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
+      <NewContract/>
+      <div className="max-sm:flex sticky top-0 grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Contrats</h1>
         <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
-          <button className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
-          <button className="flex items-center max-sm:gap-2 max-sm:justify-center whitespace-nowrap max-sm:p-2 pl-1 max-sm:w-full bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
+          <button  className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
+          <button onClick={()=>dispatch(setIsOpenNewContrat(true))} className="flex items-center max-sm:gap-2 max-sm:justify-center whitespace-nowrap max-sm:p-2 pl-1 max-sm:w-full bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
             <PlusIcon className="size-5"/>
             Nouveau contrat</button>
         </div>
        
       </div>
-            <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-0 sticky z-50 inset-0 mt-0">
-              <div className="flex gap-6 w-full justify-between">
+            <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-9 overflow-y-visible sticky z-50 inset-0 mt-0">
+              <div className="flex gap-6 flex-wrap w-full justify-between pb-2  whitespace-nowrap ">
                 <span className="font-semibold">Filtré par</span>
                 <div className="flex  items-center gap-2 ">
                     <DropDown libelle="Par véhicules" dataset = {[
@@ -242,7 +280,7 @@ export default function Contrats() {
             <th className="p-3 font-medium">Client</th>
             <th className="p-3 font-medium">Téléphone</th>
             <th className="p-3 font-medium">Paiements</th>
-            <th className="p-3 font-medium">Suivie</th>
+            {/* <th className="p-3 font-medium">Suivie</th> */}
             <th className="p-3 font-medium">Status</th>
             <th className=" rounded-r-lg p-3 font-medium sticky backdrop-blur-lg -right-4 bg-inherit ">Action</th>
           </tr>
@@ -274,16 +312,16 @@ export default function Contrats() {
                 </div>
                 <span className=" text-left">{e?.statut}</span>
               </td>
-              <td className="px-2 text-center">
+              {/* <td className="px-2 text-center">
                   <div className={`${e?.suivi == "Facturé" ? "bg-green-500" :"bg-red-500"} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.suivi}</div>
-              </td>
+              </td> */}
               <td className="px-2 text-center  ">
                   <div className={` ${e?.vehicleReturned != 1 ? "bg-yellow-500 " :"bg-green-500 "} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.vehicleReturned == 1 ? "Terminé" :"Active"}</div>
               </td>
               <td className="p-6 text-center sticky -right-4  bg-opacity-70 backdrop-blur-lg bg-white  ">
-                  <div className="w-full px-4 rounded-xl flex justify-center items-center gap-2 ">
+                  <div className="w-full px-4 rounded-xl flex justify-end items-center gap-2 ">
                   <EyeIcon className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
-                  <a className="size-8 min-w-8 p-[6px] hover:bg-neutral-100 rounded-full  cursor-pointer" aria-label="Chat on WhatsApp" href="https://wa.me/1XXXXXXXXXX"> <img alt="Chat on WhatsApp" src={whatsappIcon} /></a>
+                  {e?.statut != "Payé" && <button onClick={()=>sendWatshappRappelMessage(e)} className="size-8 min-w-8 p-[6px] hover:bg-neutral-100 rounded-full  cursor-pointer" aria-label="Chat on WhatsApp"> <img alt="Chat on WhatsApp" src={whatsappIcon} /></button>}
                   <EllipsisVerticalIcon onClick={()=>setOpenActions({contrat:1,state:!openActions.state})}  className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
                   <div className={`min-w-16 border rounded-lg shadow-lg border-neutral-300  bg-white h-auto absolute right-4 top-[70px] ${openActions.state && openActions.contrat == 1 ? "" : "hidden"} `}>
                     <div onClick={()=>setIsPopUpOpen(true)} className={`flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer ${e.statut == "Terminé" && "hidden"} `}>
