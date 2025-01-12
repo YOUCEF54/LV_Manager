@@ -60,10 +60,11 @@ export default function NewContract() {
     const isOpen = useSelector(state => state?.newContrat?.value?.isOpen)
     console.log("what is going on!!:",isOpen)
     const dispatch = useDispatch()
+    const [isOpenNewLocalisation,setIsOpenNewLocalisaion] = useState(false)
      return (
     <div className={`${isOpen ? " ":"hidden"}`}>
         <div style={{"zIndex":51}} className="absolute inset-0 flex items-center justify-center   bg-opacity-55 backdrop-blur bg-black">
-            <div className="bg-white p-6 space-y-2 m-8 rounded-md w-full">
+            <div className="bg-white p-6 drop-shadow-2xl shadow-white  space-y-2 m-8 rounded-lg max-md:min-w-[90vw] min-w-[40rem]">
                 <div style={{"zIndex":52}} className="flex justify-between items-center">
                     <h1 className="text-xl font-semibold">Nouveau Contrat</h1>
                     <XMarkIcon onClick={()=>dispatch(setIsOpenNewContrat(false))} className="size-7 cursor-pointer shadow bg-neutral-50 border hover:bg-neutral-100 rounded-full p-1 "/>
@@ -73,8 +74,18 @@ export default function NewContract() {
                         <label>Localisation de départ <span className="text-red-600">*</span></label>
                         <div className="flex w-full gap-2 items-center">
                             <DropDown libelle="no_lib" dataset={["Agence","Aeroport"]}/>
-                            <PlusIcon className="size-9 border p-1.5 border-neutral-400 cursor-pointer hover:bg-neutral-50 rounded-lg"/>
+                            <PlusIcon onClick={()=>setIsOpenNewLocalisaion(!isOpenNewLocalisation)} className="size-9 border p-1.5 border-neutral-400 cursor-pointer hover:bg-neutral-50 rounded-lg"/>
                         </div>
+                       <div className={`space-y-2 duration-500 ${isOpenNewLocalisation?"p-2 shadow border h-[8.25rem]":"h-0"}  rounded-lg  overflow-clip `}>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="localisation">Ajouter une localisation</label>
+                                <input className="outline-none rounded-lg p-2 border" id="localisation" placeholder="Saisir la libelle du localisation ..."/>
+                            </div>
+                            <div className="flex justify-end gap-2">
+                                <button className="bg-neutral-500 border text-white px-3  rounded-lg p-1 hover:bg-neutral-600">Annuler</button>
+                                <button className="bg-blue-600 border text-white px-3  rounded-lg p-1 hover:bg-blue-700">Ajouter</button>
+                            </div>
+                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
                         <label>Date/Heure de Début <span className="text-red-600">*</span></label>
@@ -94,7 +105,7 @@ export default function NewContract() {
                         </div>
                     </div>
                     </div>
-                    <button className="mt-5 p-2 rounded-lg bg-neutral-600 text-white hover:bg-neutral-700">Trouver une vehicule</button>
+                    <button className="mt-5 p-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Trouver une vehicule</button>
                 </div>
             </div>
         </div>
