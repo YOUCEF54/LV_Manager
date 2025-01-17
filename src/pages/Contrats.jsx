@@ -225,7 +225,7 @@ export default function Contrats() {
         </div> */}
       {/* </div> */}
       <NewContract/>
-      <div className="max-sm:flex sticky top-0 grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
+      <div className="max-sm:flex  top-0 grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Contrats</h1>
         <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
           <button  className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
@@ -235,7 +235,7 @@ export default function Contrats() {
         </div>
        
       </div>
-            <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-9 overflow-y-visible sticky z-50 inset-0 mt-0">
+            <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-9 overflow-y-visible  z-50 inset-0 mt-0">
               <div className="flex gap-6 flex-wrap w-full justify-between pb-2  whitespace-nowrap ">
                 <span className="font-semibold">Filtré par</span>
                 <div className="flex  items-center gap-2 ">
@@ -267,9 +267,9 @@ export default function Contrats() {
                 </div>
           </div>
             </div>
-        <div className="overflow-x-auto  min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+        <div className="overflow-x-auto   min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
           
-        <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap ">
+        <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap  ">
         <thead>
           <tr className="bg-neutral-200 text-neutral-800 bg-opacity-70">
             <th className="p-3 rounded-l-lg font-medium">Réf</th>
@@ -318,14 +318,17 @@ export default function Contrats() {
               <td className="px-2 text-center  ">
                   <div className={` ${e?.vehicleReturned != 1 ? "bg-yellow-500 " :"bg-green-500 "} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.vehicleReturned == 1 ? "Terminé" :"Active"}</div>
               </td>
-              <td className="p-6 text-center sticky -right-4  bg-opacity-70 backdrop-blur-lg bg-white  ">
-                  <div className="w-full px-4 rounded-xl flex justify-end items-center gap-2 ">
+              <td className="p-6 text-center  sticky -right-4  bg-opacity-70 backdrop-blur-lg bg-white  ">
+                  <div className="w-full px-4  rounded-xl flex justify-end items-center gap-2 ">
                   <EyeIcon className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
                   {e?.statut != "Payé" && <button onClick={()=>sendWatshappRappelMessage(e)} className="size-8 min-w-8 p-[6px] hover:bg-neutral-100 rounded-full  cursor-pointer" aria-label="Chat on WhatsApp"> <img alt="Chat on WhatsApp" src={whatsappIcon} /></button>}
-                  <EllipsisVerticalIcon onClick={()=>setOpenActions({contrat:1,state:!openActions.state})}  className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
-                  <div className={`min-w-16 border rounded-lg shadow-lg border-neutral-300  bg-white h-auto absolute right-4 top-[70px] ${openActions.state && openActions.contrat == 1 ? "" : "hidden"} `}>
+                  <EllipsisVerticalIcon onClick={()=>setOpenActions({contrat:e?.contratId,state:!openActions.state})}  className="size-8 min-w-8 p-1 relativee hover:bg-neutral-100 rounded-full  cursor-pointer"/>
+                  
+                  </div>
+              </td>
+              <div style={{zIndex:999}} className={`min-w-16 border rounded-lg shadow-lg border-neutral-300  bg-white h-auto absolute right-0 top-[${70*(index+1)}px]  ${(contrats.length -index < 3) ? `bottom-[90px]` : "mt-20"} ${openActions.state && openActions.contrat == e?.contratId ? "" : "hidden"}  `}>
                     <div onClick={()=>setIsPopUpOpen(true)} className={`flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer ${e.statut == "Terminé" && "hidden"} `}>
-                      <CalendarDateRangeIcon   id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
+                      <CalendarDateRangeIcon id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
                       <div>Prolonger </div>
                     </div>
                     <div className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
@@ -341,12 +344,12 @@ export default function Contrats() {
                       <div>Supprimer</div>
                     </div>
                   </div>
-                  </div>
-              </td>
             </tr>
           )) : <div className="text-center flex items-center justify-center w-full absolute my-2 p-6 rounded-md bg-red-300">Nothing to show</div>}
         </tbody>
+        
       </table>
+      
       </div>
     </div>
   )

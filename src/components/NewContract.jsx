@@ -1,10 +1,16 @@
-/* eslint-disable react/prop-types */
-import { ChevronDownIcon, PlusIcon, XMarkIcon } from "@heroicons/react/16/solid";
+import { ChevronDownIcon, PlusIcon, XMarkIcon } from "@heroicons/react/16/solid"; 
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsOpenNewContrat } from "../redux/newContratSlice";
 import { useEffect, useState ,useRef} from "react";
+import axios from "axios";
 
-const DropDown = ({libelle, dataset}) =>{
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
+};
+
+const DropDown = ({libelle, dataset, onChange}) =>{
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
   
@@ -23,6 +29,7 @@ const DropDown = ({libelle, dataset}) =>{
       }, []);
 
       const [chosenEle,setChosenEle] = useState(dataset[0])
+
 
   return (
       <div ref={dropdownRef} className="relative w-full  whitespace-nowrap ">
@@ -61,6 +68,21 @@ export default function NewContract() {
     console.log("what is going on!!:",isOpen)
     const dispatch = useDispatch()
     const [isOpenNewLocalisation,setIsOpenNewLocalisaion] = useState(false)
+
+
+
+    const handleGetVehicles = async() =>{
+      
+      try {
+        const response = await axios.post('https://beta.lvmanager.net/tenants/vehicles', newContractData ,{headers});
+        console.log(response)
+      } catch (error) {
+        console.log("error",error)
+      }
+    }
+
+
+
      return (
     <div className={`${isOpen ? " ":"hidden"}`}>
         <div style={{"zIndex":51}} className="absolute inset-0 flex items-center justify-center   bg-opacity-55 backdrop-blur bg-black">
@@ -73,7 +95,7 @@ export default function NewContract() {
                     <div className="flex flex-col gap-2">
                         <label>Localisation de départ <span className="text-red-600">*</span></label>
                         <div className="flex w-full gap-2 items-center">
-                            <DropDown libelle="no_lib" dataset={["Agence","Aeroport"]}/>
+                            <DropDown  libelle="no_lib" dataset={["Agence","Aeroport"]}/>
                             <PlusIcon onClick={()=>setIsOpenNewLocalisaion(!isOpenNewLocalisation)} className="size-9 border p-1.5 border-neutral-400 cursor-pointer hover:bg-neutral-50 rounded-lg"/>
                         </div>
                        <div className={`space-y-2 duration-500 ${isOpenNewLocalisation?"p-2 shadow border h-[8.25rem]":"h-0"}  rounded-lg  overflow-clip `}>
@@ -82,7 +104,7 @@ export default function NewContract() {
                                 <input className="outline-none rounded-lg p-2 border" id="localisation" placeholder="Saisir la libelle du localisation ..."/>
                             </div>
                             <div className="flex justify-end gap-2">
-                                <button className="bg-neutral-500 border text-white px-3  rounded-lg p-1 hover:bg-neutral-600">Annuler</button>
+                                <button onClick={()=>setIsOpenNewLocalisaion(!isOpenNewLocalisation)} className="bg-neutral-500 border text-white px-3  rounded-lg p-1 hover:bg-neutral-600">Annuler</button>
                                 <button className="bg-blue-600 border text-white px-3  rounded-lg p-1 hover:bg-blue-700">Ajouter</button>
                             </div>
                        </div>
