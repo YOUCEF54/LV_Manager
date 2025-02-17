@@ -10,6 +10,7 @@ import About from './pages/About.jsx';
 import Contrats from './pages/Contrats.jsx';
 import Sidebar from './components/layout/Sidebar.jsx';
 import Login from './routes/Login.jsx';
+import FindVehicle from './components/FindVehicle.jsx';
 
 // Define a simple NotFound component
 const NotFound = () => (
@@ -63,6 +64,7 @@ function App() {
             <Route element={<MainLayout />}>
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
+            <Route path="/admin/contrats/find_vehicle" element={<FindVehicle />} />
             <Route path="/admin/contrats" element={<Contrats />} />
             <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
           </Route>
