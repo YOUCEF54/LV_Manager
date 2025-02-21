@@ -29,6 +29,27 @@ export default function FindVehicle() {
         <li className="flex gap-2 flex-wrap">Location : <span className=" font-mono px-1 py-0.5 bg-gray-100 rounded-md border border-gray-400 mb-2">Aeroport</span></li>
         <li className="flex gap-2 flex-wrap">Date & Heur : <span className=" font-mono px-1 py-0.5 bg-gray-100 rounded-md border border-gray-400 mb-2">21-02-2026 16:30</span></li>
       </ul>
+      <hr/>
+        <button className="px-3 p-1 rounded-lg bg-gray-200 my-2 border border-gray-500 w-full">Editer</button>
+      <hr/>
+      <h1 className=" font-semibold mb-2">Filter les véhicules</h1>
+      <div className="font-medium">Catégories des véhicules</div>
+      <div className="flex items-center gap-2">
+        <input id="eco" type="checkbox"/>
+        <label htmlFor="eco">Economique</label>
+      </div>
+      <div className="font-medium">Marques des Véhicules</div>
+      <div className="flex items-center gap-2">
+        <input id="dacia" type="checkbox"/>
+        <label htmlFor="eco">Dacia</label>
+      </div>
+      <div className="flex items-center gap-2">
+        <input id="jeep" type="checkbox"/>
+        <label htmlFor="eco">Jeep</label>
+      </div>
+      <hr/>
+        <button className="px-3 p-1 rounded-lg bg-gray-200 my-2 border border-gray-500 w-full">Filtrer</button>
+
     </div>
     <div className="grid lg:grid-cols-2 gap-2">
       {Array.from({ length: 10 }).map((index,e)=>(
