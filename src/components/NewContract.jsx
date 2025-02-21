@@ -167,7 +167,7 @@ export default function NewContract() {
                     <div className="flex flex-col gap-2">
                         <label>Nombre des Jours <span className="text-red-600">*</span></label>
                         <div className="flex w-full gap-2 items-center">
-                            <input onChange={(e)=>setNombreJours(e.target.value)} type="number" placeholder="nombre de jours ..." className="w-full border outline-none border-neutral-400 p-2 rounded-lg"/>
+                            <input defaultValue={1} onChange={(e)=>setNombreJours(e.target.value)} type="number" placeholder="nombre de jours ..." className="w-full border outline-none border-neutral-400 p-2 rounded-lg"/>
                         </div>
                     <div className="flex flex-col gap-2">
                         <label>Localisation d&apos;arrivé <span className="text-red-600">*</span></label>
