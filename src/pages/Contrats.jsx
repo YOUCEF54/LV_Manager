@@ -7,6 +7,17 @@ import whatsappIcon from "../../public/whatsapp.svg"
 import NewContract from "../components/NewContract";
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsOpenNewContrat } from "../redux/newContratSlice";
+import DataTable from "../components/DataTable";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { Button } from "../components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
 
 const DropDown = ({libelle, dataset}) =>{
       const [isOpen, setIsOpen] = useState(false);
@@ -212,6 +223,152 @@ export default function Contrats() {
               </div>
             </div>)
           }
+
+          
+const columns = [
+  {
+    accessorKey: "contratId",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Réf <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "libelle",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Véhicule <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "matricule",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Nº matricule <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "dateDep",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Date de départ <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "dateArriv",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Date de retour <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "nomClient",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Client <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "tel",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Téléphone <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "montantAPayer",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Paiements <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    accessorKey: "statut",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        className="flex items-center gap-2"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Statut <ArrowUpDown />
+      </Button>
+    ),
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => alert(`Editing ${row.original.id}`)}>
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => alert(`Deleting ${row.original.id}`)}>
+            Delete
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => alert(`Viewing details of ${row.original.id}`)}>
+            View Details
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+];
+
+          
+          // const data = [
+          //   { id: 1, name: "Alice Johnson", email: "alice@example.com" },
+          //   { id: 2, name: "Bob Smith", email: "bob@example.com" },
+          //   { id: 3, name: "Charlie Brown", email: "charlie@example.com" },
+          // ];
+          
           return (
             <div className="pr-2 ">
       <Prolonger/>
@@ -238,7 +395,7 @@ export default function Contrats() {
             <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-9 overflow-y-visible  z-50 inset-0 mt-0">
               <div className="flex gap-6 flex-wrap w-full justify-between pb-2  whitespace-nowrap ">
                 <span className="font-semibold">Filtré par</span>
-                <div className="flex  items-center gap-2 ">
+                <div className="flex  items-center gap-2 z-50 ">
                     <DropDown libelle="Par véhicules" dataset = {[
                       <input onChange={(e)=>{handleSearch("V", e.target.value)}} type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,
                       vehicles]}/>
@@ -255,101 +412,20 @@ export default function Contrats() {
                       <label className="flex items-center gap-2" htmlFor="termine" key={2}><input className="size-3" id="termine" type="checkbox"/>Terminé</label>,]}/>                    
                 </div>
               </div>
-            <div className=" mb-2 flex justify-end ">
-              <div className="flex whitespace-nowrap gap-2 mb-2 mt-4 w-1/3">
+            </div>
+      <div className="overflow-x-auto mb-32  min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+            <div className=" mb-2 flex justify-start ">
+              <div className="flex whitespace-nowrap gap-2 mb-2  w-1/3">
                 {/* <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}
                   <ChevronDownIcon className="size-5"/>
                 </button> */}
-                <input 
+                <input  
                   onChange={(e)=>{handleSearch("G",e.target.value)}}              
-                  className="outline-none focus:bg-opacity-90 z-500 bg-opacity-40 duration-100 ease-in-out focus:shadow-md bg-white p-1 w-full px-3 rounded-md border border-neutral-300 focus:border-blue-600 "
-                  type="text" placeholder="Search ..."/>
+                  className="outline-none  z-500  duration-100 ease-in-out bg-white p-1 w-full px-3 rounded-md border border-neutral-300 focus:border-blue-600 "
+                  type="text" placeholder="Rechercher par référence, véhicule, client..."/>
                 </div>
           </div>
-            </div>
-        <div className="overflow-x-auto   min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
-          
-        <table className="w-full min-w-[30rem border-collapse whitespace-nowrap text-nowrap  ">
-        <thead>
-          <tr className="bg-neutral-200 text-neutral-800 bg-opacity-70">
-            <th className="p-3 rounded-l-lg font-medium">Réf</th>
-            <th className="p-3 font-medium">Véhicule</th>
-            <th className="p-3 font-medium">Nº matricule</th>
-            <th className="p-3 font-medium">Date de départ</th>
-            <th className="p-3 font-medium">Date de retour</th>
-            <th className="p-3 font-medium">Client</th>
-            <th className="p-3 font-medium">Téléphone</th>
-            <th className="p-3 font-medium">Paiements</th>
-            {/* <th className="p-3 font-medium">Suivie</th> */}
-            <th className="p-3 font-medium">Status</th>
-            <th className=" rounded-r-lg p-3 font-medium sticky backdrop-blur-lg -right-4 bg-inherit ">Action</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y-2 text-nowrap whitespace-nowrap">
-        {isLoading ?
-            <tr className="h-[2.2rem]  flex justify-center ">
-              <td  className=" right-0 cursor-wait left-0 absolute overflow-clip ">
-                <Loading className=" my-2  animate-spin   m-auto "/>
-              </td>
-            </tr>:
-            // Contrats mapping
-            contrats?.length != 0 ?
-              contrats?.map((e, index) => (
-            <tr key={index} className="text-neutral-600">
-              <td className="p-6 text-center">{e?.contratId}</td>
-              <td className="p-6 text-center">{e?.libelle}</td>
-              <td className="p-6 text-center">{e?.matricule}</td>
-              <td className="p-6 text-center justify-center flex items-center gap-2">
-              {/* <CalendarDaysIcon className="size-5 fill-emerald-600"/> */}
-               {e?.dateDep?.split(" ")[0]}<br/>{e?.dateDep?.split(" ")[1]}</td>
-              <td className="p-6 text-center">{e?.dateArriv?.split(" ")[0]}<br/>{e?.dateArriv?.split(" ")[1]}</td>
-              <td className="p-6 text-center">{e?.nomClient}</td>
-              <td className="p-6 text-center">{e?.tel}</td>
-              <td className="px-6 text-center w-full flex whitespace-normal  flex-grow m-auto  items-center gap-1">
-                <div className="flex flex-col justify-between gap-1">
-                  <span className="bg-emerald-500 rounded-xl min-w-24  px-4  text-white h-full ">{e?.avance}DH</span>
-                  <span className="bg-red-500 rounded-xl px-4 min-w-24  flex-grow text-white h-full ">{e?.montantAPayer - e?.avance}DH</span>
-                </div>
-                <span className=" text-left">{e?.statut}</span>
-              </td>
-              {/* <td className="px-2 text-center">
-                  <div className={`${e?.suivi == "Facturé" ? "bg-green-500" :"bg-red-500"} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.suivi}</div>
-              </td> */}
-              <td className="px-2 text-center  ">
-                  <div className={` ${e?.vehicleReturned != 1 ? "bg-yellow-500 " :"bg-green-500 "} w-fit m-auto  text-white px-4 rounded-xl `}>{e?.vehicleReturned == 1 ? "Terminé" :"Active"}</div>
-              </td>
-              <td className="p-6 text-center  sticky -right-4  bg-opacity-70 backdrop-blur-lg bg-white  ">
-                  <div className="w-full px-4  rounded-xl flex justify-end items-center gap-2 ">
-                  <EyeIcon className="size-8 min-w-8 p-1 hover:bg-neutral-100 rounded-full  cursor-pointer"/>
-                  {e?.statut != "Payé" && <button onClick={()=>sendWatshappRappelMessage(e)} className="size-8 min-w-8 p-[6px] hover:bg-neutral-100 rounded-full  cursor-pointer" aria-label="Chat on WhatsApp"> <img alt="Chat on WhatsApp" src={whatsappIcon} /></button>}
-                  <EllipsisVerticalIcon onClick={()=>setOpenActions({contrat:e?.contratId,state:!openActions.state})}  className="size-8 min-w-8 p-1 relativee hover:bg-neutral-100 rounded-full  cursor-pointer"/>
-                  
-                  </div>
-              </td>
-              <div style={{zIndex:999}} className={`min-w-16 border rounded-lg shadow-lg border-neutral-300  bg-white h-auto absolute right-0 top-[${70*(index+1)}px]  ${(contrats.length -index < 3) ? `bottom-[90px]` : "mt-20"} ${openActions.state && openActions.contrat == e?.contratId ? "" : "hidden"}  `}>
-                    <div onClick={()=>setIsPopUpOpen(true)} className={`flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer ${e.statut == "Terminé" && "hidden"} `}>
-                      <CalendarDateRangeIcon id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
-                      <div>Prolonger </div>
-                    </div>
-                    <div className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
-                      <ArrowUturnLeftIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
-                      <div>Retourner</div>
-                    </div>
-                    <div className="flex gap-2 items-center p-1 m-1 pr-2 hover:bg-neutral-100  rounded-md cursor-pointer">
-                      <CurrencyDollarIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1  rounded-md  "/>
-                      <div>Paiement</div>
-                    </div>
-                    <div className="flex gap-2 items-center p-1 m-1 cursor-pointer pr-2 hover:bg-red-600 bg-red-600 text-white  rounded-md">
-                      <TrashIcon onClick={()=>alert("hi guys")} id="trash"  className="size-8 min-w-8 p-1 cursor-pointer  rounded-md  "/>
-                      <div>Supprimer</div>
-                    </div>
-                  </div>
-            </tr>
-          )) : <div className="text-center flex items-center justify-center w-full absolute my-2 p-6 rounded-md bg-red-300">Nothing to show</div>}
-        </tbody>
-        
-      </table>
-      
+        <DataTable columns={columns} data={contrats} />
       </div>
     </div>
   )

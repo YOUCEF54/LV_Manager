@@ -78,9 +78,9 @@ export default function FindVehicle() {
         <button className="px-3 p-1 rounded-lg bg-gray-200 my-2 border border-gray-500 w-full">Filtrer</button>
 
     </div>
-    <div className="gridlg:grid-cols-2 flex gap-2">
+    <div className="gridlg:grid-cols-2 h-fit flex gap-2">
       {vehicles?.map((e,index)=>(
- <div key={index} className="flex h-1/2 max-sm:flex-col items-center rounded-xl bg-white overflow-clip border shadow-md border-gray-300">
+ <div key={index} className="flex  max-sm:flex-col items-center rounded-xl bg-white overflow-clip border shadow-md border-gray-300">
  <div className="p-2 min-w-36 relative max-sm:w-full border-dashed h-full flex items-center m-auto  sm:border-r-2 max-sm:border-b-2 ">
      <div className="px-2 py-1  bottom-2 right-2 left-2 text-white text-center rounded-md bg-gray-800  absolute min-w-fit">{e?.matricule}</div>
      <img className=" m-auto  object-cover max-w-[30rem] w-full " src={e?.image_url}/>

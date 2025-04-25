@@ -1,4 +1,4 @@
-import { ArchiveBoxIcon, BanknotesIcon, CalendarDateRangeIcon, ChartBarIcon, Cog6ToothIcon, DocumentIcon, DocumentTextIcon, GlobeAltIcon, PaperClipIcon, PencilSquareIcon, UsersIcon } from "@heroicons/react/16/solid";
+import { ArchiveBoxIcon, BanknotesIcon, CalendarDateRangeIcon, ChartBarIcon, ChevronUpIcon, Cog6ToothIcon, DocumentIcon, DocumentTextIcon, GlobeAltIcon, PaperClipIcon, PencilSquareIcon, UsersIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState } from "react";
 import { Bars3BottomLeftIcon, BellIcon, ChevronDownIcon, ChevronLeftIcon, PlusIcon, UserIcon } from "@heroicons/react/16/solid";
 
@@ -9,6 +9,7 @@ import Chat from "../Chat";
 // eslint-disable-next-line react/prop-types
 export default function Sidebar({children}) {
 const [isToggle,setToggle] = useState(true)
+const [isToggleB,setToggleB] = useState(false)
 const [dropAjout,setDropAjout] = useState(false)
 const [isDropProfile,setDropProfile] = useState(false)
 const [isDown,setisDown] = useState(false)
@@ -84,12 +85,12 @@ useEffect(() => {
       </div>
     <aside
       className={`flex ease-in-out overflow-y-auto  flex-col max-sm:absolute max-sm:z-50 max-sm:w-full max-sm:inset-0 ${
-        !isHidden && "hidden"
+        isHidden && "hidden"
       } duration-300 ${
-        !isToggle ? "w-0" : "w-[20rem] min-w-[15rem]"
+        isToggle ? "w-0" : "w-[20rem] min-w-[15rem]"
       } bg-white p-4`}
       >
-      <div className="text-lg font-bold text-neutral-600 max-sm:flex items-center justify-between">
+      <div className="text-lg font-bold fixedbg-whitez-40inset-x-0top-0drop-shadow-smp-[1.36rem]  text-neutral-600 max-sm:flex items-center justify-between">
         <div><span className="text-blue-600">Lv</span>Manager</div>
         <button onClick={()=>setToggle(!isToggle)} className="sm:hidden" ><PlusIcon className="size-8 rotate-45 mx-2 bg-neutral-50  rounded-full p-1 "/></button>
       </div>
@@ -98,7 +99,7 @@ useEffect(() => {
 
     <ul className="flex flex-col gap-2 whitespace-nowrap">
       {menu?.map((e,index)=>(
-        e.link == "/siteWeb" ?
+        e.name == "Site web"?
         <div key={index} className={`${isDown ?"bg-red-50 p-2 border rounded-lg":""} duration-100`}>
             <button onClick={()=>setisDown(!isDown)} className={`${isDown ? "bg-blue-600 mb-2 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center justify-between`}>
               <div className="flex items-center gap-2"><GlobeAltIcon className="size-4"/>Site web</div>
@@ -127,13 +128,26 @@ useEffect(() => {
             </ul>
           </div>
         :
+      <li key={index} className="relative ">
+        
+          <Link
+            to={e?.link}
+            // onClick={() => setToggle(false)}
+            className={`whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center justify-between gap-2 ${
+              e.isCurrent ? "bg-blue-600 before:absolute before:top-0 before:h-10 before:w-3.5 text-white before:bg-blue-600 before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"
+            }`}
+          >
+            <div className="flex items-center  gap-2">
+              <e.icon className="size-4" />
+              {e.name}
+            </div>
 
-          <li key={index} className="relative">
-           <Link to={e?.link} onClick={()=>setToggle(false)} className={`${e.isCurrent ? "bg-blue-600 before:absolute before:w-3.5  text-white before:bg-blue-600 before:h-full before:-left-6 before:rounded-r-md " : " hover:bg-neutral-100"}  whitespace-nowrap p-2 px-3 rounded-md w-full flex items-center gap-2`}>
-           <e.icon className="size-4"/>
-           {e.name}
-           </Link>
+            <div />
+          </Link>
+           
+         
           </li>
+
       ))}
 
 
