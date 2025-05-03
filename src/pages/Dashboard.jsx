@@ -10,7 +10,7 @@ import TopVehicules from "../components/cards/TopVehiculesCard";
 export default function Dashboard() {
 
     return (
-      <div>
+      <div className="">
           <h1 className="text-3xl font-semibold text-neutral-700">Dashboard</h1>
           <div className="mt-7 mb-3 grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
             <TotalClients />

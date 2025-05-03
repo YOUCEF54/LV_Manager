@@ -49,7 +49,7 @@ export default function Reservations() {
       setIsLoading(false);
       setAllContrats(response.data); // Store fetched data
       setReservations(response.data); // Initially display all data
-      console.log("Résérvations: ",response.data); 
+      console.log("Résérvations: ",response); 
       setHasFetched(true);
     } catch (error) {
       console.error(error);
@@ -68,72 +68,13 @@ export default function Reservations() {
       return;
     }
   
-    let filteredContrats = allContrats;
   
-    switch (searchQuery.from) {
-      case "V": // Filter by vehicle
-        filteredContrats = allContrats.filter((e) =>
-          e?.libelle?.toLowerCase().includes(searchQuery.value.toLowerCase())
-        );
-        break;
-      case "C": // Filter by client
-        filteredContrats = allContrats.filter((e) =>
-          e?.nomClient?.toLowerCase().includes(searchQuery.value.toLowerCase())
-        );
-        break;
-      case "G": // General search (all attributes)
-        filteredContrats = allContrats.filter((e) =>
-            Object.values(e).some(value =>
-                String(value)?.toLowerCase().includes(searchQuery.value.toLowerCase())
-            )
-        );
-        break;
-      default:
-        break;
-    }
-  
-    setReservations(filteredContrats);
   }, [searchQuery, allContrats]);
   
   // Update searchQuery on filter change
   function handleSearch(from, value) {
     setSearchQuery({ from, value });
   }
-
-  function sendWatshappRappelMessage(e) {
-    const contrat = reservations.find(reservation => reservation.reservationId === e.reservationId);
-
-    if (!contrat) {
-        console.error("Contract not found!");
-        console.error(contrat);
-        return;
-    }
-
-    let Reste = contrat.montantAPayer - contrat.avance;
-    const websiteLink = window.location.protocol + '//' + window.location.hostname;
-    let whatsappMessage =
-        `Bonjour ${contrat.nomClient}, Ceci est un rappel pour payer le montant dû (${Reste} DH)
-          Détails du contrat:
-          Date de début: ${contrat.dateDep}.
-          Date de retour: ${contrat.dateArriv}.
-          Total à payer: ${contrat.montantAPayer} DH.
-          Montant fourni: ${contrat.avance} DH.
-          Reste: ${Reste} DH.
-
-          Pour plus de détails, veuillez visiter ce lien et saisir votre CIN:
-          ${websiteLink}/admin/clientPrintContrat.html?contratId=${contrat.contratsId}
-          Nous vous remercions de votre coopération et nous restons à votre disposition pour toute assistance supplémentaire. N'hésitez pas à nous contacter en cas de questions ou de préoccupations.
-
-          Cordialement`;
-
-          const whatsappUrl = `https://wa.me/${contrat.tel.replace(/^\d/, '+212')}?text=${encodeURIComponent(whatsappMessage)}`;
-          window.open(whatsappUrl, '_blank');
-      }
-
-          
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
-  const [openActions, setOpenActions] = useState({contrat : null,state : false})
-          
 
 
           
@@ -288,16 +229,11 @@ const columns = [
 
           
   return (
-    <div className="pr-2 ">
+    <div className="">
       <NewContract/>
       <div className="max-sm:flex  top-0 grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Résérvations</h1>
-        <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
-          <button  className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
-          <button onClick={()=>dispatch(setIsOpenNewContrat(true))} className="flex items-center max-sm:gap-2 max-sm:justify-center whitespace-nowrap max-sm:p-2 pl-1 max-sm:w-full bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
-            <PlusIcon className="size-5"/>
-            Nouveau contrat</button>
-        </div>
+     
       
       </div>
         

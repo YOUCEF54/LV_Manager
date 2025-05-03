@@ -370,7 +370,7 @@ const columns = [
           // ];
           
           return (
-            <div className="pr-2 ">
+            <div className=" w-full">
       <Prolonger/>
       {/* <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}> */}
 
@@ -392,7 +392,7 @@ const columns = [
         </div>
        
       </div>
-            <div className="felx flex-col bg-gray-100 pt-10 mb-4 top-9 overflow-y-visible  z-50 inset-0 mt-0">
+            <div className="felx flex-col  pt-10 mb-4 top-9 overflow-y-visible  z-50 inset-0 mt-0">
               <div className="flex gap-6 flex-wrap w-full justify-between pb-2  whitespace-nowrap ">
                 <span className="font-semibold">Filtré par</span>
                 <div className="flex  items-center gap-2 z-50 ">
@@ -419,14 +419,14 @@ const columns = [
                 {/* <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}
                   <ChevronDownIcon className="size-5"/>
                 </button> */}
-                <input  
+                <input 
                   onChange={(e)=>{handleSearch("G",e.target.value)}}              
                   className="outline-none  z-500  duration-100 ease-in-out bg-white p-1 w-full px-3 rounded-md border border-neutral-300 focus:border-blue-600 "
                   type="text" placeholder="Rechercher par référence, véhicule, client..."/>
                 </div>
           </div>
-        <DataTable columns={columns} data={contrats} />
-      </div>
+          <DataTable columns={columns} data={contrats} pageSize={10} />
+        </div>
     </div>
   )
 }

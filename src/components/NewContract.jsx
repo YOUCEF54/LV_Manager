@@ -68,8 +68,8 @@ const DropDown = ({ libelle, dataset = [], onChange }) => {
 export default function NewContract() {
 
     const isOpen = useSelector(state => state?.newContrat?.value?.isOpen)
-    console.log("what is going on!!:",isOpen)
     const dispatch = useDispatch()
+    console.log("what is going on!!:",isOpen)
     const [isOpenNewLocalisation,setIsOpenNewLocalisaion] = useState(false)
     const [newContractData,setNewContractData] = useState([])
     const [newLocalisation,setNewLocalisation] = useState({"libelleLoc":null})
