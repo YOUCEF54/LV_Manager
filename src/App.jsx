@@ -19,6 +19,8 @@ import Payments from './pages/Paiements';
 import Charges from './pages/Charges';
 import CashRegister from './pages/Caisse';
 import Contacts from './pages/Contacts';
+import Utilisateurs from './pages/Utilisateurs';
+import Settings from './pages/Settings';
 
 // Define a simple NotFound component
 const NotFound = () => (
@@ -81,6 +83,8 @@ function App() {
             <Route path="/admin/charges" element={<Charges />} />
             <Route path="/admin/caisse" element={<CashRegister />} />
             <Route path="/admin/contacts" element={<Contacts />} />
+            <Route path="/admin/utilisateurs" element={<Utilisateurs />} />
+            <Route path="/admin/parametre" element={<Settings />} />
             <Route path="/admin/test" element={<Test />} />
             <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
           </Route>
