@@ -14,90 +14,64 @@ import {
 import { Button } from "../components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import PropTypes from 'prop-types';
+import { DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@radix-ui/react-dropdown-menu";
 
-const DropDown = ({ libelle, dataset }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  const handleOutsideClick = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, []);
-
+const DropDown = ({ libelle, dataset, topMsg, setState, state }) => {
   return (
-    <div ref={dropdownRef} className="relative w-fit whitespace-nowrap">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-center items-center gap-1 text-sm text-neutral-500 border p-2 py-1 rounded-[5px] border-neutral-400 bg-neutral-50"
-      >
-        <div className="">
-          {libelle}
-        </div>
-        <ChevronDownIcon className="size-4" />
-      </button>
-      <ul
-        className={`absolute top-8 right-0 text-sm w-fit min-w-full rounded-lg shadow-md border bg-white p-1 ${
-          isOpen ? "block" : "hidden"
-        }`}
-      >
-        {dataset?.map((e, index) => (
-          <li
-            key={index}
-            className="p-2 py-1 cursor-pointer rounded-md hover:bg-gray-100"
-          >
-            {e}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">{libelle}</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>{topMsg}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={state} onValueChange={setState}>
+          {dataset?.map((e, index) => (
+            <DropdownMenuRadioItem key={index} value={e}>{e}</DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
 DropDown.propTypes = {
   libelle: PropTypes.string.isRequired,
   dataset: PropTypes.array,
+  topMsg: PropTypes.string,
+  setState: PropTypes.func.isRequired,
+  state: PropTypes.string.isRequired,
 };
 
-export default function Vehicules() {
+export default function Client() {
   const [isLoading, setIsLoading] = useState(false);
-  const [vehicules, setVehicules] = useState([]);
+  const [clients, setClients] = useState([]);
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
     Authorization: `Bearer 2|np6CGgKypqpac9qR6yWI58cwEKsZwqrBnFiKcTere9286d94`,
   };
 
-  async function fetchVehicules() {
+  async function fetchClients() {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `https://beta.lvmanager.net/tenants/vehicles`,
+        `https://beta.lvmanager.net/tenants/clients`,
         { headers }
       );
       // Transform the data to match the table structure
-      const transformedData = response.data.map(vehicle => ({
-        id: vehicle.matricule,
-        imgPrinc: vehicle.imgPrinc || null, // Add default image if needed
-        libelle: vehicle.libelle || 'N/A',
-        libelleCat: vehicle.libelleCat || 'N/A',
-        libelleMarque: vehicle.libelleMarque || 'N/A',
-        modele: vehicle.matricule || 'N/A', // Fixed: Changed from 'matricule' to 'modele'
-        matricule: vehicle.matricule || 'N/A',
-        montantAPayer: vehicle.matricule || 0,
-        status: vehicle.status || 'N/A',
-        transmission: vehicle.matricule || 'N/A' // Added transmission field
+      const transformedData = response.data.map(client => ({
+        id: client.id || 'N/A',
+        avatar: client.avatar || null,
+        name: client.name || 'N/A',
+        email: client.email || 'N/A',
+        phone: client.phone || 'N/A',
+        status: client.status || 'N/A',
+        balance: client.balance || 0,
       }));
-      setVehicules(transformedData);
+      setClients(transformedData);
       console.log("Fetched data: ", response.data);
-      console.log("Tranformed data: ",transformedData);
+      console.log("Transformed data: ", transformedData);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -106,12 +80,12 @@ export default function Vehicules() {
   }
 
   useEffect(() => {
-    fetchVehicules();
+    fetchClients();
   }, []);
 
   const columns = [
     {
-      accessorKey: "imgPrinc",
+      accessorKey: "avatar",
       header: ({ column }) => (
         <Button
           variant="ghost"
@@ -123,88 +97,64 @@ export default function Vehicules() {
       ),
       cell: ({ row }) => (
         <img 
-          src={row.getValue('imgPrinc')} 
-          alt="Vehicle" 
+          src={row.getValue('avatar')} 
+          alt="Client" 
           className="h-10 w-10 rounded-full mx-auto object-cover"
           onError={(e) => {
-            e.target.src = 'https://placehold.co/600x400'; // Fallback image
+            e.target.src = 'https://placehold.co/600x400';
           }}
         />
       ),
     },
     {
-      accessorKey: "libelle",
+      accessorKey: "name",
       header: ({ column }) => (
         <Button
           variant="ghost"
           className="flex items-center gap-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Libelle <ArrowUpDown />
+          Nom <ArrowUpDown />
         </Button>
       ),
     },
     {
-      accessorKey: "libelleCat",
+      accessorKey: "email",
       header: ({ column }) => (
         <Button
           variant="ghost"
           className="flex items-center gap-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Catégorie <ArrowUpDown />
+          Email <ArrowUpDown />
         </Button>
       ),
     },
     {
-      accessorKey: "libelleMarque",
+      accessorKey: "phone",
       header: ({ column }) => (
         <Button
           variant="ghost"
           className="flex items-center gap-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Marque <ArrowUpDown />
+          Téléphone <ArrowUpDown />
         </Button>
       ),
     },
     {
-      accessorKey: "modele",
+      accessorKey: "balance",
       header: ({ column }) => (
         <Button
           variant="ghost"
           className="flex items-center gap-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Modèle <ArrowUpDown />
-        </Button>
-      ),
-    },
-    {
-      accessorKey: "matricule",
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          N° Matricule <ArrowUpDown />
-        </Button>
-      ),
-    },
-    {
-      accessorKey: "montantAPayer",
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Paiements <ArrowUpDown />
+          Solde <ArrowUpDown />
         </Button>
       ),
       cell: ({ row }) => (
-        <span>{row.getValue('montantAPayer')} €</span>
+        <span>{row.getValue('balance')} €</span>
       ),
     },
     {
@@ -215,27 +165,14 @@ export default function Vehicules() {
           className="flex items-center gap-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {}
           Statut <ArrowUpDown />
         </Button>
       ),
       cell: ({ row }) => (
         <div className="flex items-center gap-2">
-          <div className={`size-2 ${row.getValue("status") == "Louée" ? "bg-red-500": row.getValue("status") == "Disponible" ?" bg-green-500 ":" bg-yellow-500"}  rounded-full`}/>
+          <div className={`size-2 ${row.getValue("status") === "Actif" ? "bg-green-500" : row.getValue("status") === "Inactif" ? "bg-red-500" : "bg-yellow-500"} rounded-full`}/>
           {row.getValue('status')}
         </div>
-      ),
-    },
-    {
-      accessorKey: "transmission",
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Transmission <ArrowUpDown />
-        </Button>
       ),
     },
     {
@@ -251,14 +188,14 @@ export default function Vehicules() {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem onClick={() => alert(`Editing ${row.original.id}`)}>
-              Edit
+              Modifier
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => alert(`Deleting ${row.original.id}`)}>
-              Delete
+              Supprimer
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => alert(`Viewing details of ${row.original.id}`)}>
-              View Details
+              Voir Détails
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -266,41 +203,59 @@ export default function Vehicules() {
     },
   ];
 
+  const [state, setState] = useState("Actif");
+
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <div className="w-full h-full flex items-center justify-center">
+          <Loading className="animate-spin" />
+        </div>
       ) : (
         <>
           <div className="flex justify-between">
-            <h1 className="text-xl font-semibold">#Véhicules</h1>
+            <h1 className="text-xl font-semibold">#Clients</h1>
             <div className="flex items-center gap-2">
-              <DropDown libelle="Gérer les..." dataset={["1", "2"]} />
-              <button className="p-2 text-sm py-1 rounded-md bg-blue-500 text-white">
-                Nouveau Véhicule
+              <button className="p-2 py-1 rounded-md bg-black text-white">
+                Liste noire
+              </button>
+              <button className="p-2 py-1 rounded-md bg-blue-500 text-white">
+                Nouveau client
               </button>
             </div>
           </div>
           <div className="flex items-center gap-2 my-4">
-            <DropDown libelle="Par catégories" dataset={[]} />
-            <DropDown libelle="Par marques" dataset={[]} />
-            <DropDown libelle="Par statuts" dataset={[]} />
+            <DropDown 
+              libelle="Par statuts" 
+              topMsg="Sélectionner un statut" 
+              state={state} 
+              setState={setState} 
+              dataset={["Actif", "Inactif", "Suspendu"]} 
+            />
           </div>
-          <div className="flex justify-between items-center my-2">
-            <div className="flex items-center gap-1 z-30">
-              show <DropDown libelle="10" dataset={[10, 20, 30, 50]} /> entries
+          <div className="flex justify-between z-30 items-center my-2">
+            <div className="flex items-center gap-1">
+              Afficher{" "}
+              <DropDown 
+                libelle="10" 
+                topMsg="Nombre d'entrées" 
+                dataset={[10, 20, 30, 50]} 
+                state={state} 
+                setState={setState} 
+              />{" "}
+              entrées
             </div>
             <div>
-              search
+              Rechercher
               <input
                 type="text"
-                placeholder="type something..."
+                placeholder="Tapez quelque chose..."
                 className="p-2 ml-2 border-neutral-400 outline-none border rounded-md"
               />
             </div>
           </div>
           <div className="bg-white rounded-md shadow-md p-4">
-            <DataTable columns={columns} data={vehicules} pageSize={10} />
+            <DataTable columns={columns} data={clients} pageSize={10} />
           </div>
         </>
       )}
