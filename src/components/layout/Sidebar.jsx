@@ -15,9 +15,9 @@ function SidebarContent({ children, menu }) {
 
   return (
     <>
-      <Sidebar  className="z-20" collapsible="icon">
+      <Sidebar  className="z-30  " collapsible="icon">
         <SidebarHeader>
-          <div className="my-3">
+          <div className="my-3 ">
             {open ? (
               <span className="text-lg  font-bold text-foreground">
                 <span className="text-blue-500">Lv</span>Manager
@@ -27,12 +27,12 @@ function SidebarContent({ children, menu }) {
           </div>
         </SidebarHeader>
 
-        <SidebarMenu className="p-2">
+        <SidebarMenu className="p-2 ">
           {menu?.map((item, index) =>
             item.subItems ? (
               <SidebarMenuItem key={index}>
                 <SidebarMenuButton asChild>
-                  <div className={`${item.isCurrent ? "bg-accent  text-accent-foreground" : ""} hover:bg-blue-600 hover:text-black`}>
+                  <div className={`${item.isCurrent ? "bg-accent  text-accent-foreground" : ""} hover:bg-transparent`}>
                     <item.icon className="size-5 " />
                     <span>{item.name} </span>
                   </div>
@@ -65,11 +65,11 @@ function SidebarContent({ children, menu }) {
       </Sidebar>
 
       <SidebarInset>
-        <div style={{ zIndex: 50 }} className="fixed bottom-16 right-4">
+        <div style={{ zIndex: 50 }} className="fixed bottom-16 right-4 ">
           <Chat />
         </div>
 
-        <header className="flex items-center shadow-sm sticky top-0 z-10 justify-between border-b bg-background p-4">
+        <header className="flex items-center shadow-sm sticky top-0 z-20 justify-between border-b bg-background p-4">
           <div className="flex items-center gap-2 ">
             <SidebarTrigger />
             <span className="text-lg font-semibold">LvManager</span>
@@ -128,7 +128,7 @@ function SidebarContent({ children, menu }) {
         </header>
 
         <main
-          className={`flex-grow p-6 bg-gray-50 overflow-y-auto  w-full transition-all duration-300`}
+          className={`flex-grow  bg-gray-50 overflow-y-auto w-full transition-all duration-300`}
         >
           {children}
         </main>

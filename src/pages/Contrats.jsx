@@ -370,7 +370,7 @@ const columns = [
           // ];
           
           return (
-            <div className=" w-full">
+            <div className=" w-full p-6">
       <Prolonger/>
       {/* <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}> */}
 
@@ -395,7 +395,7 @@ const columns = [
             <div className="felx flex-col  pt-10 mb-4 top-9 overflow-y-visible  z-50 inset-0 mt-0">
               <div className="flex gap-6 flex-wrap w-full justify-between pb-2  whitespace-nowrap ">
                 <span className="font-semibold">Filtré par</span>
-                <div className="flex  items-center gap-2 z-50 ">
+                <div className="flex  items-center gap-2 z-10 ">
                     <DropDown libelle="Par véhicules" dataset = {[
                       <input onChange={(e)=>{handleSearch("V", e.target.value)}} type="text" placeholder="Rechercher ..."  className="bg-transparent  max-w-32 outline-none" key={1}/>,
                       vehicles]}/>
@@ -413,7 +413,7 @@ const columns = [
                 </div>
               </div>
             </div>
-      <div className="overflow-x-auto mb-32  min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+      <div className="overflow-x-auto mb-32 border min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
             <div className=" mb-2 flex justify-start ">
               <div className="flex whitespace-nowrap gap-2 mb-2  w-1/3">
                 {/* <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}

@@ -70,7 +70,7 @@ const DataTable = ({ columns, data, pageSize  }) => {
           className="max-w-sm"
         />
       </div> */}
-      <div className="rounded-md border">
+      <div className="rounded-md border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
