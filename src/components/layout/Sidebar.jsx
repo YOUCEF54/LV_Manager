@@ -15,7 +15,7 @@ function SidebarContent({ children, menu }) {
 
   return (
     <>
-      <Sidebar  collapsible="icon">
+      <Sidebar  className="z-20" collapsible="icon">
         <SidebarHeader>
           <div className="my-3">
             {open ? (
@@ -69,17 +69,17 @@ function SidebarContent({ children, menu }) {
           <Chat />
         </div>
 
-        <header className="flex items-center  justify-between border-b bg-background p-4">
-          <div className="flex items-center gap-2">
+        <header className="flex items-center shadow-sm sticky top-0 z-10 justify-between border-b bg-background p-4">
+          <div className="flex items-center gap-2 ">
             <SidebarTrigger />
             <span className="text-lg font-semibold">LvManager</span>
           </div>
           <div className="flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="flex items-center p-3 gap-2">
+                <Button className="flex items-center p-3  gap-2">
                   <PlusIcon className="w-4 h-4" />
-                  <span className="max-sm:hidden">Ajouté</span>
+                  <span className="max-sm:hidden mr-2">Ajouté</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -128,7 +128,7 @@ function SidebarContent({ children, menu }) {
         </header>
 
         <main
-          className={`flex-grow p-6 bg-background overflow-y-auto  w-full transition-all duration-300`}
+          className={`flex-grow p-6 bg-gray-50 overflow-y-auto  w-full transition-all duration-300`}
         >
           {children}
         </main>

@@ -269,7 +269,9 @@ export default function Vehicules() {
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <div className="w-full h-full flex items-center justify-center">
+        <Loading className="animate-spin" />
+      </div>
       ) : (
         <>
           <div className="flex justify-between">
@@ -287,7 +289,7 @@ export default function Vehicules() {
             <DropDown libelle="Par statuts" dataset={[]} />
           </div>
           <div className="flex justify-between items-center my-2">
-            <div className="flex items-center gap-1 z-30">
+            <div className="flex items-center gap-1 ">
               show <DropDown libelle="10" dataset={[10, 20, 30, 50]} /> entries
             </div>
             <div>

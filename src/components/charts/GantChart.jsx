@@ -140,7 +140,7 @@ export default function GanttChart() {
   }, []);
 
   return (
-    <div className="mt-2 w-full  overflow-x-auto rounded-lg shadow bg-white p-4 md:p-6">
+    <div className="mt-2 w-full  overflow-x-auto rounded-2xl shadow-md border-[0.2px] border-gray-200 bg-white p-4 md:p-6">
       <div className="flex flex-row justify-between items-center py-3">
         <h3 className="text-2xl font-bold">Utilisation du Flott</h3>
         <div ref={dropdownRef} className="relative whitespace-nowrap">

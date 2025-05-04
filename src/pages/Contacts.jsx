@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../../public/Loading";
+import DataTable from "../components/DataTable";
 import { Button } from "../components/ui/button";
-import { Edit, Trash } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../components/ui/table";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
 
 export default function Contacts() {
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +77,96 @@ export default function Contacts() {
     // Add logic to delete the contact
   };
 
+  const columns = [
+    {
+      accessorKey: "id",
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          # <ArrowUpDown />
+        </Button>
+      ),
+    },
+    {
+      accessorKey: "fullName",
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Nom Complet <ArrowUpDown />
+        </Button>
+      ),
+    },
+    {
+      accessorKey: "phone",
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Téléphone <ArrowUpDown />
+        </Button>
+      ),
+    },
+    {
+      accessorKey: "address",
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Adresse <ArrowUpDown />
+        </Button>
+      ),
+    },
+    {
+      accessorKey: "createdBy",
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Crée par <ArrowUpDown />
+        </Button>
+      ),
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => handleEdit(row.original.id)}>
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+              Delete
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+              message
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+              call
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ];
+
   return (
     <>
       {isLoading ? (
@@ -85,51 +174,11 @@ export default function Contacts() {
           <Loading className="animate-spin" />
         </div>
       ) : (
-        <div className="container mx-auto ">
+        <div className="container mx-auto p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">#Contacts</h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 bg-white p-4 rounded-lg shadow-md">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>#</TableHead>
-                    <TableHead>Nom Complet</TableHead>
-                    <TableHead>Téléphone</TableHead>
-                    <TableHead>Adresse</TableHead>
-                    <TableHead>Crée par</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {contacts.map((contact) => (
-                    <TableRow key={contact.id} className="hover:bg-gray-50 transition-colors">
-                      <TableCell>{contact.id}</TableCell>
-                      <TableCell>{contact.fullName}</TableCell>
-                      <TableCell>{contact.phone}</TableCell>
-                      <TableCell>{contact.address}</TableCell>
-                      <TableCell>{contact.createdBy}</TableCell>
-                      <TableCell>
-                        <div className="flex space-x-2">
-                          <Button
-                            variant="ghost"
-                            className="h-8 w-8 p-0 text-blue-500 hover:text-blue-700 transition-colors"
-                            onClick={() => handleEdit(contact.id)}
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            className="h-8 w-8 p-0 text-red-500 hover:text-red-700 transition-colors"
-                            onClick={() => handleDelete(contact.id)}
-                          >
-                            <Trash className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <DataTable columns={columns} data={contacts} pageSize={10} />
             </div>
             <div className="bg-white p-4 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">Ajouter un contact</h2>

@@ -3,7 +3,7 @@ import CarIcon from "../../../public/CarIcon";
 
 export function TotalClients() {
   return (
-    <div className="flex  justify-between p-5 gap-5 bg-white rounded-2xl shadow">
+    <div className="flex  justify-between p-5 gap-5 bg-white rounded-2xl border-[0.2px] border-gray-200 shadow">
       <div className="flex-col">
         <div className="text-neutral-600 mb-4">Total clients</div>
         <span className="text-2xl text-neutral-800 font-semibold">22</span>
@@ -15,7 +15,7 @@ export function TotalClients() {
 
 export function Contracts() {
   return (
-    <div className="flex text-nowrap justify-between p-5 gap-5 bg-white rounded-2xl shadow">
+    <div className="flex text-nowrap justify-between p-5 gap-5 bg-white rounded-2xl border-[0.2px] border-gray-200 shadow">
       <div className="flex-col">
         <div className="text-neutral-600 mb-4">Contracts</div>
         <span className="text-2xl text-neutral-800 font-semibold">15</span>
@@ -27,7 +27,7 @@ export function Contracts() {
 
 export function Vehicules() {
   return (
-    <div className="flex text-nowrap justify-between p-5 gap-5 bg-white rounded-2xl shadow">
+    <div className="flex text-nowrap justify-between p-5 gap-5 bg-white rounded-2xl border-[0.2px] border-gray-200 shadow">
       <div className="flex-col">
         <div className="text-neutral-600 mb-4">Vehicules</div>
         <span className="text-2xl text-neutral-800 font-semibold">8</span>
@@ -39,7 +39,7 @@ export function Vehicules() {
 
 export function Reservations() {
   return (
-    <div className="flex  justify-between p-5 gap-5 bg-white rounded-2xl shadow">
+    <div className="flex  justify-between p-5 gap-5 bg-white rounded-2xl border-[0.2px] border-gray-200 shadow">
       <div className="flex-col">
         <div className="text-neutral-600 mb-4">Reservations</div>
         <span className="text-2xl text-neutral-800 font-semibold">30</span>
