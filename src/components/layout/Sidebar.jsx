@@ -77,9 +77,9 @@ function SidebarContent({ children, menu }) {
           <div className="flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="flex items-center gap-2">
+                <Button className="flex items-center p-3 gap-2">
                   <PlusIcon className="w-4 h-4" />
-                  Ajouté
+                  <span className="max-sm:hidden">Ajouté</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
