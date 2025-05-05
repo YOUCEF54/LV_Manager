@@ -237,7 +237,7 @@ const columns = [
       
       </div>
         
-      <div className="overflow-x-auto mb-32  min-h-[25rem] mt-5  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+      <div className="overflow-x-auto mb-32  border-[0.2px] border-gray-200 min-h-[25rem] mt-5  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
         <div className=" mb-2 flex justify-start ">
           <div className="flex whitespace-nowrap gap-2 mb-2  w-1/3">
             

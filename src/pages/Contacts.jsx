@@ -174,13 +174,13 @@ export default function Contacts() {
           <Loading className="animate-spin" />
         </div>
       ) : (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto ">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">#Contacts</h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 bg-white p-4 rounded-lg shadow-md">
+            <div className="lg:col-span-2 bg-white p-4 rounded-xl  border-[0.2px] border-gray-200 shadow-md">
               <DataTable columns={columns} data={contacts} pageSize={10} />
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-md">
+            <div className="bg-white p-4 rounded-xl  border-[0.2px] border-gray-200 shadow-md">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">Ajouter un contact</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>

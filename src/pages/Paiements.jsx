@@ -131,7 +131,7 @@ export default function Payments() {
         <>
           <div className="mb-4">
             <h1 className="text-xl font-semibold mb-4">#Paiements</h1>
-            <div className="bg-gray-100 p-4 border border-gray-400 rounded-md shadow-md ">
+            <div className=" p-4  border-[0.2px] border-gray-200 bg-background rounded-xl shadow-md ">
               <h2 className="text-lg font-medium mb-4">Ajouter une Paiement</h2>
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -142,7 +142,7 @@ export default function Payments() {
                     onValueChange={(value) => handleInputChange("contract", value)}
                     value={formData.contract}
                   >
-                    <SelectTrigger className="w-full bg-gray-200 border border-gray-600 ">
+                    <SelectTrigger className="w-full bg-gray-50 outline-none border border-gray-300 ">
                       <SelectValue placeholder="Sélectionner un contrat" />
                     </SelectTrigger>
                     <SelectContent>
@@ -159,7 +159,7 @@ export default function Payments() {
                     onValueChange={(value) => handleInputChange("paymentMethod", value)}
                     value={formData.paymentMethod}
                   >
-                    <SelectTrigger className="w-full bg-gray-200 border border-gray-600 ">
+                    <SelectTrigger className="w-full bg-gray-50 outline-none border border-gray-300 ">
                       <SelectValue placeholder="Sélectionner une méthode" />
                     </SelectTrigger>
                     <SelectContent>
@@ -177,7 +177,7 @@ export default function Payments() {
                     type="number"
                     value={formData.amount}
                     onChange={(e) => handleInputChange("amount", e.target.value)}
-                    className="w-full bg-gray-200 border border-gray-600 "
+                    className="w-full bg-gray-50 outline-none border border-gray-300 "
                     placeholder="Montant"
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function Payments() {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-full justify-start text-left font-normal bg-gray-200 border border-gray-600 ",
+                          "w-full justify-start text-left font-normal bg-gray-50 outline-none border border-gray-300 ",
                           !formData.date && "text-muted-foreground"
                         )}
                       >
@@ -214,7 +214,7 @@ export default function Payments() {
                   <Input
                     value={formData.description}
                     onChange={(e) => handleInputChange("description", e.target.value)}
-                    className="w-full bg-gray-200 border border-gray-600 "
+                    className="w-full bg-gray-50 outline-none border border-gray-300 "
                     placeholder="Description"
                   />
                 </div>
@@ -226,7 +226,7 @@ export default function Payments() {
               </form>
             </div>
           </div>
-          <div className="bg-white rounded-md shadow-md p-4">
+          <div className="bg-white rounded-xl  border-[0.2px] border-gray-200 shadow-md p-4">
             <DataTable columns={columns} data={payments} pageSize={10} />
           </div>
         </>

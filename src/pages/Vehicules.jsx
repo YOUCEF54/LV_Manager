@@ -297,11 +297,11 @@ export default function Vehicules() {
               <input
                 type="text"
                 placeholder="type something..."
-                className="p-2 ml-2 border-neutral-400 outline-none border rounded-md"
+                className="px-2 py-1 ml-2  border-[0.2px] border-gray-200 outline-none  rounded-md"
               />
             </div>
           </div>
-          <div className="bg-white rounded-md shadow-md p-4">
+          <div className="bg-white rounded-lg  border-[0.2px] border-gray-200   shadow p-4">
             <DataTable columns={columns} data={vehicules} pageSize={10} />
           </div>
         </>

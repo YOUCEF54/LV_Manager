@@ -141,14 +141,14 @@ export default function Charges() {
           <Loading className="animate-spin" />
         </div>
       ) : (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-800">#Charges</h1>
             <Button className="bg-blue-500 hover:bg-blue-600 text-white transition-colors">
               Charges Répétées
             </Button>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-xl  border-[0.2px] border-gray-200 shadow-md">
             <h2 className="text-xl font-semibold mb-6">Ajouter une Charge</h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -280,7 +280,7 @@ export default function Charges() {
               </div>
             </form>
           </div>
-          <div className="mt-6 p-6 bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="mt-6 p-4 bg-white rounded-xl  border-[0.2px] border-gray-200 shadow-md overflow-hidden">
             <DataTable
               columns={columns}
               data={charges}

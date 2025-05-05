@@ -78,9 +78,9 @@ export default function Settings() {
           <Loading className="animate-spin" />
         </div>
       ) : (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto ">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">#Paramètres</h1>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-xl  border-[0.2px] border-gray-200 shadow-md">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label className="block text-sm font-medium text-gray-700 mb-2">Société Logo</Label>

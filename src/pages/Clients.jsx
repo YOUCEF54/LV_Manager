@@ -250,11 +250,11 @@ export default function Client() {
               <input
                 type="text"
                 placeholder="Tapez quelque chose..."
-                className="p-2 ml-2 border-neutral-400 outline-none border rounded-md"
+                className="p-2 py-1 ml-2 border-neutral-400 outline-none border rounded-md"
               />
             </div>
           </div>
-          <div className="bg-white rounded-md shadow-md p-4">
+          <div className="bg-white rounded-lg  border-[0.2px] border-gray-200 shadow-md p-4">
             <DataTable columns={columns} data={clients} pageSize={10} />
           </div>
         </>

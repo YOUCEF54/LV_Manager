@@ -176,7 +176,7 @@ export default function Users() {
           <Loading className="animate-spin" />
         </div>
       ) : (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto ">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-800">#Utilisateurs</h1>
             <Button
@@ -186,7 +186,7 @@ export default function Users() {
               Nouveau Utilisateur
             </Button>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-md">
+          <div className="bg-white p-4 rounded-xl  border-[0.2px] border-gray-200 shadow-md">
             <DataTable columns={columns} data={users} pageSize={10} />
           </div>
         </div>

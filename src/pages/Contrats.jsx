@@ -370,7 +370,7 @@ const columns = [
           // ];
           
           return (
-            <div className=" w-full p-6">
+            <div className=" w-full">
       <Prolonger/>
       {/* <div onClick={()=>{setIsOpen(false)}} className={`absolute drop-shadow-lg  bg-black flex inset-0 z-400 bg-opacity-50 ${!isOpen &&" hidden"}`}> */}
 
@@ -413,7 +413,7 @@ const columns = [
                 </div>
               </div>
             </div>
-      <div className="overflow-x-auto mb-32 border min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-xl">
+      <div className="overflow-x-auto mb-32 border min-h-[25rem]  overflow-y-clip relative  bg-white shadow-md p-4 rounded-lg">
             <div className=" mb-2 flex justify-start ">
               <div className="flex whitespace-nowrap gap-2 mb-2  w-1/3">
                 {/* <button onClick={()=>setIsOpen(true)} className="p-2 rounded-lg h-full bg-blue-600 flex items-center gap-2 text-white">{searchQuery || "search by"}

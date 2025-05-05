@@ -128,7 +128,7 @@ function SidebarContent({ children, menu }) {
         </header>
 
         <main
-          className={`flex-grow  bg-gray-50 overflow-y-auto w-full transition-all duration-300`}
+          className={`flex-grow p-6 bg-gray-50 overflow-y-auto w-full transition-all duration-300`}
         >
           {children}
         </main>
