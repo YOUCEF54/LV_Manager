@@ -18,6 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
+import { Link } from "react-router-dom";
 
 const DropDown = ({libelle, dataset}) =>{
       const [isOpen, setIsOpen] = useState(false);
@@ -385,7 +386,7 @@ const columns = [
       <div className="max-sm:flex  top-0 grid grid-cols-2 max-sm:flex-col gap-2 items-center max-sm:items-start justify-between">
         <h1 className="text-3xl  font-semibold text-neutral-700">Contrats</h1>
         <div className="flex max-sm:w-full  justify-end duration-100 max-sm:mt-6  items-center gap-2 whitespace-nowrap">
-          <button  className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button>
+          <Link to={"/admin/factures"}><button  className="bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 max-sm:p-2 max-sm:w-full text-white">Factures</button></Link>
           <button onClick={()=>dispatch(setIsOpenNewContrat(true))} className="flex items-center max-sm:gap-2 max-sm:justify-center whitespace-nowrap max-sm:p-2 pl-1 max-sm:w-full bg-blue-600 hover:bg-blue-700 rounded-md p-2 py-1 text-white">
             <PlusIcon className="size-5"/>
             Nouveau contrat</button>

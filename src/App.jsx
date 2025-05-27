@@ -21,6 +21,7 @@ import CashRegister from './pages/Caisse';
 import Contacts from './pages/Contacts';
 import Utilisateurs from './pages/Utilisateurs';
 import Settings from './pages/Settings';
+import Factures from './pages/Factures';
 
 // Define a simple NotFound component
 const NotFound = () => (
@@ -76,6 +77,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/admin/contrats/find_vehicle" element={<FindVehicle />} />
             <Route path="/admin/contrats" element={<Contrats />} />
+            <Route path="/admin/factures" element={<Factures />} />
             <Route path="/admin/reservations" element={<Reservations />} />
             <Route path="/admin/vehicules" element={<Vehicules />} />
             <Route path="/admin/clients" element={<Clients />} />
