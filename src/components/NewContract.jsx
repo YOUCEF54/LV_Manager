@@ -138,7 +138,7 @@ export default function NewContract() {
             <div className="bg-white p-6 drop-shadow-2xl shadow-white  space-y-2 m-8 rounded-lg max-md:min-w-[90vw] min-w-[40rem]">
                 <div style={{"zIndex":52}} className="flex justify-between items-center">
                     <h1 className="text-xl font-semibold">Nouveau Contrat</h1>
-                    <XMarkIcon onClick={() => dispatch(setLocalisation(localisationData))} className="size-7 cursor-pointer shadow bg-neutral-50 border hover:bg-neutral-100 rounded-full p-1" />
+                    <XMarkIcon onClick={() => dispatch(setIsOpenNewContrat(false))} className="size-7 cursor-pointer shadow bg-neutral-50 border hover:bg-neutral-100 rounded-full p-1" />
                     </div>
                 <div className="flex flex-col gap-3">
                     <div className="flex flex-col gap-2">

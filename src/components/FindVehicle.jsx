@@ -81,20 +81,20 @@ export default function FindVehicle() {
     <div className="gridlg:grid-cols-2 h-fit flex gap-2">
       {vehicles?.map((e,index)=>(
  <div key={index} className="flex  max-sm:flex-col items-center rounded-xl bg-white overflow-clip border shadow-md border-gray-300">
- <div className="p-2 min-w-36 relative max-sm:w-full border-dashed h-full flex items-center m-auto  sm:border-r-2 max-sm:border-b-2 ">
+ <div className="p-2 min-w-[15rem] relative max-sm:w-full border-dashed h-full flex items-center m-auto  sm:border-r-2 max-sm:border-b-2 ">
      <div className="px-2 py-1  bottom-2 right-2 left-2 text-white text-center rounded-md bg-gray-800  absolute min-w-fit">{e?.matricule}</div>
      <img className=" m-auto  object-cover max-w-[30rem] w-full " src={e?.image_url}/>
  </div>
- <div className="m-2">
-     <div className="grid grid-cols-2 gap-2">
+ <div className="m-2 min-w-[15rem] overflow-x-auto">
+     <div className="flex justify-between gap-2">
        <div className="space-y-2 mb-2">
        <div>{e?.libelleMarque}</div>
        <div className="bg-gray-100 text-gray-600 px-2 rounded-md border border-gray-300 w-fit">{e?.libelleCat}</div>
        </div>
-       <div className="space-y-2 mb-2">
-       <div>3600.00</div>
+       <div className="space-y-2 mb-2  rounded-xl 1border 1bg-blue-50 p-2 w-fit   1border-blue-200">
+       <div>{e.prixJournelle * LocalisationData?.nombreJours}</div>
        <div>MAD/Total</div>
-       <div className=" text-white w-fit px-3 bg-red-500 font-semibold p-1 text-center rounded-md">{LocalisationData?.nombreJours} Jours</div>
+       <div className=" text-white w-fit px-3 bg-red-500 font-semibold p-1 text-center rounded-lg">{LocalisationData?.nombreJours} Jours</div>
        </div>
        
      </div>
